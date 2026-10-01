@@ -15,26 +15,28 @@ The catalog is at `.agents/plugins/marketplace.json`. Plugin packages are in
 
 ## Call of Cthulhu
 
-Create, edit, save, and roll Call of Cthulhu 7th edition investigator sheets.
-The native plugin package includes its manifest, skill, icon, and a required
-reference to the existing Sites-managed Call of Cthulhu app. The application and
-backend run on the hosted service; no local server build is needed.
+Create, edit and roll Call of Cthulhu 7th edition investigator sheets as a guest.
+The application runs on Quest Portal's Cloudflare account at
+[cthulhu.questportal.com](https://cthulhu.questportal.com), with its public MCP
+endpoint at `https://cthulhu.questportal.com/mcp`. No account or local server is
+required. Drafts stay in the browser where the host permits, JSON import/export
+provides portable backups, and dice history lasts only for the current view.
+There is no persistent server library or roll history. Quest Portal connection
+and cloud saving are deferred to v2.
 
-Authentication is managed through the existing app connection, not a separately
-configured MCP server. The app must be available to the importing account or
-workspace, and users must connect it. A public repository does not grant app access.
-
-Version 0.1.1 replaces the direct MCP declaration with `.app.json`. Refresh the
-marketplace and update the installed plugin to receive this change. Host support
-and successful tool invocation still need verification; repository publication
-alone is not evidence that installation or authentication succeeds.
+Version 0.2.0 replaces the Sites-managed app dependency with a guest MCP connection.
+Refresh the marketplace and update the installed plugin. Existing installations
+may need to reconnect after this endpoint change. The package includes portable
+`plugin.json`/`mcp.json` and matching Codex compatibility files. ChatGPT installation,
+embedding and attachment still need host verification; endpoint deployment alone
+does not prove those flows. The prior Site and its records are not migrated.
 
 ## Updates
 
 Publish updated distribution files under `plugins/call-of-cthulhu-plugin/` and
 update the plugin manifest version when releasing changes. This repository holds
 the authoritative source for the catalog, plugin manifest, skills, plugin icon,
-and Sites app reference. Edit those files here. The private application
+and MCP connection. Edit those files here. The private application
 repository owns the UI, backend, database, tests, and deployment, and consumes
 a pinned public icon during its builds.
 Marketplace sync reads updates from this repository's `main` branch.

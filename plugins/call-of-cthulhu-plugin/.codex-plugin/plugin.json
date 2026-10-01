@@ -1,7 +1,7 @@
 {
   "name": "call-of-cthulhu-plugin",
-  "version": "0.1.1",
-  "description": "Create, edit, save, and roll Call of Cthulhu 7th edition investigator sheets in a native ChatGPT plugin view.",
+  "version": "0.2.0",
+  "description": "Create, edit and roll guest Call of Cthulhu investigator sheets. Keep drafts locally and import/export JSON.",
   "author": {
     "name": "Quest Portal"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Call of Cthulhu",
     "shortDescription": "Your investigator dossier",
-    "longDescription": "A standalone investigator library inspired by Quest Portal's Enhanced Call of Cthulhu Sheet. Manage characteristics, skills, health, sanity, luck, weapons, backstory and possessions. Roll percentile checks with bonus and penalty dice, import and export JSON, and explicitly share a sheet with ChatGPT. Includes sidebar and conversation panel entrypoints. Private saved investigator libraries; no Quest Portal account required.",
+    "longDescription": "An editable Call of Cthulhu 7th edition investigator sheet with characteristics, skills, health, sanity, luck, weapons, backstory and possessions. No account required. Drafts stay in your browser where the host permits; export JSON for a portable backup. Dice history lasts for the current view only. Explicitly attach a draft to share it with ChatGPT. Cloud saving and Quest Portal accounts are planned for a later release.",
     "developerName": "Quest Portal",
     "category": "Entertainment",
     "capabilities": [
@@ -24,5 +24,5 @@
       "Help me create a Call of Cthulhu investigator."
     ]
   },
-  "apps": "./.app.json"
+  "mcpServers": "./.mcp.json"
 }
