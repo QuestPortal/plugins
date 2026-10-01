@@ -54,10 +54,11 @@ subscription and a supporting host. Character creation choices, inspiration
 consequences and campaign decisions remain with the table. This is a companion
 sheet, not a rulebook or an official Chaosium endorsement.
 
-The initial package is prepared under `plugins/pendragon-plugin/`. Publish the
-matching backend before releasing its distribution metadata. Deployment, ChatGPT
-installation, native embedding, Attach and live event delivery are separate
-verification steps; package source alone does not establish that they work.
+The 0.1.0 backend was deployed on 2026-10-01; its matching package lives under
+`plugins/pendragon-plugin/`. The local application passed 197 automated tests,
+17 Chromium E2E tests, and 3 runner safety checks, including explicit Attach and
+launch replay in a local MCP Apps host harness. Actual ChatGPT installation,
+native embedding, and live event delivery still require host verification.
 
 ## Updates
 
