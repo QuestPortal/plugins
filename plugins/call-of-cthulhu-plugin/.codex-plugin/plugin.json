@@ -1,7 +1,7 @@
 {
   "name": "call-of-cthulhu-plugin",
-  "version": "0.2.0",
-  "description": "Create, edit and roll guest Call of Cthulhu investigator sheets. Keep drafts locally and import/export JSON.",
+  "version": "0.3.0",
+  "description": "Create and roll guest Call of Cthulhu investigator sheets, display inline roll results and share dice events through private play sessions.",
   "author": {
     "name": "Quest Portal"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Call of Cthulhu",
     "shortDescription": "Your investigator dossier",
-    "longDescription": "An editable Call of Cthulhu 7th edition investigator sheet with characteristics, skills, health, sanity, luck, weapons, backstory and possessions. No account required. Drafts stay in your browser where the host permits; export JSON for a portable backup. Dice history lasts for the current view only. Explicitly attach a draft to share it with ChatGPT. Cloud saving and Quest Portal accounts are planned for a later release.",
+    "longDescription": "An editable Call of Cthulhu 7th edition investigator sheet with characteristics, skills, health, sanity, luck, weapons, backstory and possessions. No account required. Drafts stay in your browser where the host permits; export JSON for a portable backup. Display dice results inline in chat. Optionally connect a private guest play session to share dice events with an explicitly subscribed chat. Sessions expire after 24 hours and retain up to 1,000 rolls. Explicitly attach a draft to share it with ChatGPT. Cloud saving and Quest Portal accounts are planned for a later release.",
     "developerName": "Quest Portal",
     "category": "Entertainment",
     "capabilities": [
