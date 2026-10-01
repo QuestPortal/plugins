@@ -28,7 +28,10 @@ installation or hosted-service availability.
 
 Publish updated distribution files under `plugins/call-of-cthulhu-plugin/` and
 update the plugin manifest version when releasing changes. This repository holds
-a distribution snapshot; it does not automatically copy development changes.
+the authoritative source for the catalog, plugin manifest, skills, plugin icon,
+and hosted MCP configuration. Edit those files here. The private application
+repository owns the UI, backend, database, tests, and deployment, and consumes
+a pinned public icon during its builds.
 Marketplace sync reads updates from this repository's `main` branch.
 
 This catalog does not migrate an existing uploaded plugin or change workspace
