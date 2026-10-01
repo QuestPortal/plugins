@@ -7,10 +7,8 @@
     {
       "name": "call-of-cthulhu-plugin",
       "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/QuestPortal/questportal.git",
-        "path": "./apps/call-of-cthulhu-plugin",
-        "ref": "gunni/call-of-cthulhu-plugin"
+        "source": "local",
+        "path": "./plugins/call-of-cthulhu-plugin"
       }
     }
   ]
