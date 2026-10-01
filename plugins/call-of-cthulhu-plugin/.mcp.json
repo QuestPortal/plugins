@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "cthulhu-sheets": {
-      "type": "http",
-      "url": "https://cthulhu-investigator-sheets.eldergatewarden.chatgpt.site/mcp"
-    }
-  }
-}
