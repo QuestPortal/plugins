@@ -10,6 +10,13 @@
         "source": "local",
         "path": "./plugins/call-of-cthulhu-plugin"
       }
+    },
+    {
+      "name": "pendragon-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pendragon-plugin"
+      }
     }
   ]
 }

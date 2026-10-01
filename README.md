@@ -35,10 +35,35 @@ require host support. The package includes portable
 embedding and attachment still need host verification; endpoint deployment alone
 does not prove those flows. The prior Site and its records are not migrated.
 
+## Pendragon
+
+Create, edit and roll Pendragon 6th edition knight sheets as a guest. The package
+is configured for [pendragon.questportal.com](https://pendragon.questportal.com)
+and its public MCP endpoint at `https://pendragon.questportal.com/mcp`, using the
+same guest workflow and visual conventions as the Call of Cthulhu companion.
+The sheet covers attributes, opposed Traits, Passions, skills, combat, mounts,
+equipment, family, Glory and Winter Phase notes. Drafts remain in the browser
+where supported; JSON import/export provides portable backups, and Attach
+explicitly shares current values with ChatGPT. No account, cloud character
+library or device sync is required or provided.
+
+Version 0.1.0 includes inline roll cards and optional private guest play sessions.
+Sessions expire after 24 hours and retain up to 1,000 rolls; ending a session
+removes its rolls and subscriptions. Event monitoring requires an explicit
+subscription and a supporting host. Character creation choices, inspiration
+consequences and campaign decisions remain with the table. This is a companion
+sheet, not a rulebook or an official Chaosium endorsement.
+
+The 0.1.0 backend was deployed on 2026-10-01; its matching package lives under
+`plugins/pendragon-plugin/`. The local application passed 197 automated tests,
+17 Chromium E2E tests, and 3 runner safety checks, including explicit Attach and
+launch replay in a local MCP Apps host harness. Actual ChatGPT installation,
+native embedding, and live event delivery still require host verification.
+
 ## Updates
 
-Publish updated distribution files under `plugins/call-of-cthulhu-plugin/` and
-update the plugin manifest version when releasing changes. This repository holds
+Publish updated distribution files under the matching directory in `plugins/`
+and update the plugin manifest version when releasing changes. This repository holds
 the authoritative source for the catalog, plugin manifest, skills, plugin icon,
 and MCP connection. Edit those files here. The private application
 repository owns the UI, backend, database, tests, and deployment, and consumes
