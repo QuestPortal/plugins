@@ -17,6 +17,13 @@
         "source": "local",
         "path": "./plugins/pendragon-plugin"
       }
+    },
+    {
+      "name": "dnd-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dnd-plugin"
+      }
     }
   ]
 }

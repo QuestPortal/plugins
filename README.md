@@ -60,6 +60,27 @@ The 0.1.0 backend was deployed on 2026-10-01; its matching package lives under
 launch replay in a local MCP Apps host harness. Actual ChatGPT installation,
 native embedding, and live event delivery still require host verification.
 
+## Dungeons & Dragons
+
+Create, edit and roll D&D 5.5e character sheets for the 2024 revised fifth edition.
+The package is configured for [dnd.questportal.com](https://dnd.questportal.com)
+and its public MCP endpoint at `https://dnd.questportal.com/mcp`, following the
+Call of Cthulhu companion’s guest workflow and interface conventions. Abilities,
+skills, combat, spells, features, inventory and character notes use the shared
+Quest Portal D&D components, compiled with an isolated Tailwind 4 theme.
+
+Version 0.1.0 includes browser drafts, validated JSON import/export, explicit
+Attach-to-chat, d20 and damage dice, inline roll cards and optional private guest
+play sessions. No account, cloud character library or device sync is required or
+provided. Rules are based on the openly licensed SRD 5.2.1. This is a character
+sheet with editable progression choices, not an automatic validator for every
+class feature or a substitute for the rulebooks.
+
+Distribution source lives in `plugins/dnd-plugin/`. The private application
+repository owns its UI, backend, build and tests. Deployment, marketplace release,
+ChatGPT installation, native embedding, Attach and live event delivery are separate
+verification steps; package source alone does not establish those host workflows.
+
 ## Updates
 
 Publish updated distribution files under the matching directory in `plugins/`
