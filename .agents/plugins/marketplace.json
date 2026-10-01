@@ -1,0 +1,17 @@
+{
+  "name": "questportal-plugins",
+  "interface": {
+    "displayName": "Quest Portal plugins"
+  },
+  "plugins": [
+    {
+      "name": "call-of-cthulhu-plugin",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/QuestPortal/questportal.git",
+        "path": "./apps/call-of-cthulhu-plugin",
+        "ref": "gunni/call-of-cthulhu-plugin"
+      }
+    }
+  ]
+}
