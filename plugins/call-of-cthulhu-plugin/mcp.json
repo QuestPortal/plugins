@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "cthulhu-sheets": {
+      "type": "streamable-http",
+      "url": "https://cthulhu.questportal.com/mcp"
+    }
+  }
+}
