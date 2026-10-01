@@ -27,13 +27,15 @@ removes its rolls and subscriptions. Unconnected rolls stay in the current view.
 There is no server-side investigator library. Quest Portal accounts and cloud
 saving are deferred to v2.
 
-Version 0.3.0 adds guest MCP Events and inline roll result widgets to the existing
-guest MCP connection. Refresh the marketplace and update the installed plugin to
-load the new session and event instructions. MCP Events and inline rendering also
-require host support. The package includes portable
-`plugin.json`/`mcp.json` and matching Codex compatibility files. ChatGPT installation,
-embedding and attachment still need host verification; endpoint deployment alone
-does not prove those flows. The prior Site and its records are not migrated.
+Version 0.4.0 adds populated single and batch creation plus revisions of explicitly
+attached sheets. Creation uses request IDs to avoid duplicates, reports per-character
+validation failures, and distinguishes prepared payloads from the sheet confirming
+loading and local saving. Assigned builds are custom, not verified rules-legal.
+Refresh the marketplace and update the installed plugin to load the new instructions
+and tools. Existing dice and guest play sessions remain available. MCP Events,
+inline rendering, embedding and attachment depend on host support; endpoint deployment
+alone does not prove those flows. The package includes portable `plugin.json`/`mcp.json`
+and matching Codex compatibility files. The prior Site and its records are not migrated.
 
 ## Pendragon
 
