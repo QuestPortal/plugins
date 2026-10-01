@@ -7,6 +7,10 @@ description: Open, create and roll a guest Pendragon 6th edition knight sheet. U
 
 Use `open_sheet` with no arguments to show the native sheet. Use tools by their
 advertised names; the host may namespace them. No account is required.
+Check the tools and capabilities exposed by the current connection. See
+[tool contracts](references/tool-contracts.md) for argument shapes, result
+handling, and recovery. The live advertised schema takes precedence if a
+deployment differs; do not invent tools or unsupported arguments.
 
 Drafts stay only in the current browser where the host permits local storage.
 There is no server character library or cross-device sync. The server cannot list
@@ -15,6 +19,10 @@ an exported JSON document, when you need their current values. Never claim you
 can see a draft merely because its sheet is open. Clearing browser data removes
 local drafts; recommend JSON export for a portable backup, especially when the
 host cannot retain drafts.
+An attachment is a snapshot, not a live connection to the sheet. If the user has
+edited the sheet since sharing it, ask them to attach it again before using
+values that may have changed. Never substitute the new-draft defaults for a
+missing knight's actual values.
 
 Use `create_knight` when asked for a new knight. It creates an editable guest
 draft and opens it in the sheet; it does not save a server record. Its initial
@@ -39,6 +47,11 @@ apply wounds, spend resources, mark experience, award Glory or apply inspiration
 consequences. Any knight context must set `saved:false`. For opposed checks,
 keep each participant's returned result distinct and apply the table's rules;
 never invent the other participant's roll.
+When the formula uses `wd` or `bd`, supply the matching derived damage values and
+any explicit damage-point adjustment from the shared sheet. If they are missing,
+request the sheet or the values instead of accepting the server's illustrative
+defaults. A characteristic check's reported critical or fumble is not permission
+to invent an additional characteristic-specific consequence.
 
 Without a `sessionToken`, dice calls are stateless. Every call generates a new
 result, even when the same `requestId` is reused. Do not silently retry a lost
@@ -80,6 +93,11 @@ that sheet from sharing future rolls. Use `end_play_session` when asked to end i
 for everyone: this deletes retained rolls, subscriptions and pending events.
 Messages already delivered to chat remain. Session tokens do not grant access
 to local knight drafts.
+An explicit request to end the session is sufficient intent; do not ask for a
+second confirmation. If the user only asks to disconnect this sheet, leave the
+shared session running. Report completion only after a successful tool result.
+On expiry or an invalid token, explain the failure and do not silently create a
+replacement session or subscription.
 
 ## Sharing and rules boundaries
 
