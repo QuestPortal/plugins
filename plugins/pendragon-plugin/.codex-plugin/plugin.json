@@ -1,0 +1,24 @@
+{
+  "name": "pendragon-plugin",
+  "version": "0.1.0",
+  "description": "Create and roll guest Pendragon knight sheets, display inline roll results and share dice events through private play sessions.",
+  "author": {
+    "name": "Quest Portal"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Pendragon",
+    "shortDescription": "Your knight’s chronicle",
+    "longDescription": "An editable Pendragon 6th edition knight sheet with attributes, opposed Traits, Passions, skills, combat, mounts, equipment, family, Glory and Winter Phase notes. No account required. Drafts stay in your browser where the host permits; export JSON for a portable backup. Roll checks and damage, display results inline in chat, and optionally share dice through a private guest play session. Sessions expire after 24 hours and retain up to 1,000 rolls. Explicitly attach a draft to share its current values with ChatGPT. Character creation choices, inspiration consequences and campaign decisions remain with your table. No cloud character library or device sync.",
+    "developerName": "Quest Portal",
+    "category": "Entertainment",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "logo": "./assets/icon.svg",
+    "composerIcon": "./assets/icon.svg",
+    "defaultPrompt": [
+      "Open my Pendragon knight sheets.",
+      "Help me create a Pendragon 6th edition knight."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}
