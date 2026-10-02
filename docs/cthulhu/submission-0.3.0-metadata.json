@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "call-of-cthulhu-plugin",
-  "version": "0.4.1",
-  "description": "Create and revise populated guest Call of Cthulhu investigators individually or in batches, roll dice and share private play-session events.",
+  "version": "0.3.0",
+  "description": "Create and roll guest Call of Cthulhu investigator sheets, display inline roll results and share dice events through private play sessions.",
   "author": {
     "name": "Quest Portal"
   },
@@ -10,8 +10,8 @@
     "com.openai": {
       "interface": {
         "displayName": "Call of Cthulhu",
-        "shortDescription": "Your investigator dossier",
-        "longDescription": "Create complete, editable Call of Cthulhu 7th edition investigators individually or in batches, with custom assigned stats, skills and backstories. Revise an explicitly attached sheet without replacing unrelated fields. No account required. Drafts stay in your browser where supported; the sheet confirms local saving and JSON export is an optional backup. Custom builds are not verified rules-legal. Roll dice inline and optionally share dice events through a private guest play session. Cloud saving and cross-device sync are not included.",
+        "shortDescription": "Investigator Character Sheet",
+        "longDescription": "Create and edit Call of Cthulhu 7th edition investigator sheets without an account. Track characteristics, skills, health, sanity, luck, weapons, backstory and possessions. Roll percentile checks with difficulty and bonus or penalty dice, roll weapon damage, and display results inline in supported chat hosts. Drafts remain in your browser where storage is supported; import and export JSON for portable backups. Explicitly attach a draft to share its contents with ChatGPT. Optional private guest play sessions share dice events with explicitly subscribed chats on hosts that support MCP Events. Sessions expire after 24 hours and retain up to 1,000 rolls; ending a session removes its retained rolls and subscriptions. New investigators start as editable drafts, not rules-complete characters. There is no cloud investigator library or cross-device synchronization, and rolls do not automatically change sheet resources. Published by Quest Portal. Call of Cthulhu is a Chaosium game; this companion does not imply official Chaosium endorsement.",
         "developerName": "Quest Portal",
         "category": "Entertainment",
         "capabilities": [
@@ -23,7 +23,7 @@
         "composerIcon": "./assets/icon.svg",
         "defaultPrompt": [
           "Open my Call of Cthulhu investigator sheets.",
-          "Create five characters, each with different stats, skills, and backstory."
+          "Help me create a Call of Cthulhu investigator."
         ],
         "websiteURL": "https://cthulhu.questportal.com/about",
         "supportURL": "https://cthulhu.questportal.com/support",
@@ -82,6 +82,10 @@
         "commerce": false,
         "commerce_description": "This plugin involves no payments or purchases.",
         "demo_recording_url": "https://cthulhu.questportal.com/walkthrough.mp4"
+      },
+      "publication": {
+        "release_notes": "Version 0.3.0 adds optional private guest play sessions, MCP Events for explicitly subscribed chats, and inline roll-result cards to the account-free investigator sheet. Host support is required for events and native rendering.",
+        "countries": []
       }
     }
   }

@@ -1,0 +1,46 @@
+name: Marketplace packages
+
+on:
+  pull_request:
+    paths:
+      - 'plugins/**'
+      - 'scripts/**'
+      - '.agents/plugins/marketplace.json'
+      - '.github/workflows/marketplace-packages.yml'
+      - 'infrastructure/cthulhu-domain-verification/**'
+  push:
+    branches: [main]
+    paths:
+      - 'plugins/**'
+      - 'scripts/**'
+      - '.agents/plugins/marketplace.json'
+      - '.github/workflows/marketplace-packages.yml'
+      - 'infrastructure/cthulhu-domain-verification/**'
+permissions:
+  contents: read
+concurrency:
+  group: marketplace-packages-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r scripts/marketplace/requirements.txt
+      - name: Run regression tests
+        run: |
+          python -m unittest discover -s scripts/marketplace -p 'test_*.py'
+          python -m unittest discover -s scripts/pendragon -p 'test_*.py'
+          python -m unittest discover -s scripts/battlemap -p 'test_*.py'
+          node --test infrastructure/cthulhu-domain-verification/worker.test.mjs
+      - name: Validate catalog and build verified deterministic archives
+        run: python scripts/marketplace/package.py build --output-dir "$RUNNER_TEMP/packages"

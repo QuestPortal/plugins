@@ -24,6 +24,13 @@
         "source": "local",
         "path": "./plugins/quest-portal-battlemap"
       }
+    },
+    {
+      "name": "dnd-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dnd-plugin"
+      }
     }
   ]
 }
