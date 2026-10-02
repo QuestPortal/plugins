@@ -68,6 +68,32 @@ session recovery. It adds an offline package validator and reproducible portable
 ZIP builder; see [Pendragon packaging](scripts/pendragon/README.md). This package
 update does not itself change the backend or prove native host installation.
 
+## Battlemap
+
+Build and run persistent tactical encounters with maps, tokens, walls, doors,
+fog, initiative and bounded ChatGPT control. Install **Battlemap by Quest Portal**
+from this marketplace, then connect it through the host’s OAuth flow. The app is
+hosted at [Battlemap](https://quest-portal-battlemap.quest-portal.workers.dev).
+
+Version 0.1.2 is an **owner-only pilot**. Access requires the separate Battlemap
+owner sign-in and OAuth consent. Marketplace installation does not grant access
+to the owner’s encounters; obtain access from the owner before connecting. Do not
+paste access phrases or credentials into a conversation.
+
+The release includes safe creation retries, visual proposal review, explicit fog
+reveal confirmation, reconnect recovery and host-mediated `.battlemap` downloads.
+Player preview filters the displayed map; it cannot erase GM information already
+shared with a conversation. Control grants and future-event subscriptions require
+separate approval. Actual host OAuth linking, embedded downloads and live Events
+acceptance remain unverified; see [release evidence](docs/battlemap-release.md).
+
+The authoritative package is `plugins/quest-portal-battlemap/`, with portable and
+Codex manifests, the MCP connection, three skills and its icon. Validate it and
+build reproducible ZIPs using the [offline packaging tool](scripts/battlemap/README.md).
+The private application repository owns the runtime, Cloudflare configuration,
+storage and deployment. This catalog entry preserves the package name and does
+not use a personal plugin ID to claim a workspace migration.
+
 ## Updates
 
 Publish updated distribution files under the matching directory in `plugins/`

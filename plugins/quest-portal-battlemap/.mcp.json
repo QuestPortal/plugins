@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "battlemap": {
+      "type": "http",
+      "url": "https://quest-portal-battlemap.quest-portal.workers.dev/mcp"
+    }
+  }
+}
