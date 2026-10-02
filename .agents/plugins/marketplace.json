@@ -17,6 +17,13 @@
         "source": "local",
         "path": "./plugins/pendragon-plugin"
       }
+    },
+    {
+      "name": "quest-portal-battlemap",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quest-portal-battlemap"
+      }
     }
   ]
 }

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "quest-portal-battlemap",
+  "version": "0.1.2",
+  "description": "Create and run persistent tactical encounters with shared human and ChatGPT control, deterministic movement, fog, and bounded opponent turns.",
+  "author": {
+    "name": "Quest Portal",
+    "url": "https://www.questportal.com"
+  },
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/onboarding/SKILL.md",
+      "interface": {
+        "displayName": "Battlemap by Quest Portal",
+        "shortDescription": "Your shared tactical table",
+        "longDescription": "Build private square-grid encounters, place tokens, edit walls and doors, measure distances, manage fog and initiative, and direct ChatGPT through the same authoritative command engine. This initial release requires the Battlemap owner’s sign-in and OAuth consent; installing from the marketplace does not grant access to encounters. Explicitly scoped AI control and event subscriptions are separate choices. This is geometric encounter assistance, not a complete edition-specific combat rules engine.",
+        "developerName": "Quest Portal",
+        "category": "Entertainment",
+        "capabilities": [
+          "Interactive",
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Open my battlemaps.",
+          "Create a ruined chapel encounter with four heroes and three skeletons.",
+          "Help me run the sample encounter."
+        ],
+        "brandColor": "#34B4E3",
+        "brandColorDark": "#34B4E3",
+        "logo": "./assets/icon.svg",
+        "composerIcon": "./assets/icon.svg"
+      }
+    }
+  }
+}
