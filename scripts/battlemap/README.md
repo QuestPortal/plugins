@@ -12,8 +12,8 @@ python3 -m venv /tmp/battlemap-package-venv
 /tmp/battlemap-package-venv/bin/python -m pip install -r scripts/battlemap/requirements.txt
 /tmp/battlemap-package-venv/bin/python -m unittest discover -s scripts/battlemap -p 'test_*.py'
 /tmp/battlemap-package-venv/bin/python scripts/battlemap/package.py validate plugins/quest-portal-battlemap
-/tmp/battlemap-package-venv/bin/python scripts/battlemap/package.py build plugins/quest-portal-battlemap --output /tmp/quest-portal-battlemap-0.1.2.zip --report /tmp/quest-portal-battlemap-0.1.2-validation.json
-/tmp/battlemap-package-venv/bin/python scripts/battlemap/package.py validate /tmp/quest-portal-battlemap-0.1.2.zip
+/tmp/battlemap-package-venv/bin/python scripts/battlemap/package.py build plugins/quest-portal-battlemap --output /tmp/quest-portal-battlemap-0.1.3.zip --report /tmp/quest-portal-battlemap-0.1.3-validation.json
+/tmp/battlemap-package-venv/bin/python scripts/battlemap/package.py validate /tmp/quest-portal-battlemap-0.1.3.zip
 ```
 
 Dependency setup is the only network step. Requirements reuse the exact pinned
@@ -42,7 +42,7 @@ Creator's enclosing-directory convention. Hidden `.codex-plugin/plugin.json`
 and `.mcp.json` are always included. For the PRD's portable root layout:
 
 ```sh
-/tmp/battlemap-package-venv/bin/python scripts/battlemap/package.py build plugins/quest-portal-battlemap --layout portable --output /tmp/quest-portal-battlemap-0.1.2-portable.zip
+/tmp/battlemap-package-venv/bin/python scripts/battlemap/package.py build plugins/quest-portal-battlemap --layout portable --output /tmp/quest-portal-battlemap-0.1.3-portable.zip
 ```
 
 Both layouts sort entries, fix timestamps to 1980 and permissions to 0644, and

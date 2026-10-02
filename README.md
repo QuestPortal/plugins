@@ -73,12 +73,19 @@ update does not itself change the backend or prove native host installation.
 Build and run persistent tactical encounters with maps, tokens, walls, doors,
 fog, initiative and bounded ChatGPT control. Install **Battlemap by Quest Portal**
 from this marketplace, then connect it through the host’s OAuth flow. The app is
-hosted at [Battlemap](https://quest-portal-battlemap.quest-portal.workers.dev).
+hosted at [map.questportal.com](https://map.questportal.com), with its MCP endpoint
+at `https://map.questportal.com/mcp`.
 
-Version 0.1.2 is an **owner-only pilot**. Access requires the separate Battlemap
+Version 0.1.3 is an **owner-only pilot**. Access requires the separate Battlemap
 owner sign-in and OAuth consent. Marketplace installation does not grant access
 to the owner’s encounters; obtain access from the owner before connecting. Do not
 paste access phrases or credentials into a conversation.
+
+Version 0.1.3 moves the app and MCP connection to `map.questportal.com`. Refresh
+the marketplace and update the plugin, then reconnect through the host’s OAuth
+flow. Sign in again when opening the new domain in your browser: browser sessions
+and OAuth connections from the previous Worker origin do not transfer. The
+existing encounter library stays in the same Cloudflare storage.
 
 The release includes safe creation retries, visual proposal review, explicit fog
 reveal confirmation, reconnect recovery and host-mediated `.battlemap` downloads.

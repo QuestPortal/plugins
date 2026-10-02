@@ -1,6 +1,6 @@
 {
   "name": "quest-portal-battlemap",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Create and run persistent tactical encounters with shared human and ChatGPT control, deterministic movement, fog, and bounded opponent turns.",
   "author": {
     "name": "Quest Portal",
