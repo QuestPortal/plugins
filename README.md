@@ -68,6 +68,26 @@ session recovery. It adds an offline package validator and reproducible portable
 ZIP builder; see [Pendragon packaging](scripts/pendragon/README.md). This package
 update does not itself change the backend or prove native host installation.
 
+## Pendragon 2
+
+A second, independently built Pendragon 6th edition knight sheet, published as
+its own package (`plugins/pendragon2-plugin/`, display name "Pendragon 2") so it
+can be installed and compared beside the Pendragon package above. It is
+configured for [pendragon2.questportal.com](https://pendragon2.questportal.com)
+and its public MCP endpoint at `https://pendragon2.questportal.com/mcp`. No
+account or local server is required. Drafts stay in the browser where the host
+permits, JSON import/export provides portable backups, and d20 checks, opposed
+rolls and damage results can display inline in chat. Optional private guest play
+sessions let an explicitly subscribed chat receive dice events. Sessions expire
+after 24 hours and retain up to 1,000 rolls; ending a session removes its rolls
+and subscriptions. There is no server-side knight library, and Quest Portal
+accounts and cloud saving are not available.
+
+Version 0.1.0 is this package's first version. ChatGPT installation, native
+embedding, attachment and live event delivery still require host verification;
+endpoint deployment alone does not prove those flows. The Pendragon packaging
+tool under `scripts/pendragon/` validates the `pendragon-plugin` package only.
+
 ## Battlemap
 
 Build and run persistent tactical encounters with maps, tokens, walls, doors,
