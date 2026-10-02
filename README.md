@@ -68,6 +68,35 @@ session recovery. It adds an offline package validator and reproducible portable
 ZIP builder; see [Pendragon packaging](scripts/pendragon/README.md). This package
 update does not itself change the backend or prove native host installation.
 
+## Dungeons & Dragons 2
+
+A second, independently built D&D 5.5e character sheet (the 2024 revision of
+fifth edition), published as its own package (`plugins/dnd2-plugin/`, display
+name "Dungeons & Dragons 2") so it can be installed and compared beside any other
+D&D package in this catalog. It is configured for
+[dnd2.questportal.com](https://dnd2.questportal.com) and its public MCP endpoint
+at `https://dnd2.questportal.com/mcp`, using the same guest workflow and visual
+conventions as the Call of Cthulhu companion. The sheet covers ability scores,
+saving throws, skills, hit points, Hit Point Dice, death saves, conditions,
+attacks, spellcasting, features, equipment, coins and backstory. No account or
+local server is required. Drafts stay in the browser where the host permits,
+JSON import/export provides portable backups, and Attach explicitly shares
+current values with ChatGPT. There is no server-side character library, and
+Quest Portal accounts and cloud saving are not provided.
+
+Version 0.1.0 is this package's first version. It includes D20 Tests with
+Advantage and Disadvantage, damage rolls, inline roll cards and optional private
+guest play sessions. Sessions expire after 24 hours and retain up to 1,000 rolls;
+ending a session removes its rolls and subscriptions. Event monitoring requires
+an explicit subscription and a supporting host. Chat rolls never change the
+sheet, and character creation choices and rulings remain with the table.
+Built-in rules values come from the System Reference Document 5.2.1 under
+CC-BY-4.0; see the plugin's [attribution](plugins/dnd2-plugin/NOTICE.md). This is
+a companion sheet compatible with fifth edition, not a rulebook or an official
+endorsement. ChatGPT installation, native embedding, attachment and live event
+delivery still require host verification; endpoint deployment alone does not
+prove those flows.
+
 ## Battlemap
 
 Build and run persistent tactical encounters with maps, tokens, walls, doors,
