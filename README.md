@@ -69,11 +69,17 @@ The 0.1.0 backend was deployed on 2026-10-01; its matching package lives under
 launch replay in a local MCP Apps host harness. Actual ChatGPT installation,
 native embedding, and live event delivery still require host verification.
 
-Package version 0.1.1 preserves the existing identity, MCP endpoint, prompts, and
+Package version 0.1.1 preserved the existing identity, MCP endpoint, prompts, and
 audience while clarifying attachment snapshots, damage inputs, tool errors, and
-session recovery. It adds an offline package validator and reproducible portable
+session recovery. It added an offline package validator and reproducible portable
 ZIP builder; see [Pendragon packaging](scripts/pendragon/README.md). This package
 update does not itself change the backend or prove native host installation.
+
+Candidate 0.1.2 aligns with the original runtime improvements: opposed checks
+return both dice and partial/tie outcomes; statistic-aware characteristic checks
+show success/failure; horse and critical damage use explicit bounded inputs.
+The endpoint and tools retain their identities. Matching deployment and native
+host acceptance remain pending; see [release status](docs/release-status.md).
 
 ## Battlemap
 

@@ -12,8 +12,8 @@ python3 -m venv /tmp/pendragon-package-venv
 /tmp/pendragon-package-venv/bin/python -m pip install -r scripts/pendragon/requirements.txt
 /tmp/pendragon-package-venv/bin/python -m unittest discover -s scripts/pendragon -p 'test_*.py'
 /tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py validate plugins/pendragon-plugin
-/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py build plugins/pendragon-plugin --output /tmp/pendragon-plugin-0.1.1.zip --report /tmp/pendragon-plugin-0.1.1-validation.json
-/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py validate /tmp/pendragon-plugin-0.1.1.zip
+/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py build plugins/pendragon-plugin --output /tmp/pendragon-plugin-0.1.2.zip --report /tmp/pendragon-plugin-0.1.2-validation.json
+/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py validate /tmp/pendragon-plugin-0.1.2.zip
 ```
 
 Dependency installation is the only network step. Validation and ZIP building

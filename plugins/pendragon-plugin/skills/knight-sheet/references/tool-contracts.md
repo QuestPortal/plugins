@@ -1,6 +1,7 @@
 # Tool contracts and recovery
 
-These are the guest release's implemented contracts. Use the actual connection's
+These are the original guest runtime 0.1.2 candidate contracts. Package source
+does not prove that this runtime is deployed. Use the actual connection's
 advertised schemas and names; session tools depend on the deployed capability.
 No tool can retrieve or modify a browser's local knight library.
 
@@ -8,8 +9,8 @@ No tool can retrieve or modify a browser's local knight library.
 | --- | --- | --- |
 | Open the local sheet | `open_sheet({})` | `{ guest: true }` opens the native UI; it does not reveal local knights to the model. |
 | Begin a knight | `create_knight({ name? })` | `{ guest: true, character }` opens an illustrative draft. Optional name is nonblank, at most 200 characters. Creation does not save a server record or complete character creation. |
-| Roll a check | `roll_check({ value, modifier?, label?, knight?, requestId?, sessionToken? })` | Use the returned `roll` record. `value` is an integer 0–999; `modifier` is −999–999 and defaults to 0. The response records the natural die, target, critical bonus, modified result, and outcome. It does not change the sheet. |
-| Roll damage | `roll_damage({ formula, weaponDamageDice?, brawlingDamage?, damagePoints?, label?, knight?, requestId?, sessionToken? })` | Use the returned `roll` record. Accepted grammar is d6 dice, integer constants, `wd`, `bd`, and addition/subtraction; no multiplication or arbitrary dice. Formula length is at most 120 characters and total dice at most 60. Damage is not applied. |
+| Roll a check | `roll_check({ value, modifier?, statistic?, opponent?, label?, knight?, requestId?, sessionToken? })` | Use the returned `roll` record. `value` is an integer 0–999; `modifier` is −999–999 and defaults to 0. The response records the natural die, target, critical bonus, modified result, and outcome. An opposed request adds `result.opponent` and `result.resolution`; it does not change the sheet. |
+| Roll damage | `roll_damage({ formula, weaponDamageDice?, brawlingDamage?, damagePoints?, horseDamageDice?, critical?, label?, knight?, requestId?, sessionToken? })` | Use the returned `roll` record. Accepted grammar is d6 dice, integer constants, `wd`, `bd`, `horse`, and addition/subtraction; no multiplication or arbitrary dice. Formula length is at most 120 characters and the complete expanded pool including critical dice is at most 60. Damage is not applied. |
 | Show an existing result | `show_roll_result({ roll })` | Supply the complete, unchanged record returned by a dice tool or `dice.rolled` event. This only displays it; it does not roll, store, or apply it. |
 | Start requested sharing | `create_play_session({})` | Returns `{ session }`, including a secret bearer token and expiry. It neither subscribes a chat nor connects the sheet automatically. |
 | End requested sharing for everyone | `end_play_session({ sessionToken })` | Ends the session and removes retained rolls, subscriptions, and pending events. Check success before claiming completion. |
@@ -17,6 +18,20 @@ No tool can retrieve or modify a browser's local knight library.
 `connect_play_session({ sessionToken })` is an app-only tool: the sheet's Settings
 uses it to validate a connection. Do not assume it is model-callable. There are
 no `get_knight`, `save_knight`, list-library, or roll-history retrieval tools.
+
+For checks, optional `statistic` is `characteristic`, `skill`, `trait`, `passion`
+or `other`. Omission preserves legacy generic resolution. Characteristics return
+success/failure without critical/fumble classifications. Optional `opponent`
+is `{ value, modifier?, statistic?, label? }`, using the same value/modifier bounds.
+Its label defaults to `Opponent`; its omitted statistic inherits the first side’s
+statistic. Both sides are validated before either d20 is consumed.
+
+An opposed call returns the first side’s result plus `result.opponent` and
+`result.resolution`: `win`, `partial`, `loss`, `tie`, or `both-fail`. `partial`
+means the first side succeeded but lost to the opponent. Two criticals tie;
+equal failed modified rolls tie; unequal failures are `both-fail`. The top-level
+`success` still reports the first side’s own check, not whether it won. Report
+the returned resolution without automatically applying combat consequences.
 
 For both dice tools, `label` is nonblank text up to 200 characters, `requestId`
 is a UUID, and optional `knight` context has exactly `{ id, name, saved: false }`
@@ -27,7 +42,25 @@ and `damagePoints` is −999–999. `wd` uses the actual weapon-damage dice coun
 `bd` uses the actual fixed brawling-damage value. `damagePoints` adjusts these
 symbolic terms. The defaults 4, 4, and 0 are illustrative values, not evidence
 about the user's knight. For an explicit formula such as `5d6+2`, do not add the
-same adjustment a second time.
+same adjustment a second time. Symbolic adjustments keep their sign with their
+term: subtracting `wd` subtracts its dice subtotal and its damage points.
+
+`horseDamageDice` is an optional integer 0–60 and is required when the formula
+contains `horse`. Horse damage does not receive `damagePoints`. Optional
+`critical` is `weapon` (+4d6) or `brawling` (+2d6), appended once to the complete
+formula. Do not double damage or manually append the same critical dice again.
+The total expanded pool, including repeated symbols and critical dice, cannot
+exceed 60 dice; invalid pools fail before rolling.
+
+Examples (use actual shared values instead of copying these illustrative ones):
+
+```json
+{"value":15,"statistic":"skill","opponent":{"value":12,"modifier":-5,"label":"Rival"}}
+{"formula":"horse+2","horseDamageDice":5,"critical":"weapon"}
+```
+
+The second example expands to `5d6+2+4d6` without a knight damage-point bonus.
+Existing calls that omit these optional fields remain valid.
 
 ## Results, retries, and unavailable capabilities
 
