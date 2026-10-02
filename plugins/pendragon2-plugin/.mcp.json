@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pendragon2-sheets": {
+      "type": "http",
+      "url": "https://pendragon2.questportal.com/mcp"
+    }
+  }
+}
