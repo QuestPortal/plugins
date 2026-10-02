@@ -1,4 +1,4 @@
-# Battlemap 0.1.2 marketplace release
+# Battlemap 0.1.3 marketplace release
 
 This package targets the existing Quest Portal Git marketplace. It is an
 owner-only pilot, with one persistent library protected by the separate Battlemap
@@ -7,6 +7,14 @@ installers to read or change that library. It does not represent an OpenAI publi
 directory submission or verified guest/multi-user access.
 
 ## Changes
+
+Version 0.1.3 moves the application to `https://map.questportal.com` and both
+portable and Codex MCP connections to `https://map.questportal.com/mcp`. The
+package identity, owner-only access model, prompts, skills and icon are unchanged.
+The existing Worker and Cloudflare storage retain the encounter library; this is
+an origin change, not an encounter-data migration.
+
+The earlier 0.1.2 improvements remain included:
 
 - Tool OAuth metadata and authentication challenges identify the permissions
   needed to connect or upgrade a connection. Events retain separate scopes.
@@ -18,8 +26,8 @@ directory submission or verified guest/multi-user access.
 - Sign-in returns to the requested scene/panel. Temporary service failures and
   timed-out requests offer explicit recovery without replaying a write.
 - Offline package validation and deterministic ZIP builds run in CI. The
-  portable and Codex manifests retain the same identity, prompts, icon and
-  production MCP endpoint.
+  portable and Codex manifests retain matching identity, prompts, icon and
+  MCP endpoint.
 
 ## Verification boundary
 
@@ -54,6 +62,12 @@ Import `https://github.com/QuestPortal/plugins`, branch `main`, with an empty
 path, using the workspace marketplace import flow. Refresh the marketplace and
 update Battlemap after this release lands. Complete the host's connection flow
 with the authorized Battlemap owner; never put the owner phrase into chat.
+
+Browser sessions and OAuth connections belong to the previous origin and do not
+transfer to `map.questportal.com`. Sign in on the new domain and reconnect the
+updated plugin through the host’s OAuth flow. Existing encounters remain in the
+same Cloudflare storage. Successful relinking and native-host behavior at the new
+origin require separate verification; package validation does not prove them.
 
 The existing personal upload is separate from this Git marketplace entry.
 Do not add its ID as a workspace migration ID. The package preserves the

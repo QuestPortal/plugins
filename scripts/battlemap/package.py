@@ -27,7 +27,7 @@ sha256 = helpers.sha256
 fixed_schema = helpers.fixed_schema
 
 NAME = "quest-portal-battlemap"
-ENDPOINT = "https://quest-portal-battlemap.quest-portal.workers.dev/mcp"
+ENDPOINT = "https://map.questportal.com/mcp"
 MARKETPLACE = SCRIPTS.parent / ".agents/plugins/marketplace.json"
 SKILLS = ("build-map", "onboarding", "run-encounter")
 FILES = (

@@ -3,7 +3,7 @@
   "mcpServers": {
     "battlemap": {
       "type": "streamable-http",
-      "url": "https://quest-portal-battlemap.quest-portal.workers.dev/mcp"
+      "url": "https://map.questportal.com/mcp"
     }
   }
 }
