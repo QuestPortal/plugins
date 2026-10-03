@@ -1,7 +1,7 @@
 # Tool contracts and recovery
 
-These are the original guest runtime 0.1.2 candidate contracts. Package source
-does not prove that this runtime is deployed. Use the actual connection's
+These are the original guest runtime 0.1.2 contracts. The matching runtime was
+verified live on 2026-10-03. Use the actual connection's
 advertised schemas and names; session tools depend on the deployed capability.
 No tool can retrieve or modify a browser's local knight library.
 

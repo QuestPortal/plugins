@@ -3,7 +3,7 @@
 The prior prepared public-directory archive,
 `call-of-cthulhu-plugin-0.3.0-video.zip`, describes runtime 0.3.0. It must not
 replace the populated-creation and revision instructions from source 0.4.0.
-Package candidate **0.4.1** preserves those 0.4 workflows and starter prompts,
+Package **0.4.1** preserves those 0.4 workflows and starter prompts,
 restores the four previously supplied listing/support/privacy/terms URLs, and
 retains the five positive and three negative review cases plus walkthrough and
 commerce metadata. The Codex interface matches the portable interface.

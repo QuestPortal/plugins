@@ -39,7 +39,7 @@ inline rendering, embedding and attachment depend on host support; endpoint depl
 alone does not prove those flows. The package includes portable `plugin.json`/`mcp.json`
 and matching Codex compatibility files. The prior Site and its records are not migrated.
 
-Package candidate 0.4.1 restores the existing listing/support/legal URLs and
+Package 0.4.1 restores the existing listing/support/legal URLs and
 review cases from the separately prepared 0.3 submission without reverting the
 0.4 workflows. The older walkthrough does not demonstrate batch/revision or
 native-host acceptance. See [metadata reconciliation](docs/cthulhu/reconciliation.md).
@@ -75,11 +75,12 @@ session recovery. It added an offline package validator and reproducible portabl
 ZIP builder; see [Pendragon packaging](scripts/pendragon/README.md). This package
 update does not itself change the backend or prove native host installation.
 
-Candidate 0.1.2 aligns with the original runtime improvements: opposed checks
+Version 0.1.2 aligns with the original runtime improvements: opposed checks
 return both dice and partial/tie outcomes; statistic-aware characteristic checks
 show success/failure; horse and critical damage use explicit bounded inputs.
-The endpoint and tools retain their identities. Matching deployment and native
-host acceptance remain pending; see [release status](docs/release-status.md).
+The endpoint and tools retain their identities. The matching runtime is deployed
+and verified live; native-host and Events acceptance remain unverified. See
+[release evidence](docs/release-status.md).
 
 ## Battlemap
 
@@ -123,9 +124,10 @@ Call of Cthulhu companion’s guest workflow and interface conventions. Abilitie
 skills, combat, spells, features, inventory and character notes use the shared
 Quest Portal D&D components.
 
-The unreleased original 0.1.0 candidate adds 339 SRD spell and 38 weapon pickers,
+The original 0.1.0 release adds 339 SRD spell and 38 weapon pickers,
 per-class casting, class-owned Hit Dice, and explicit slot/maximum-HP suggestions.
-Death-save rolls use DC 10; initiative has no success verdict.
+Death-save rolls use DC 10; initiative has no success verdict. The matching
+runtime is deployed and verified live; see [release evidence](docs/release-status.md).
 
 Version 0.1.0 includes browser drafts, validated JSON import/export, explicit
 Attach-to-chat, d20 and damage dice, inline roll cards and optional private guest
