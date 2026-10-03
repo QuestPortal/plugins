@@ -1,0 +1,34 @@
+{
+  "name": "cthulhu-domain-verification",
+  "main": "worker.mjs",
+  "account_id": "c6ba74eb28b0748b8bfd37b5951e19cd",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "cthulhu.questportal.com/.well-known/openai-apps-challenge",
+      "zone_name": "questportal.com"
+    },
+    {
+      "pattern": "cthulhu.questportal.com/about",
+      "zone_name": "questportal.com"
+    },
+    {
+      "pattern": "cthulhu.questportal.com/support",
+      "zone_name": "questportal.com"
+    },
+    {
+      "pattern": "cthulhu.questportal.com/privacy",
+      "zone_name": "questportal.com"
+    },
+    {
+      "pattern": "cthulhu.questportal.com/terms",
+      "zone_name": "questportal.com"
+    },
+    {
+      "pattern": "cthulhu.questportal.com/walkthrough.mp4",
+      "zone_name": "questportal.com"
+    }
+  ]
+}

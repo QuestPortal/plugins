@@ -39,19 +39,30 @@ value and the requested modifier. Pendragon modifiers adjust the target value;
 they are not Call of Cthulhu bonus or penalty dice. Use the advertised schema for
 accepted bounds and fields. Do not assume all skills, Traits or Passions are
 capped at 20. Report the returned natural die, modified target and outcome
-accurately. Do not substitute a generic roll-under rule for the returned result.
+accurately. Set `statistic` to `characteristic`, `skill`, `trait`, `passion` or
+`other` as appropriate. Characteristic checks present success/failure without
+extra critical/fumble classifications. Do not substitute a generic roll-under
+rule for the returned result.
 
 Use `roll_damage` for an accepted damage formula and any required supplied weapon
 damage or brawling value. Use the knight's actual shared values. Rolls do not
 apply wounds, spend resources, mark experience, award Glory or apply inspiration
-consequences. Any knight context must set `saved:false`. For opposed checks,
-keep each participant's returned result distinct and apply the table's rules;
-never invent the other participant's roll.
+consequences. Any knight context must set `saved:false`. For an opposed check,
+pass the other participant’s known `value` and any `modifier`, `statistic` and
+`label` in `opponent`. One call rolls both dice. Report both returned sides and
+`resolution` (`win`, `partial`, `loss`, `tie` or `both-fail`); `partial` means
+your side succeeded but lost the opposition. Do not infer the opposition verdict
+from the top-level `success` alone or invent another participant’s values.
+Table-specific consequences remain with the players.
 When the formula uses `wd` or `bd`, supply the matching derived damage values and
 any explicit damage-point adjustment from the shared sheet. If they are missing,
 request the sheet or the values instead of accepting the server's illustrative
-defaults. A characteristic check's reported critical or fumble is not permission
-to invent an additional characteristic-specific consequence.
+defaults. `horse` requires explicit `horseDamageDice` from the mount and does
+not inherit the knight’s damage-point adjustment. The optional `critical` value
+is `weapon` (+4d6) or `brawling` (+2d6), added once; it does not double the total.
+Omit it for ordinary damage and do not add the bonus twice in the formula.
+The expanded pool, including critical dice, must stay within 60 dice.
+No characteristic-specific consequence is implied by a roll.
 
 Without a `sessionToken`, dice calls are stateless. Every call generates a new
 result, even when the same `requestId` is reused. Do not silently retry a lost

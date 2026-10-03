@@ -1,0 +1,195 @@
+{
+  "call-of-cthulhu-plugin": {
+    "version": "0.4.1",
+    "author": {
+      "name": "Quest Portal"
+    },
+    "server": "cthulhu-sheets",
+    "endpoint": "https://cthulhu.questportal.com/mcp",
+    "extensionKeys": [
+      "interface",
+      "review"
+    ],
+    "interfaceKeys": [
+      "displayName",
+      "shortDescription",
+      "longDescription",
+      "developerName",
+      "category",
+      "capabilities",
+      "logo",
+      "composerIcon",
+      "defaultPrompt",
+      "websiteURL",
+      "supportURL",
+      "privacyPolicyURL",
+      "termsOfServiceURL"
+    ],
+    "identity": {
+      "displayName": "Call of Cthulhu",
+      "developerName": "Quest Portal",
+      "category": "Entertainment",
+      "capabilities": [
+        "Interactive",
+        "Read",
+        "Write"
+      ],
+      "defaultPrompt": [
+        "Open my Call of Cthulhu investigator sheets.",
+        "Create five characters, each with different stats, skills, and backstory."
+      ]
+    },
+    "files": [
+      ".codex-plugin/plugin.json",
+      ".mcp.json",
+      "NOTICE.md",
+      "assets/icon.svg",
+      "mcp.json",
+      "plugin.json",
+      "skills/investigator-sheet/SKILL.md"
+    ]
+  },
+  "dnd-plugin": {
+    "version": "0.1.0",
+    "author": {
+      "name": "Quest Portal"
+    },
+    "server": "dnd-sheets",
+    "endpoint": "https://dnd.questportal.com/mcp",
+    "extensionKeys": [
+      "interface"
+    ],
+    "interfaceKeys": [
+      "displayName",
+      "shortDescription",
+      "longDescription",
+      "developerName",
+      "category",
+      "capabilities",
+      "logo",
+      "composerIcon",
+      "defaultPrompt"
+    ],
+    "identity": {
+      "displayName": "Dungeons & Dragons",
+      "developerName": "Quest Portal",
+      "category": "Entertainment",
+      "capabilities": [
+        "Interactive",
+        "Read",
+        "Write"
+      ],
+      "defaultPrompt": [
+        "Open my D&D character sheets.",
+        "Help me create a D&D 5.5e character."
+      ]
+    },
+    "files": [
+      ".codex-plugin/plugin.json",
+      ".mcp.json",
+      "NOTICE.md",
+      "README.md",
+      "assets/icon.svg",
+      "mcp.json",
+      "plugin.json",
+      "skills/character-sheet/SKILL.md"
+    ]
+  },
+  "pendragon-plugin": {
+    "version": "0.1.2",
+    "author": {
+      "name": "Quest Portal"
+    },
+    "server": "pendragon-sheets",
+    "endpoint": "https://pendragon.questportal.com/mcp",
+    "extensionKeys": [
+      "interface"
+    ],
+    "interfaceKeys": [
+      "displayName",
+      "shortDescription",
+      "longDescription",
+      "developerName",
+      "category",
+      "capabilities",
+      "logo",
+      "composerIcon",
+      "defaultPrompt"
+    ],
+    "identity": {
+      "displayName": "Pendragon",
+      "developerName": "Quest Portal",
+      "category": "Entertainment",
+      "capabilities": [
+        "Interactive",
+        "Read",
+        "Write"
+      ],
+      "defaultPrompt": [
+        "Open my Pendragon knight sheets.",
+        "Help me create a Pendragon 6th edition knight."
+      ]
+    },
+    "files": [
+      ".codex-plugin/plugin.json",
+      ".mcp.json",
+      "NOTICE.md",
+      "assets/icon.svg",
+      "mcp.json",
+      "plugin.json",
+      "skills/knight-sheet/SKILL.md",
+      "skills/knight-sheet/references/tool-contracts.md"
+    ]
+  },
+  "quest-portal-battlemap": {
+    "version": "0.1.3",
+    "author": {
+      "name": "Quest Portal",
+      "url": "https://www.questportal.com"
+    },
+    "server": "battlemap",
+    "endpoint": "https://map.questportal.com/mcp",
+    "extensionKeys": [
+      "onboardingSkill",
+      "interface"
+    ],
+    "interfaceKeys": [
+      "displayName",
+      "shortDescription",
+      "longDescription",
+      "developerName",
+      "category",
+      "capabilities",
+      "defaultPrompt",
+      "brandColor",
+      "brandColorDark",
+      "logo",
+      "composerIcon"
+    ],
+    "identity": {
+      "displayName": "Battlemap by Quest Portal",
+      "developerName": "Quest Portal",
+      "category": "Entertainment",
+      "capabilities": [
+        "Interactive",
+        "Read",
+        "Write"
+      ],
+      "defaultPrompt": [
+        "Open my battlemaps.",
+        "Create a ruined chapel encounter with four heroes and three skeletons.",
+        "Help me run the sample encounter."
+      ]
+    },
+    "files": [
+      ".codex-plugin/plugin.json",
+      ".mcp.json",
+      "assets/icon.svg",
+      "mcp.json",
+      "plugin.json",
+      "skills/build-map/SKILL.md",
+      "skills/onboarding/SKILL.md",
+      "skills/run-encounter/SKILL.md"
+    ]
+  }
+}

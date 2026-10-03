@@ -1,7 +1,7 @@
 {
   "name": "pendragon-plugin",
-  "version": "0.1.1",
-  "description": "Create and roll guest Pendragon knight sheets, display inline roll results and share dice events through private play sessions.",
+  "version": "0.1.2",
+  "description": "Create, edit and roll guest Pendragon 6th edition knight sheets with opposed checks, damage controls and optional private play sessions.",
   "author": {
     "name": "Quest Portal"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Pendragon",
     "shortDescription": "Your knight’s chronicle",
-    "longDescription": "An editable Pendragon 6th edition knight sheet with attributes, opposed Traits, Passions, skills, combat, mounts, equipment, family, Glory and Winter Phase notes. No account required. Drafts stay in your browser where the host permits; export JSON for a portable backup. Roll checks and damage, display results inline in chat, and optionally share dice through a private guest play session. Sessions expire after 24 hours and retain up to 1,000 rolls. Explicitly attach a draft to share its current values with ChatGPT. Character creation choices, inspiration consequences and campaign decisions remain with your table. No cloud character library or device sync.",
+    "longDescription": "An editable Pendragon 6th edition knight sheet with attributes, opposed Traits, Passions, skills, combat, mounts, equipment, family, Glory and Winter Phase notes. No account required. Drafts stay in your browser where the host permits; export JSON for a portable backup. Roll checks and damage, display results inline in chat, and optionally share dice through a private guest play session. Sessions expire after 24 hours and retain up to 1,000 rolls. Explicitly attach a draft to share its current values with ChatGPT. Character creation choices, inspiration consequences and campaign decisions remain with your table. No cloud character library or device sync. Opposed checks return both dice and their resolution; characteristic checks use success/failure presentation. Damage supports explicit horse dice and weapon or brawling critical bonuses. Rolls do not automatically change sheet resources.",
     "developerName": "Quest Portal",
     "category": "Entertainment",
     "capabilities": [

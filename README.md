@@ -1,6 +1,8 @@
 # Quest Portal plugins
 
-Public plugin marketplace for Quest Portal.
+Plugin distribution source for Quest Portal. The catalog includes guest character
+sheets and an owner-only Battlemap pilot; package availability does not establish
+host acceptance. See [release status and remaining gates](docs/release-status.md).
 
 ## Import into ChatGPT
 
@@ -27,7 +29,7 @@ removes its rolls and subscriptions. Unconnected rolls stay in the current view.
 There is no server-side investigator library. Quest Portal accounts and cloud
 saving are deferred to v2.
 
-Version 0.4.0 adds populated single and batch creation plus revisions of explicitly
+Runtime version 0.4.0 adds populated single and batch creation plus revisions of explicitly
 attached sheets. Creation uses request IDs to avoid duplicates, reports per-character
 validation failures, and distinguishes prepared payloads from the sheet confirming
 loading and local saving. Assigned builds are custom, not verified rules-legal.
@@ -36,6 +38,11 @@ and tools. Existing dice and guest play sessions remain available. MCP Events,
 inline rendering, embedding and attachment depend on host support; endpoint deployment
 alone does not prove those flows. The package includes portable `plugin.json`/`mcp.json`
 and matching Codex compatibility files. The prior Site and its records are not migrated.
+
+Package 0.4.1 restores the existing listing/support/legal URLs and
+review cases from the separately prepared 0.3 submission without reverting the
+0.4 workflows. The older walkthrough does not demonstrate batch/revision or
+native-host acceptance. See [metadata reconciliation](docs/cthulhu/reconciliation.md).
 
 ## Pendragon
 
@@ -62,11 +69,18 @@ The 0.1.0 backend was deployed on 2026-10-01; its matching package lives under
 launch replay in a local MCP Apps host harness. Actual ChatGPT installation,
 native embedding, and live event delivery still require host verification.
 
-Package version 0.1.1 preserves the existing identity, MCP endpoint, prompts, and
+Package version 0.1.1 preserved the existing identity, MCP endpoint, prompts, and
 audience while clarifying attachment snapshots, damage inputs, tool errors, and
-session recovery. It adds an offline package validator and reproducible portable
+session recovery. It added an offline package validator and reproducible portable
 ZIP builder; see [Pendragon packaging](scripts/pendragon/README.md). This package
 update does not itself change the backend or prove native host installation.
+
+Version 0.1.2 aligns with the original runtime improvements: opposed checks
+return both dice and partial/tie outcomes; statistic-aware characteristic checks
+show success/failure; horse and critical damage use explicit bounded inputs.
+The endpoint and tools retain their identities. The matching runtime is deployed
+and verified live; native-host and Events acceptance remain unverified. See
+[release evidence](docs/release-status.md).
 
 ## Battlemap
 
@@ -100,6 +114,39 @@ build reproducible ZIPs using the [offline packaging tool](scripts/battlemap/REA
 The private application repository owns the runtime, Cloudflare configuration,
 storage and deployment. This catalog entry preserves the package name and does
 not use a personal plugin ID to claim a workspace migration.
+
+## Dungeons & Dragons
+
+Create, edit and roll D&D 5.5e character sheets for the 2024 revised fifth edition.
+The package is configured for [dnd.questportal.com](https://dnd.questportal.com)
+and its public MCP endpoint at `https://dnd.questportal.com/mcp`, following the
+Call of Cthulhu companion’s guest workflow and interface conventions. Abilities,
+skills, combat, spells, features, inventory and character notes use the shared
+Quest Portal D&D components.
+
+The original 0.1.0 release adds 339 SRD spell and 38 weapon pickers,
+per-class casting, class-owned Hit Dice, and explicit slot/maximum-HP suggestions.
+Death-save rolls use DC 10; initiative has no success verdict. The matching
+runtime is deployed and verified live; see [release evidence](docs/release-status.md).
+
+Version 0.1.0 includes browser drafts, validated JSON import/export, explicit
+Attach-to-chat, d20 and damage dice, inline roll cards and optional private guest
+play sessions. No account, cloud character library or device sync is required or
+provided. Rules are based on the openly licensed SRD 5.2.1. This is a character
+sheet with editable progression choices, not an automatic validator for every
+class feature or a substitute for the rulebooks.
+
+Distribution source lives in `plugins/dnd-plugin/`. The private application
+repository owns its UI, backend, build and tests. Deployment, marketplace release,
+ChatGPT installation, native embedding, Attach and live event delivery are separate
+verification steps; package source alone does not establish those host workflows.
+
+## Validate and package
+
+Run the [shared offline validator and archive builder](scripts/marketplace/README.md)
+for all catalog packages. It checks source/manifest parity and archive contents;
+it does not call production endpoints or establish host acceptance. Alternate
+D&D2 and Pendragon2 branches remain available for reference and are not cataloged.
 
 ## Updates
 
