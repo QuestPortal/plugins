@@ -1,6 +1,6 @@
 {
   "call-of-cthulhu-plugin": {
-    "version": "0.4.2",
+    "version": "0.4.3",
     "author": {
       "name": "Quest Portal"
     },
@@ -56,7 +56,7 @@
     ]
   },
   "dnd-plugin": {
-    "version": "0.1.1",
+    "version": "0.2.0",
     "author": {
       "name": "Quest Portal"
     },
@@ -108,7 +108,7 @@
     ]
   },
   "pendragon-plugin": {
-    "version": "0.1.3",
+    "version": "0.2.0",
     "author": {
       "name": "Quest Portal"
     },

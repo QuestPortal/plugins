@@ -1,6 +1,6 @@
 ---
 name: knight-sheet
-description: Open a guest Pendragon 6th edition knight sheet, guide manual character creation, and roll checks or damage using shared values. Use for Traits, Passions, opposed checks and knight-sheet workflows.
+description: Open, populate, batch-create, revise and roll guest Pendragon 6th edition knight sheets using explicitly shared values. Use for Traits, Passions, opposed checks and knight-sheet workflows.
 ---
 
 # Pendragon knight sheets
@@ -9,7 +9,7 @@ Use advertised tools from the current connection; names may be namespaced.
 Call `open_sheet({})` to open the guest sheet. No account is required. If a
 needed tool is absent, explain the limitation; do not claim it ran.
 
-For new sheets, the chat creation tool accepts **only an optional name**. Complete character choices through manual sheet editing; there is no populated creation, batch creation or chat revision tool.
+Use `create_character` for populated single creation, `create_characters` for **1–20** characters, and `revise_character` with the exact current explicitly attached snapshot. Existing system-specific tool names remain supported. A prepared payload is not proof of sheet loading or local saving.
 
 ## Choose the relevant reference
 

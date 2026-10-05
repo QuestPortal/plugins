@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "dnd-plugin",
-  "version": "0.1.1",
-  "description": "Open guest D&D 2024 sheets, create name-only starter drafts, edit in the sheet, and roll checks and damage.",
+  "version": "0.2.0",
+  "description": "Create and revise populated guest D&D 2024 characters, in batches up to 20, and roll checks and damage.",
   "author": {
     "name": "Quest Portal"
   },
@@ -11,7 +11,7 @@
       "interface": {
         "displayName": "Dungeons & Dragons",
         "shortDescription": "Your D&D character sheet",
-        "longDescription": "A D&D 5.5e sheet for the 2024 revision, grounded in SRD 5.2.1. Chat creates a name-only starter draft; complete and edit class, background, species, feat and equipment choices manually in the sheet. Pick from 339 spells and 38 weapons, assign casting classes, manage class-owned Hit Dice, rests and resources, and explicitly apply slot/max-HP suggestions. Responsive layouts, roll/edit switching and light/dark preferences are included. Use Sheet tools for Attach, JSON backup and Settings. No account required: drafts stay in the browser where supported, with no cloud library or device sync. Attach shares a snapshot; chat cannot populate or revise the local sheet. Roll d20 tests and damage inline in supporting hosts; rolls do not spend resources. Optional private 24-hour sessions retain up to 1,000 rolls; monitoring requires an explicit subscription and host support. Not a complete character builder or an official Wizards of the Coast product.",
+        "longDescription": "A D&D 5.5e sheet for the 2024 revision, grounded in SRD 5.2.1. Prepare populated characters individually or in batches of up to 20, and revise an explicitly attached current sheet. Assigned builds remain editable and are not verified rules-legal. The sheet distinguishes prepared payloads from loaded and locally saved drafts. Pick from 339 spells and 38 weapons, assign casting classes, manage class-owned Hit Dice, rests and resources, and explicitly apply slot/max-HP suggestions. Responsive layouts, roll/edit switching and light/dark preferences are included. Use Sheet tools for Attach, JSON backup and Settings. No account required: browser-local drafts have no cloud library or device sync. Roll d20 tests and damage inline in supporting hosts; rolls do not spend resources. Optional private 24-hour sessions retain up to 1,000 rolls; monitoring requires an explicit subscription and host support. Not a complete character builder or an official Wizards of the Coast product.",
         "developerName": "Quest Portal",
         "category": "Entertainment",
         "capabilities": [

@@ -26,19 +26,26 @@ Work through these areas without inventing culture-specific allocations:
    as directed by the table. Future experience and Winter Phase changes require
    adjudication rather than automatic advancement.
 
-## Create and enter a draft
+## Prepare a populated draft
 
-Call `create_knight({ "name": "Sir Rowan" })` for the requested new draft.
-Its strict schema accepts only an optional name, at most 200 characters.
-There is **no populated creation, batch or revision tool**. Help the user enter
-choices manually in the sheet; do not pass characteristics, Passions or equipment
-to `create_knight` or claim those choices were applied by chat.
+Use `create_character` (or retained `create_knight`) with the agreed choices:
 
-Use **Sheet tools** for JSON import/export and explicit Attach. When asked to
-review a completed knight, use a current attachment or exported JSON, identify
-remaining placeholders and check consistency with the selected procedure.
-Never infer rules legality from schema acceptance or neutral starting values.
+```json
+{"requestId":"rowan-draft-1","name":"Sir Rowan","skills":[{"id":"sword","value":15}],"passions":[{"id":"loyalty-lord","name":"Loyalty","subject":"Lord","court":"fidelity","value":16}]}
+```
 
-A discussed knight concept, an opened draft, a manually completed sheet and a
-persisted local draft are different outcomes. Report only the outcome evidenced
-by tools/the sheet; recommend JSON backup. See [workflows](workflows.md).
+Name-only creation remains supported (nonblank name up to 200 characters).
+Use `create_characters({ requestId, characters: [...] })` for 1–20 distinct
+knights; the legacy `create_knights` alias uses `knights` instead. Supply only
+approved choices; defaults do not establish rules legality. Inspect each outcome
+and report preparation separately from sheet loading/local saving.
+
+Use **Sheet tools** for JSON backup and explicit Attach. Revise an exact current
+attachment with `revise_character` (or `revise_knight`), a fresh requestId and
+intended changes. Traits, skills, Passions and weapons merge by ID; other arrays
+replace with complete entries. Refer to [workflows](workflows.md) for empty-array,
+retry and stale-snapshot rules before changing lists.
+
+A discussed concept, a prepared payload, a loaded sheet and a persisted local
+draft are different outcomes. Report only the evidenced outcome. Character
+creation budgets, campaign choices and consequences remain with the table.
