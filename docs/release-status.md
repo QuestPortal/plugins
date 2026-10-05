@@ -1,13 +1,15 @@
-# Selected original packages — release evidence
+# Plugin release evidence
 
-Updated 2026-10-05. This release reconciles the original Call of Cthulhu,
-Pendragon and D&D identities with the existing Battlemap pilot. It adds no umbrella
-Quest Portal app and no binding to the separate authenticated `apps/mcp-public`
-runtime. Marketplace source availability, runtime deployment, native-host
-acceptance and public-directory submission are separate states.
+Updated 2026-10-05. The earlier sheet release reconciled the original Call of
+Cthulhu, Pendragon and D&D identities with the existing Battlemap pilot. A separate
+`questportal-plugin` 0.1.0 package now adds the authenticated public MCP connection;
+see its [research and validation record](questportal-mcp-status.md). Marketplace
+source availability, runtime deployment, native-host acceptance and
+public-directory submission are separate states.
 
 | Package | Package version | Runtime and endpoint | Remaining acceptance |
 | --- | --- | --- | --- |
+| Quest Portal MCP | 0.1.0 | `https://mcp.questportal.com/mcp`; successful deployment recorded for `d640dd0` on 2026-10-05 | Package source prepared; authenticated OAuth/tool flows, native-host installation and public-directory submission unverified |
 | Call of Cthulhu | 0.4.3 | 0.4.3 verified live; `https://cthulhu.questportal.com/mcp` | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
 | Original Pendragon | 0.2.0 | 0.2.0 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
 | Original D&D | 0.2.0 | 0.2.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |

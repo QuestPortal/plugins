@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "questportal": {
+      "type": "http",
+      "url": "https://mcp.questportal.com/mcp"
+    }
+  }
+}
