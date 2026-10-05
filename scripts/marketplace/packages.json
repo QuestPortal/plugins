@@ -209,5 +209,59 @@
       "skills/onboarding/SKILL.md",
       "skills/run-encounter/SKILL.md"
     ]
+  },
+  "questportal-plugin": {
+    "version": "0.1.0",
+    "author": {
+      "name": "Quest Portal"
+    },
+    "server": "questportal",
+    "endpoint": "https://mcp.questportal.com/mcp",
+    "extensionKeys": [
+      "interface"
+    ],
+    "interfaceKeys": [
+      "displayName",
+      "shortDescription",
+      "longDescription",
+      "developerName",
+      "category",
+      "capabilities",
+      "logo",
+      "composerIcon",
+      "defaultPrompt",
+      "websiteURL"
+    ],
+    "identity": {
+      "displayName": "Quest Portal",
+      "developerName": "Quest Portal",
+      "category": "Entertainment",
+      "capabilities": [
+        "Read",
+        "Write"
+      ],
+      "defaultPrompt": [
+        "Show my Quest Portal campaigns and help me choose one to prepare.",
+        "Summarize the latest session in my Quest Portal campaign with source links.",
+        "Help me prepare an NPC and a session note for my Quest Portal campaign."
+      ]
+    },
+    "files": [
+      ".codex-plugin/plugin.json",
+      ".mcp.json",
+      "NOTICE.md",
+      "README.md",
+      "assets/icon.svg",
+      "mcp.json",
+      "plugin.json",
+      "skills/using-questportal-mcp/SKILL.md",
+      "skills/using-questportal-mcp/references/blueprints.md",
+      "skills/using-questportal-mcp/references/characters.md",
+      "skills/using-questportal-mcp/references/connection-and-access.md",
+      "skills/using-questportal-mcp/references/dice-formulas.md",
+      "skills/using-questportal-mcp/references/note-content.md",
+      "skills/using-questportal-mcp/references/scheduling.md",
+      "skills/using-questportal-mcp/references/tools.md"
+    ]
   }
 }

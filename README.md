@@ -1,8 +1,9 @@
 # Quest Portal plugins
 
-Plugin distribution source for Quest Portal. The catalog includes guest character
-sheets and an owner-only Battlemap pilot; package availability does not establish
-host acceptance. See [release status and remaining gates](docs/release-status.md).
+Plugin distribution source for Quest Portal. The catalog includes the authenticated
+Quest Portal MCP connection, guest character sheets and an owner-only Battlemap
+pilot; package availability does not establish host acceptance. See
+[release status and remaining gates](docs/release-status.md).
 
 ## Import into ChatGPT
 
@@ -14,6 +15,21 @@ In Workspace settings > Plugins > Add > Import marketplace, enter:
 
 The catalog is at `.agents/plugins/marketplace.json`. Plugin packages are in
 `plugins/`, so importing does not require access to any private repository.
+
+## Quest Portal MCP
+
+Connect your Quest Portal account through OAuth at
+`https://mcp.questportal.com/mcp`. The [Quest Portal package](plugins/questportal-plugin/README.md)
+includes portable and Codex manifests, connection configuration, the Quest Portal
+icon, and a structured usage skill covering campaigns, notes, characters, session
+history, library search, scenes, music and scheduling.
+
+Personal Pro or eligible campaign-scoped shared Pro access is required; scopes,
+roles and feature gates still apply. Scheduling requires preview access, and
+note-content search has additional owner-controlled eligibility checks. This
+package connects to the account-based service and includes no embedded guest
+sheet. See the [MCP research and status record](docs/questportal-mcp-status.md)
+for deployment evidence, supported boundaries and unverified host behavior.
 
 ## Call of Cthulhu
 

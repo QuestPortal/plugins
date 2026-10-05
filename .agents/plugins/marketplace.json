@@ -31,6 +31,13 @@
         "source": "local",
         "path": "./plugins/dnd-plugin"
       }
+    },
+    {
+      "name": "questportal-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/questportal-plugin"
+      }
     }
   ]
 }
