@@ -46,7 +46,9 @@ native-host acceptance. See [metadata reconciliation](docs/cthulhu/reconciliatio
 
 ## Pendragon
 
-Create, edit and roll Pendragon 6th edition knight sheets as a guest. The package
+Open and roll Pendragon 6th edition knight sheets as a guest. Chat creates a
+name-only starter draft; complete character choices and later edits manually
+in the sheet. There is no populated creation, batch or chat revision tool. The package
 is configured for [pendragon.questportal.com](https://pendragon.questportal.com)
 and its public MCP endpoint at `https://pendragon.questportal.com/mcp`, using the
 same guest workflow and visual conventions as the Call of Cthulhu companion.
@@ -117,7 +119,9 @@ not use a personal plugin ID to claim a workspace migration.
 
 ## Dungeons & Dragons
 
-Create, edit and roll D&D 5.5e character sheets for the 2024 revised fifth edition.
+Open, manually edit and roll D&D 5.5e character sheets for the 2024 revised fifth
+edition. Chat creates only a name-only starter draft; complete character choices
+and later edits manually in the sheet.
 The package is configured for [dnd.questportal.com](https://dnd.questportal.com)
 and its public MCP endpoint at `https://dnd.questportal.com/mcp`, following the
 Call of Cthulhu companion’s guest workflow and interface conventions. Abilities,
@@ -147,6 +151,30 @@ Run the [shared offline validator and archive builder](scripts/marketplace/READM
 for all catalog packages. It checks source/manifest parity and archive contents;
 it does not call production endpoints or establish host acceptance. Alternate
 D&D2 and Pendragon2 branches remain available for reference and are not cataloged.
+
+## System guides and current UI
+
+The package instructions now separate tabletop guidance from implemented tools:
+
+| System | Current package | Skill and linked references | Chat creation/edit boundary |
+| --- | --- | --- | --- |
+| D&D 2024 / SRD 5.2.1 | 0.1.1 | [Character sheet](plugins/dnd-plugin/skills/character-sheet/SKILL.md) | Name-only draft; manual sheet completion and edits |
+| Call of Cthulhu 7e | 0.4.2 | [Investigator sheet](plugins/call-of-cthulhu-plugin/skills/investigator-sheet/SKILL.md) | Populated single/batch creation (up to 20), current attached-sheet revisions |
+| Pendragon 6e | 0.1.3 | [Knight sheet](plugins/pendragon-plugin/skills/knight-sheet/SKILL.md) | Name-only draft; manual sheet completion and edits |
+
+Each skill links system overview, character creation, core rules, supported
+workflows, examples and authoritative sources. D&D includes 339 SRD spells and
+38 weapons, class-specific casting, class-owned Hit Dice and explicit rest/resource
+controls; it is not a complete build validator. All three use the footer's **Sheet
+tools** entry for auxiliary actions such as Attach, JSON backup and Settings.
+D&D/CoC have responsive layouts, roll/edit switching and light/dark preferences;
+Pendragon is dark-only. Rolls do not automatically spend resources or apply damage.
+
+These are documentation package updates for the already deployed runtime at
+`d640dd0`; no deployment is part of this change. See the updated
+[release evidence](docs/release-status.md) for supplied live Chromium checks and
+separate, still-unrun installed-host acceptance. Package versions differ from
+runtime versions. Existing historical release records above are retained for context.
 
 ## Updates
 

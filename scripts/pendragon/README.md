@@ -12,8 +12,8 @@ python3 -m venv /tmp/pendragon-package-venv
 /tmp/pendragon-package-venv/bin/python -m pip install -r scripts/pendragon/requirements.txt
 /tmp/pendragon-package-venv/bin/python -m unittest discover -s scripts/pendragon -p 'test_*.py'
 /tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py validate plugins/pendragon-plugin
-/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py build plugins/pendragon-plugin --output /tmp/pendragon-plugin-0.1.2.zip --report /tmp/pendragon-plugin-0.1.2-validation.json
-/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py validate /tmp/pendragon-plugin-0.1.2.zip
+/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py build plugins/pendragon-plugin --output /tmp/pendragon-plugin-0.1.3.zip --report /tmp/pendragon-plugin-0.1.3-validation.json
+/tmp/pendragon-package-venv/bin/python scripts/pendragon/package.py validate /tmp/pendragon-plugin-0.1.3.zip
 ```
 
 Dependency installation is the only network step. Validation and ZIP building
@@ -26,7 +26,7 @@ the tool separately checks Plugin Creator's package conventions, compatibility
 parity, preserved prompts and identity, endpoint, skill frontmatter, and artwork.
 
 The ZIP contains one `pendragon-plugin/` directory, including hidden Codex
-compatibility files. Only the eight explicitly reviewed package files are
+compatibility files. Only the fourteen explicitly reviewed package files are
 accepted. Unrelated files, symlinks, traversal paths, duplicate JSON keys, external
 SVG references, version drift, and oversized files are rejected. Archives are
 inspected in memory without extracting them. ZIP entries are sorted, have fixed

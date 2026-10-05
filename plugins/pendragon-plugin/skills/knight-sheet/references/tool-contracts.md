@@ -1,7 +1,8 @@
 # Tool contracts and recovery
 
 These are the original guest runtime 0.1.2 contracts. The matching runtime was
-verified live on 2026-10-03. Use the actual connection's
+verified live on 2026-10-03; its Sheet tools UI update at `d640dd0` was
+reported verified on 2026-10-05. Package 0.1.3 adds guidance without changing tools. Use the actual connection's
 advertised schemas and names; session tools depend on the deployed capability.
 No tool can retrieve or modify a browser's local knight library.
 
@@ -15,7 +16,7 @@ No tool can retrieve or modify a browser's local knight library.
 | Start requested sharing | `create_play_session({})` | Returns `{ session }`, including a secret bearer token and expiry. It neither subscribes a chat nor connects the sheet automatically. |
 | End requested sharing for everyone | `end_play_session({ sessionToken })` | Ends the session and removes retained rolls, subscriptions, and pending events. Check success before claiming completion. |
 
-`connect_play_session({ sessionToken })` is an app-only tool: the sheet's Settings
+`connect_play_session({ sessionToken })` is an app-only tool: the sheet's Sheet tools → Settings
 uses it to validate a connection. Do not assume it is model-callable. There are
 no `get_knight`, `save_knight`, list-library, or roll-history retrieval tools.
 
@@ -54,8 +55,15 @@ exceed 60 dice; invalid pools fail before rolling.
 
 Examples (use actual shared values instead of copying these illustrative ones):
 
+Check arguments:
+
 ```json
 {"value":15,"statistic":"skill","opponent":{"value":12,"modifier":-5,"label":"Rival"}}
+```
+
+Damage arguments:
+
+```json
 {"formula":"horse+2","horseDamageDice":5,"critical":"weapon"}
 ```
 

@@ -1,7 +1,7 @@
 {
   "name": "call-of-cthulhu-plugin",
-  "version": "0.4.1",
-  "description": "Create and revise populated guest Call of Cthulhu investigators individually or in batches, roll dice and share private play-session events.",
+  "version": "0.4.2",
+  "description": "Create and revise populated guest Call of Cthulhu 7e investigators, in batches up to 20, and roll dice with optional private sessions.",
   "author": {
     "name": "Quest Portal"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Call of Cthulhu",
     "shortDescription": "Your investigator dossier",
-    "longDescription": "Create complete, editable Call of Cthulhu 7th edition investigators individually or in batches, with custom assigned stats, skills and backstories. Revise an explicitly attached sheet without replacing unrelated fields. No account required. Drafts stay in your browser where supported; the sheet confirms local saving and JSON export is an optional backup. Custom builds are not verified rules-legal. Roll dice inline and optionally share dice events through a private guest play session. Cloud saving and cross-device sync are not included.",
+    "longDescription": "Create editable Call of Cthulhu 7th edition investigators with custom assigned stats, skills and backstories, individually or in batches of up to 20. Revise an explicitly attached current sheet while preserving unrelated fields. Custom builds are not verified rules-legal. The sheet distinguishes prepared payloads from loaded and locally saved drafts. Responsive layouts, roll/edit switching and light/dark preferences are included. Use Sheet tools for Attach, JSON backup and Settings. No account required; browser-local drafts have no cloud library or cross-device sync. Roll dice inline in supporting hosts without automatically changing resources. Optional private 24-hour sessions retain up to 1,000 rolls; dice monitoring requires an explicit subscription and compatible host. No rulebook retrieval or official Chaosium endorsement.",
     "developerName": "Quest Portal",
     "category": "Entertainment",
     "capabilities": [
