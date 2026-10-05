@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "call-of-cthulhu-plugin",
-  "version": "0.4.1",
-  "description": "Create and revise populated guest Call of Cthulhu investigators individually or in batches, roll dice and share private play-session events.",
+  "version": "0.4.2",
+  "description": "Create and revise populated guest Call of Cthulhu 7e investigators, in batches up to 20, and roll dice with optional private sessions.",
   "author": {
     "name": "Quest Portal"
   },
@@ -11,7 +11,7 @@
       "interface": {
         "displayName": "Call of Cthulhu",
         "shortDescription": "Your investigator dossier",
-        "longDescription": "Create complete, editable Call of Cthulhu 7th edition investigators individually or in batches, with custom assigned stats, skills and backstories. Revise an explicitly attached sheet without replacing unrelated fields. No account required. Drafts stay in your browser where supported; the sheet confirms local saving and JSON export is an optional backup. Custom builds are not verified rules-legal. Roll dice inline and optionally share dice events through a private guest play session. Cloud saving and cross-device sync are not included.",
+        "longDescription": "Create editable Call of Cthulhu 7th edition investigators with custom assigned stats, skills and backstories, individually or in batches of up to 20. Revise an explicitly attached current sheet while preserving unrelated fields. Custom builds are not verified rules-legal. The sheet distinguishes prepared payloads from loaded and locally saved drafts. Responsive layouts, roll/edit switching and light/dark preferences are included. Use Sheet tools for Attach, JSON backup and Settings. No account required; browser-local drafts have no cloud library or cross-device sync. Roll dice inline in supporting hosts without automatically changing resources. Optional private 24-hour sessions retain up to 1,000 rolls; dice monitoring requires an explicit subscription and compatible host. No rulebook retrieval or official Chaosium endorsement.",
         "developerName": "Quest Portal",
         "category": "Entertainment",
         "capabilities": [
@@ -62,6 +62,30 @@
               "prompt": "Show that exact damage result again without rolling any new dice.",
               "tools_triggered": "show_roll_result",
               "expected_behavior": "Call show_roll_result with the exact prior roll object. Preserve its ID, timestamp, dice, request, detail and total. Display the same result, without calling roll_damage or roll_check and without claiming another random result was generated."
+            },
+            {
+              "description": "Unrun installed-host gate: populated single creation with synthetic data; remove the local test draft after review.",
+              "prompt": "Create a custom 1920s archivist named Ada Wren with EDU 80, Library Use 70, Luck 45, a missing mentor, and distinct suitable remaining stats and backstory.",
+              "tools_triggered": "create_investigator",
+              "expected_behavior": "Send populated top-level profile, characteristics, resources, skills and backstory with a fresh requestId. Use canonical or supported short skill IDs. Label assigned values custom and not rules-verified. Inspect validation errors. Tool success means payload prepared; claim loaded or saved locally only with sheet receipt evidence. Do not stop at JSON in chat or claim cloud saving."
+            },
+            {
+              "description": "Unrun installed-host gate: five populated characters, then an identical retry. Make a manual edit before replay; remove synthetic drafts after review.",
+              "prompt": "Create five 1920s investigators: an archivist, dockworker, physician, journalist and mechanic, each with different stats, skills and backstory.",
+              "tools_triggered": "create_investigators",
+              "expected_behavior": "Use one requestId and five distinct investigator objects in stable array order, within the 20-member limit. Report each indexed result and custom-build status. Replay with identical requestId/inputs/order; sheet application must not duplicate characters or overwrite the intervening edit. Distinguish payload preparation, loading, local saving and already-applied receipts."
+            },
+            {
+              "description": "Unrun installed-host gate: use a controlled batch fixture with a valid member and a second member whose skill is outside the schema bounds, then correct only that failed member. Do not rely on the model inventing malformed data during normal creation.",
+              "prompt": "Retry the failed investigator in the original batch after correcting its invalid skill value; keep the already successful investigator unchanged.",
+              "tools_triggered": "create_investigators",
+              "expected_behavior": "Confirm the original per-index field error. Reuse the original requestId and array positions, leaving successful members identical and fixing only the failed member. Do not create a new batch of successful characters. Confirm no duplicate/overwritten successful draft and report per-member receipt status; do not mark failed members created."
+            },
+            {
+              "description": "Unrun installed-host gate: first create a synthetic populated sheet and explicitly Attach its current full snapshot. After successful revision, test a stale snapshot against a newer manual edit.",
+              "prompt": "In the investigator I just attached, increase Library Use to 75 and add that she trusts the mechanic; preserve everything else.",
+              "tools_triggered": "revise_investigator",
+              "expected_behavior": "Use the exact attached character, a fresh requestId and only intended changes. Preserve existing text when appending to a string field, and merge the skill by ID. Verify unrelated fields and current resources remain. An identical replay is already applied; a stale base must not overwrite newer edits. Ask for fresh Attach and a new requestId after a stale error. A prepared revision alone is not evidence of application or saving."
             }
           ],
           "negative": [
@@ -76,6 +100,10 @@
             {
               "description": "The plugin has no rulebook retrieval capability. Explain that limitation without invoking any plugin tools or claiming access to licensed book text.",
               "prompt": "Use the Call of Cthulhu plugin to retrieve the complete Keeper Rulebook chapter about sanity."
+            },
+            {
+              "description": "No current attached snapshot or exported character is available. Request a fresh explicit attachment before revision; do not reconstruct the base from memory or claim browser access.",
+              "prompt": "Use the investigator I mentioned yesterday and change her current sanity to 40."
             }
           ]
         },

@@ -31,6 +31,12 @@ FILES = (
     "plugin.json",
     "skills/knight-sheet/SKILL.md",
     "skills/knight-sheet/references/tool-contracts.md",
+    "skills/knight-sheet/references/system-overview.md",
+    "skills/knight-sheet/references/character-creation.md",
+    "skills/knight-sheet/references/core-rules.md",
+    "skills/knight-sheet/references/workflows.md",
+    "skills/knight-sheet/references/examples.md",
+    "skills/knight-sheet/references/sources.md",
 )
 SCHEMA_HASHES = {
     "plugin": "0a4aad95ce337878ad38802ebf0daa3fde76abe3f65400c86bcbb1ec0b3ab883",

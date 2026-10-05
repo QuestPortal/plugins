@@ -1,5 +1,24 @@
 # Cthulhu package and review-material reconciliation
 
+## Current documentation candidate — 0.4.2 (2026-10-05)
+
+Package 0.4.2 preserves 0.4.1 identity, URLs, prompts, commerce metadata and the
+older walkthrough. It adds linked system/creation/rules/workflow/example/source
+guides and four positive manifest cases: populated single creation, distinct
+five-member batch with identical replay, partial-error correction, and revision
+with stale-snapshot rejection. A new negative case requires a current attachment
+before revision. The original five positive and three negative cases remain.
+All nine positive and four negative cases are **unrun in the installed host**.
+The four detailed 0.4 gates below also remain unrun there. Native storage receipts,
+reload, actual Attach and real session callbacks are not inferred from deployment.
+
+The current shared UI is **Sheet tools → Settings**, with responsive layouts,
+roll/edit switching and light/dark preferences. Runtime `d640dd0` deployment and
+standalone Chromium evidence are recorded in [release status](../release-status.md).
+This package change performs no runtime deployment, upload or public submission.
+
+## Historical 0.4.1 reconciliation
+
 The prior prepared public-directory archive,
 `call-of-cthulhu-plugin-0.3.0-video.zip`, describes runtime 0.3.0. It must not
 replace the populated-creation and revision instructions from source 0.4.0.

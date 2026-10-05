@@ -1,6 +1,6 @@
 # Selected original packages — release evidence
 
-Updated 2026-10-03. This release reconciles the original Call of Cthulhu,
+Updated 2026-10-05. This release reconciles the original Call of Cthulhu,
 Pendragon and D&D identities with the existing Battlemap pilot. It adds no umbrella
 Quest Portal app and no binding to the separate authenticated `apps/mcp-public`
 runtime. Marketplace source availability, runtime deployment, native-host
@@ -8,12 +8,61 @@ acceptance and public-directory submission are separate states.
 
 | Package | Package version | Runtime and endpoint | Remaining acceptance |
 | --- | --- | --- | --- |
-| Call of Cthulhu | 0.4.1 | 0.4.0 verified live; `https://cthulhu.questportal.com/mcp`; package-only metadata restoration | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
-| Original Pendragon | 0.1.2 | 0.1.2 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
-| Original D&D | 0.1.0 | 0.1.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
+| Call of Cthulhu | 0.4.2 | 0.4.0 verified live; `https://cthulhu.questportal.com/mcp`; package-only guides and review examples | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
+| Original Pendragon | 0.1.3 | 0.1.2 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
+| Original D&D | 0.1.1 | 0.1.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
 | Battlemap | 0.1.3 | Runtime 0.1.4 reported separately; `https://map.questportal.com/mcp`; unchanged owner-only pilot | Owner-only OAuth/linking, native UI/downloads, callback Events and physical mobile |
 
-## Runtime deployment records
+## Current runtime and UI evidence — 2026-10-05
+
+The source audit fetched plugins main `92971108a84fa3596df6da303143651344c56857`
+and verified runtime main `d640dd0961c485240431b39e1914afa728afb857`.
+[Runtime PR 10484](https://github.com/QuestPortal/questportal/pull/10484) is the
+shared Sheet tools UI update. The following deployment evidence was **supplied by
+release task `01a108af-3056-749e-be1e-dc21f1dc20ca`**, not rerun by this package task:
+
+| App | Worker version serving merged `d640dd0` | Traffic |
+| --- | --- | --- |
+| Pendragon | `6f87e612-7c4f-48d4-a040-57611db7a9ef` | 100% |
+| D&D | `d9ff70ce-ab45-4b99-9761-64e2898cd046` | 100% |
+| Call of Cthulhu | `0b513fcd-3b5f-4c15-b62a-02b783099621` | 100% |
+
+The release task reports HTTP 200 health and public HTML hashes matching builds.
+Live standalone Chromium checks passed for toggle, keyboard, Escape, focus,
+outside click, 320px layout, 44px targets and reduced motion. D&D/CoC themes passed;
+Pendragon remains dark-only. All three now use the footer **Sheet tools** entry;
+D&D/CoC support responsive layouts, roll/edit switching and light/dark preferences.
+Evidence report: Library `libfile_37dd65cc22d08191b6f7ee07a5ffc49e` (supplied
+identifier, not a new artifact produced by this task).
+
+**Still unrun:** native ChatGPT/Codex embedding and installed-host acceptance,
+Attach delivery, storage/reload across host partitions, physical mobile and live
+session/Event callbacks. These checks must not be inferred from standalone browser
+success. No runtime deployment or production sessions were created for this PR.
+
+## Documentation package changes
+
+Patch package versions are D&D 0.1.1, CoC 0.4.2 and Pendragon 0.1.3. Portable and
+Codex manifests advance together; MCP identities, URLs, starter prompts, artwork,
+catalog entries, audience and the Battlemap pilot are preserved. This is a source
+PR candidate until merged; package version bumps do not indicate publication.
+
+Each existing skill now routes to edition overview, creation, core rules,
+workflows, examples and official sources. D&D/Pendragon creation schemas are
+strict name-only; completion and later editing happen manually in the sheet.
+CoC supports populated creation, 1–20-member batches and exact attached-snapshot
+revisions. Tool success is payload preparation, not proof of loading/local saving.
+The CoC manifest retains its original cases and adds populated single, distinct
+batch/retry, partial-failure and revision/stale-snapshot cases; all installed-host
+review cases remain unrun. The older walkthrough is not evidence for them.
+
+Rules are original summaries with official links. D&D attribution is preserved.
+Chaosium's free introductory material is not treated as an open license; this
+update redistributes no proprietary rulebook text/tables/art and makes no new
+rights claim. Existing commercial-license scope is not verified here. Full 6e
+Core Rulebook coverage and rules-legal CoC generation are not asserted.
+
+## Historical runtime deployment records — through 2026-10-03
 
 These records were supplied by the runtime/release tasks. The package validator
 makes no live endpoint calls. Standalone browser screenshots and matching served
@@ -75,7 +124,27 @@ remain untouched. [Package PR 5](https://github.com/QuestPortal/plugins/pull/5)
 preserves main’s Call of Cthulhu, Pendragon and Battlemap entries while adding
 only the selected original D&D package.
 
-## Package validation and remaining gates
+## Documentation candidate validation — 2026-10-05
+
+On GunniBook, the package-only change passed 28 Python regression tests
+(marketplace 11, Pendragon 6, Battlemap 11) and 9 retained Cthulhu handler tests.
+The offline validator accepted all four catalog packages, including unchanged
+Battlemap, and checked portable/Codex parity, inventory, identities/endpoints,
+frontmatter and contained Markdown links. All three system skills also passed
+the skill-authoring frontmatter validator. Two builds produced identical ZIP
+hashes for every package; archive validation compares packaged bytes to source.
+The reviewed inventories include all 18 new linked references and the retained
+Pendragon tool contract. No dependency or generated archive is committed.
+
+An independent reviewer compared the guides and examples to runtime `d640dd0`
+and checked the listings/release evidence. No blocking correctness findings
+remained. Direct Pendragon contract navigation and a CoC 20+3 batch example were
+added; separate Pendragon JSON examples were split into individually valid blocks.
+These are offline documentation/package checks. No credentials, live game sessions,
+production state changes or new native host acceptance were involved. Draft PR CI
+must also pass on the final submitted head before review/merge.
+
+## Historical package validation and remaining gates
 
 The shared offline validator checks every catalog package and deterministically
 builds complete archives with per-file hashes and portable/Codex parity. It checks
@@ -98,7 +167,7 @@ under the user’s expanded release authorization.
 
 Keep Battlemap owner-only; catalog import does not grant access to its private
 library. Public OpenAI directory submission and legal attestations are not part of
-this release. Cthulhu’s old 0.3 archive and current 0.4.1 package are reconciled in
+this release. Cthulhu’s old 0.3 archive and 0.4.1 metadata restoration and current 0.4.2 package are reconciled in
 [the review-material record](cthulhu/reconciliation.md); its review cases remain
 unrun in the installed host and the older walkthrough is not evidence for 0.4
 batch/revision behavior.

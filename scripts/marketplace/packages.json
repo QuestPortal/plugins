@@ -1,6 +1,6 @@
 {
   "call-of-cthulhu-plugin": {
-    "version": "0.4.1",
+    "version": "0.4.2",
     "author": {
       "name": "Quest Portal"
     },
@@ -46,11 +46,17 @@
       "assets/icon.svg",
       "mcp.json",
       "plugin.json",
-      "skills/investigator-sheet/SKILL.md"
+      "skills/investigator-sheet/SKILL.md",
+      "skills/investigator-sheet/references/character-creation.md",
+      "skills/investigator-sheet/references/core-rules.md",
+      "skills/investigator-sheet/references/examples.md",
+      "skills/investigator-sheet/references/sources.md",
+      "skills/investigator-sheet/references/system-overview.md",
+      "skills/investigator-sheet/references/workflows.md"
     ]
   },
   "dnd-plugin": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": {
       "name": "Quest Portal"
     },
@@ -92,11 +98,17 @@
       "assets/icon.svg",
       "mcp.json",
       "plugin.json",
-      "skills/character-sheet/SKILL.md"
+      "skills/character-sheet/SKILL.md",
+      "skills/character-sheet/references/character-creation.md",
+      "skills/character-sheet/references/core-rules.md",
+      "skills/character-sheet/references/examples.md",
+      "skills/character-sheet/references/sources.md",
+      "skills/character-sheet/references/system-overview.md",
+      "skills/character-sheet/references/workflows.md"
     ]
   },
   "pendragon-plugin": {
-    "version": "0.1.2",
+    "version": "0.1.3",
     "author": {
       "name": "Quest Portal"
     },
@@ -138,7 +150,13 @@
       "mcp.json",
       "plugin.json",
       "skills/knight-sheet/SKILL.md",
-      "skills/knight-sheet/references/tool-contracts.md"
+      "skills/knight-sheet/references/character-creation.md",
+      "skills/knight-sheet/references/core-rules.md",
+      "skills/knight-sheet/references/examples.md",
+      "skills/knight-sheet/references/sources.md",
+      "skills/knight-sheet/references/system-overview.md",
+      "skills/knight-sheet/references/tool-contracts.md",
+      "skills/knight-sheet/references/workflows.md"
     ]
   },
   "quest-portal-battlemap": {

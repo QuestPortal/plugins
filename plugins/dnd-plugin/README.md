@@ -13,8 +13,9 @@ deploy the application runtime.
 
 ## Included workflows
 
-- Open or create an editable character sheet with abilities, skills, combat,
-  spells, features, equipment and character notes.
+- Open the guest sheet or create a name-only starter draft from chat. Complete
+  abilities, classes, spells, features, equipment and notes manually in the sheet;
+  no populated creation, batch or chat revision tool is exposed.
 - Keep guest drafts in the current browser storage partition where supported;
   use validated JSON import/export for portable backups. **Attach** explicitly
   shares current values with the supporting chat host.
@@ -49,11 +50,16 @@ and their order. Keep both manifests’ identity, version and presentation in sy
 The MCP files use the same server key and URL; the portable transport spelling
 is `streamable-http`, while the compatibility file uses `http`.
 
-The original package is `0.1.0`. Its synchronized runtime adds
+Package `0.1.1` adds system guides and accurate workflow/listing descriptions;
+the runtime remains `0.1.0`. Its synchronized runtime includes
 the SRD pickers and suggestions, forces death-save DC 10, and omits initiative
 success verdicts. Generic dice tools report rolls; explicit sheet actions apply
 resource and death-save changes. The matching runtime was deployed and verified
-live on 2026-10-03. Native installed-host and Events acceptance remain unverified;
+live on 2026-10-03, with the Sheet tools update at `d640dd0` reported live on
+2026-10-05. The footer Sheet tools entry contains Attach, JSON backup and
+Settings; the responsive sheet supports roll/edit switching and light/dark
+preferences. Read the [skill guide](skills/character-sheet/SKILL.md) for linked
+creation, rules, capabilities, examples and sources. Native installed-host and Events acceptance remain unverified;
 see the repository’s `docs/release-status.md` for evidence and remaining gates.
 
 ## Release through the existing marketplace
@@ -64,8 +70,8 @@ see the repository’s `docs/release-status.md` for evidence and remaining gates
    public revision of this package’s icon.
 2. Review this directory’s manifests, skill, connection and assets together.
    Confirm that the hosted endpoint implements the advertised tools and that
-   both manifests still describe the actual behavior. This initial release is
-   `0.1.0`; later package releases advance both manifest versions together.
+   both manifests still describe the actual behavior. This documentation release is
+   `0.1.1`; advance both manifest versions together on future package releases.
 3. Release the matching hosted runtime before making newly advertised behavior
    available in the marketplace. Publish package changes through the existing
    review process for `QuestPortal/plugins`. The catalog entry is
