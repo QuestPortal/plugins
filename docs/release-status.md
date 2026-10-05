@@ -8,18 +8,54 @@ acceptance and public-directory submission are separate states.
 
 | Package | Package version | Runtime and endpoint | Remaining acceptance |
 | --- | --- | --- | --- |
-| Call of Cthulhu | 0.4.2 | 0.4.0 verified live; `https://cthulhu.questportal.com/mcp`; package-only guides and review examples | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
-| Original Pendragon | 0.1.3 | 0.1.2 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
-| Original D&D | 0.1.1 | 0.1.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
+| Call of Cthulhu | 0.4.3 | 0.4.3 verified live; `https://cthulhu.questportal.com/mcp` | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
+| Original Pendragon | 0.2.0 | 0.2.0 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
+| Original D&D | 0.2.0 | 0.2.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
 | Battlemap | 0.1.3 | Runtime 0.1.4 reported separately; `https://map.questportal.com/mcp`; unchanged owner-only pilot | Owner-only OAuth/linking, native UI/downloads, callback Events and physical mobile |
 
-## Coordinated parity candidate — not deployed or published
+## Coordinated parity release — 2026-10-05
 
-The follow-up after package main `e3e4e2aa36d0642622f35d5d6a35688212d86f4c`
-(merged PR 10) prepares D&D **0.2.0**, CoC **0.4.3**, and Pendragon **0.2.0**.
-These package candidates describe the matching runtime implementation under review,
-not the deployed baseline in the table above. No merge or deployment is authorized
-by this task. Publish package changes only after the matching runtime is released.
+The user approved runtime/package merges and deployment of the three canonical
+sheets. [Runtime PR 10485](https://github.com/QuestPortal/questportal/pull/10485)
+merged as `4a35594067c65b8bdd57ddbddd4101dccada1893`. Live verification found
+D&D/CoC health responses still contained older version literals despite serving
+the new MCP contract. [Corrective PR 10486](https://github.com/QuestPortal/questportal/pull/10486)
+merged as `66ac9fa35a3a5a8ebc7018c0594e3e15ee9616a4`, makes health read the package
+version, and adds package/MCP/health identity regression coverage. D&D and CoC
+were redeployed from that exact correction; Pendragon retains the parity merge.
+The matching package versions are D&D **0.2.0**, CoC **0.4.3**, Pendragon **0.2.0**.
+Package source release follows runtime verification in this PR; no public-directory
+submission or native-host acceptance is claimed.
+
+| Sheet | Deployed source | Provider Worker version | Traffic |
+| --- | --- | --- | --- |
+| D&D | `66ac9fa35a3a5a8ebc7018c0594e3e15ee9616a4` | `c7ec029e-9977-414f-8001-441034712543` | 100% |
+| CoC | `66ac9fa35a3a5a8ebc7018c0594e3e15ee9616a4` | `292c07a5-8cba-46d2-8e6d-09c384c27b49` | 100% |
+| Pendragon | `4a35594067c65b8bdd57ddbddd4101dccada1893` | `a436a065-834b-4643-92b9-5edd883cd545` | 100% |
+
+Public health and legacy/modern MCP discovery report the matching versions.
+Live stateless checks passed populated creation, stable retry identity, mixed
+batch results, attached-snapshot revision preparation, bounds and unknown-field
+rejection, and retained legacy names/response compatibility. Served HTML SHA-256
+matches each merged local build. Existing egress containers and session storage
+were preserved. No QA sessions, rolls, subscriptions, customer records or new
+credentials were created.
+
+Live standalone Chromium passed nine bounded checks per sheet (27 total):
+synthetic JSON import, editable values, saved edits after reload/reopening,
+current-draft export, unchanged prepared snapshots, and desktop/390px rendering.
+The browser permitted only GET requests to the selected sheet origin; all state
+was isolated browser-local data and each context was destroyed afterward. This
+is not a native host, real Attach or physical mobile test.
+
+All required CI passed on both exact runtime merges. The parity implementation
+passed 963 local tests and 31 Pendragon browser cases plus cross-system delivery
+checks. The health correction passed 691 D&D/CoC tests, lint/typechecking and both
+Cloudflare builds. The three unrelated deployment workflows temporarily paused
+with explicit approval were restored to their original active states and verified.
+No unrelated web/MCP/Realtime Database service deployment ran; the corrective
+merge's MCP selector explicitly skipped both deployment jobs, and Firestore
+reconciliation performed no deployment.
 
 All three use `create_character`, `create_characters` (1–20) and
 `revise_character` with explicit current snapshots. Existing investigator/knight
@@ -31,12 +67,12 @@ Per-system validation, array merges and game math remain distinct. See the
 Portable/Codex manifests advance together. Identity, endpoints, starter prompts,
 artwork, review metadata and the owner-only Battlemap package remain unchanged.
 Native embedding, Attach delivery, storage partitions, physical mobile and real
-host event callbacks remain unverified. The historical browser/deployment evidence
-below does not verify the new candidate or those native host flows.
+host event callbacks remain unverified. The standalone live browser checks and
+historical evidence below do not establish those native host flows.
 
-### Candidate package validation
+### Package validation
 
-The candidate passed all 28 offline Python regressions (marketplace 11,
+The package passed all 28 offline Python regressions (marketplace 11,
 Pendragon 6, Battlemap 11). Nine retained Cthulhu static-handler tests also passed;
 the handler source is unchanged. The shared validator accepted all four packages,
 including unchanged Battlemap, checking portable/Codex parity, exact inventory,
@@ -48,7 +84,7 @@ No dependencies, generated archives, credentials or production data are committe
 These checks establish package integrity only. Runtime behavior and native host
 acceptance have separate evidence; exact pushed-head CI remains a PR gate.
 
-## Current runtime and UI evidence — 2026-10-05
+## Historical runtime and UI evidence — shared footer, 2026-10-05
 
 The source audit fetched plugins main `92971108a84fa3596df6da303143651344c56857`
 and verified runtime main `d640dd0961c485240431b39e1914afa728afb857`.

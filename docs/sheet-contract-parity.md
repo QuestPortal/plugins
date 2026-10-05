@@ -1,11 +1,12 @@
-# Guest sheet contract parity candidate
+# Guest sheet contract parity
 
 Package baseline: merged PR 10, main `e3e4e2aa36d0642622f35d5d6a35688212d86f4c`.
 Runtime baseline: `d640dd0961c485240431b39e1914afa728afb857`.
-This document describes the coordinated source candidate; it does not establish
-deployment, marketplace publication or native-host acceptance.
+The coordinated runtime is deployed and verified; see [release identities and
+evidence](release-status.md). Native-host acceptance and public-directory
+publication remain separate, unverified states.
 
-| Capability | Before | Coordinated candidate |
+| Capability | Before | Coordinated release |
 | --- | --- | --- |
 | Single creation | D&D/Pendragon name-only; CoC populated | All three accept populated partial system fields with optional requestId; name-only use remains |
 | Batch creation | CoC only, 1–20 | `create_characters({requestId, characters})`, 1–20, per-index validation |
@@ -28,7 +29,7 @@ deployment, marketplace publication or native-host acceptance.
 | Open / roll / show | `open_sheet`, `roll_check`, `roll_damage`, `show_roll_result` | Existing names and system-specific roll fields retained |
 | Guest sessions | `create_play_session`, `end_play_session` | `connect_play_session` is app-only |
 
-Use the actual connection's advertised schema. A package candidate does not make
+Use the actual connection's advertised schema. Package metadata does not make
 new tools available on an older runtime. Request IDs for character operations use
 1–128 letters, digits, underscores or hyphens; dice request IDs remain UUIDs.
 Canonical and legacy creation names reach the same delivery behavior. Retry an
@@ -64,8 +65,9 @@ subscriptions and pending deliveries; already delivered messages remain.
 Native installation/discovery, embedding, actual Attach delivery, browser-storage
 partition behavior, physical mobile and live callbacks remain separate acceptance
 gates. Offline package validation verifies manifests, links and archive bytes;
-it does not establish those outcomes. No production sessions, runtime deployment,
-package publication or public-directory submission is part of this candidate.
+it does not establish those outcomes. The authorized three-Worker deployment
+and stateless/standalone live verification are recorded in [release evidence](release-status.md).
+No production QA sessions, subscriptions or public-directory submission occurred.
 
 Legacy name-only `create_knight` calls without `requestId` retain the exact
 `{ guest: true, character }` opening result for already-open older sheets.
