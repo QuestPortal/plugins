@@ -22,19 +22,28 @@ and [SRD 5.2.1](https://www.dndbeyond.com/srd) for the selected options:
 5. For a caster, select permitted spells, assign each to its casting class and
    check preparation and slot rules. Keep Pact Magic separate where appropriate.
 
-## Enter the sheet
+## Prepare the sheet
 
-Call `create_character({ "name": "Mira Ash" })` for a requested new draft.
-**Only name is accepted**, up to 100 characters. Guide the user through roll/edit
-switching and manual entry. There is no populated payload, batch tool or revision
-tool; do not claim a discussed build has been applied to the draft.
+Use `create_character` with a fresh `requestId` and the agreed sheet fields.
+For example, a custom starting draft can include
+`{ "requestId": "mira-draft-1", "name": "Mira Ash", "abilities": { "intelligence": 16 }, "notes": "Review background and spell choices." }`.
+A name-only call remains supported (name up to 100 characters). Defaults do not
+complete class, background, species, feat, equipment or spell choices. Supply
+complete array entries using the advertised schema when adding classes/spells;
+arrays replace, while supported nested objects merge.
 
-Use the sheet's catalogs to select weapons/spells and its explicit controls to
-apply slot or maximum-HP suggestions. Those helpers do not complete background,
-species, feat or feature selections. For a higher-level or multiclass build,
-review levels, per-class casting ability and Hit Dice before accepting suggestions.
+Use `create_characters({ requestId, characters: [...] })` for 1–20 distinct builds.
+Review per-member errors and retry only as described in [workflows](workflows.md).
+After tool preparation, the sheet must confirm loading and local persistence.
+Do not substitute JSON in chat for an available creation tool.
 
-Ask for Attach when reviewing entered values. Check the snapshot for unfinished
-choices, accidental defaults and duplicated effects. Record unresolved decisions,
-recommend JSON backup and distinguish a reviewed plan from a finished saved sheet.
-See [workflows](workflows.md) for storage and attachment boundaries.
+The sheet's catalogs and explicit slot/maximum-HP suggestions remain available.
+Those helpers do not complete background, species, feat or feature selections.
+For a higher-level or multiclass build, review levels, per-class casting ability
+and Hit Dice before accepting suggestions.
+
+Ask for Attach when reviewing entered values. Use `revise_character` with that
+exact snapshot, a new requestId and intended changes. Preserve complete arrays
+when changing one member. Check unfinished choices, accidental defaults and
+duplicated effects; recommend JSON backup. A prepared revision is not proof of
+application or saving. See [workflows](workflows.md) for conflict and retry rules.

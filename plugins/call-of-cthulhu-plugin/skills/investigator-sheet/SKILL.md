@@ -9,7 +9,7 @@ Use advertised tools from the current connection; names may be namespaced.
 Call `open_sheet({})` to open the guest sheet. No account is required. If a
 needed tool is absent, explain the limitation; do not claim it ran.
 
-Use populated creation for requested finished drafts, batches of **at most 20**, and `revise_investigator` only with the exact current explicitly attached snapshot. A prepared payload is not proof of sheet loading or local saving.
+Use `create_character`, `create_characters` for batches of **1–20**, and `revise_character` only with the exact current explicitly attached snapshot. The existing investigator-named tools remain supported. A prepared payload is not proof of sheet loading or local saving.
 
 ## Choose the relevant reference
 

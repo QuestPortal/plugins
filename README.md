@@ -46,9 +46,9 @@ native-host acceptance. See [metadata reconciliation](docs/cthulhu/reconciliatio
 
 ## Pendragon
 
-Open and roll Pendragon 6th edition knight sheets as a guest. Chat creates a
-name-only starter draft; complete character choices and later edits manually
-in the sheet. There is no populated creation, batch or chat revision tool. The package
+Open, populate, revise and roll Pendragon 6th edition knight sheets as a guest.
+The coordinated candidate adds populated single/batch creation and exact
+attached-snapshot revisions, while preserving manual editing. The package
 is configured for [pendragon.questportal.com](https://pendragon.questportal.com)
 and its public MCP endpoint at `https://pendragon.questportal.com/mcp`, using the
 same guest workflow and visual conventions as the Call of Cthulhu companion.
@@ -119,9 +119,9 @@ not use a personal plugin ID to claim a workspace migration.
 
 ## Dungeons & Dragons
 
-Open, manually edit and roll D&D 5.5e character sheets for the 2024 revised fifth
-edition. Chat creates only a name-only starter draft; complete character choices
-and later edits manually in the sheet.
+Open, populate, revise and roll D&D 5.5e character sheets for the 2024 revised fifth
+edition. The coordinated candidate adds populated single/batch creation and exact
+attached-snapshot revisions; class choices still need table-approved values.
 The package is configured for [dnd.questportal.com](https://dnd.questportal.com)
 and its public MCP endpoint at `https://dnd.questportal.com/mcp`, following the
 Call of Cthulhu companion’s guest workflow and interface conventions. Abilities,
@@ -158,9 +158,9 @@ The package instructions now separate tabletop guidance from implemented tools:
 
 | System | Current package | Skill and linked references | Chat creation/edit boundary |
 | --- | --- | --- | --- |
-| D&D 2024 / SRD 5.2.1 | 0.1.1 | [Character sheet](plugins/dnd-plugin/skills/character-sheet/SKILL.md) | Name-only draft; manual sheet completion and edits |
-| Call of Cthulhu 7e | 0.4.2 | [Investigator sheet](plugins/call-of-cthulhu-plugin/skills/investigator-sheet/SKILL.md) | Populated single/batch creation (up to 20), current attached-sheet revisions |
-| Pendragon 6e | 0.1.3 | [Knight sheet](plugins/pendragon-plugin/skills/knight-sheet/SKILL.md) | Name-only draft; manual sheet completion and edits |
+| D&D 2024 / SRD 5.2.1 | 0.2.0 candidate | [Character sheet](plugins/dnd-plugin/skills/character-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
+| Call of Cthulhu 7e | 0.4.3 candidate | [Investigator sheet](plugins/call-of-cthulhu-plugin/skills/investigator-sheet/SKILL.md) | Same capabilities through common names and retained investigator aliases |
+| Pendragon 6e | 0.2.0 candidate | [Knight sheet](plugins/pendragon-plugin/skills/knight-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
 
 Each skill links system overview, character creation, core rules, supported
 workflows, examples and authoritative sources. D&D includes 339 SRD spells and
@@ -170,11 +170,16 @@ tools** entry for auxiliary actions such as Attach, JSON backup and Settings.
 D&D/CoC have responsive layouts, roll/edit switching and light/dark preferences;
 Pendragon is dark-only. Rolls do not automatically spend resources or apply damage.
 
-These are documentation package updates for the already deployed runtime at
-`d640dd0`; no deployment is part of this change. See the updated
-[release evidence](docs/release-status.md) for supplied live Chromium checks and
-separate, still-unrun installed-host acceptance. Package versions differ from
-runtime versions. Existing historical release records above are retained for context.
+The candidate standardizes `create_character`, `create_characters` and
+`revise_character`, shared delivery/retry semantics and explicit snapshot Attach.
+Existing system tool names remain supported. See the
+[parity contract](docs/sheet-contract-parity.md) for the before/after matrix and
+system-specific merge rules. **These package candidates depend on the coordinated
+runtime change; they are not deployed or published by this source PR.** Release
+the matching runtime before publishing these package claims. Current connections
+must be checked for advertised capabilities. See [release evidence](docs/release-status.md)
+for historical live checks and still-unrun native acceptance. Package versions
+differ from runtime versions; historical release records above remain for context.
 
 ## Updates
 

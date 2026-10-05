@@ -1,7 +1,7 @@
 {
   "name": "pendragon-plugin",
-  "version": "0.1.3",
-  "description": "Open guest Pendragon 6e sheets, create name-only knight drafts, edit in the sheet, and roll opposed checks and damage.",
+  "version": "0.2.0",
+  "description": "Create and revise populated guest Pendragon 6e knights, in batches up to 20, and roll opposed checks and damage.",
   "author": {
     "name": "Quest Portal"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Pendragon",
     "shortDescription": "Your knight’s chronicle",
-    "longDescription": "A dark-theme Pendragon 6th edition knight sheet covering characteristics, opposed Traits, Passions, skills, combat, mounts, equipment, family, Glory and Winter Phase notes. Chat creates a name-only starter draft; character choices and later edits are completed manually in the sheet. No populated creation, batch or chat revision tool. Use Sheet tools for Attach, JSON backup and Settings. No account required: drafts stay in the browser where supported, with no cloud library or device sync. Attach shares an explicit snapshot. Roll d20 checks, opposed checks with both dice and resolution, and damage with explicit horse dice and weapon/brawling critical bonuses. Rolls do not apply wounds, award Glory or change resources. Optional private 24-hour sessions retain up to 1,000 rolls; monitoring and inline results depend on host support. Creation, inspiration consequences and campaign decisions remain with the table; no official Chaosium endorsement.",
+    "longDescription": "A dark-theme Pendragon 6th edition knight sheet covering characteristics, opposed Traits, Passions, skills, combat, mounts, equipment, family, Glory and Winter Phase notes. Prepare populated knights individually or in batches of up to 20, and revise an explicitly attached current sheet. Assigned builds and starter defaults are not verified rules-legal generation. The sheet distinguishes prepared payloads from loaded and locally saved drafts. Use Sheet tools for Attach, JSON backup and Settings. No account required: browser-local drafts have no cloud library or device sync. Roll d20 checks, opposed checks with both dice and resolution, and damage with explicit horse dice and weapon/brawling critical bonuses. Rolls do not apply wounds, award Glory or change resources. Optional private 24-hour sessions retain up to 1,000 rolls; monitoring and inline results depend on host support. Creation, inspiration consequences and campaign decisions remain with the table; no official Chaosium endorsement.",
     "developerName": "Quest Portal",
     "category": "Entertainment",
     "capabilities": [
