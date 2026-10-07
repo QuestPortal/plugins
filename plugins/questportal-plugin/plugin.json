@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "questportal-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Connect your Quest Portal account to manage campaigns, notes, characters, scenes and music, and read session history and accessible library sources.",
   "author": {
     "name": "Quest Portal"

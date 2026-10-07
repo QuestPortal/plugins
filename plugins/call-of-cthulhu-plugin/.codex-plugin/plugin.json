@@ -1,6 +1,6 @@
 {
   "name": "call-of-cthulhu-plugin",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Create and revise populated guest Call of Cthulhu 7e investigators, in batches up to 20, and roll dice with optional private sessions.",
   "author": {
     "name": "Quest Portal"

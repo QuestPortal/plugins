@@ -25,7 +25,7 @@ class PendragonPackageTests(unittest.TestCase):
     def test_build_is_deterministic_and_preserves_hidden_compatibility_files(self):
         files = package.read_directory(self.source)
         report = package.validate_files(files)
-        self.assertEqual(report["version"], "0.2.0")
+        self.assertEqual(report["version"], "0.2.1")
         first = package.build_zip(files)
         for path in self.source.rglob("*"):
             if path.is_file():

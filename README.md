@@ -174,9 +174,9 @@ The package instructions now separate tabletop guidance from implemented tools:
 
 | System | Current package | Skill and linked references | Chat creation/edit boundary |
 | --- | --- | --- | --- |
-| D&D 2024 / SRD 5.2.1 | 0.2.0 candidate | [Character sheet](plugins/dnd-plugin/skills/character-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
-| Call of Cthulhu 7e | 0.4.3 candidate | [Investigator sheet](plugins/call-of-cthulhu-plugin/skills/investigator-sheet/SKILL.md) | Same capabilities through common names and retained investigator aliases |
-| Pendragon 6e | 0.2.0 candidate | [Knight sheet](plugins/pendragon-plugin/skills/knight-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
+| D&D 2024 / SRD 5.2.1 | 0.2.1 candidate | [Character sheet](plugins/dnd-plugin/skills/character-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
+| Call of Cthulhu 7e | 0.4.4 candidate | [Investigator sheet](plugins/call-of-cthulhu-plugin/skills/investigator-sheet/SKILL.md) | Same capabilities through common names and retained investigator aliases |
+| Pendragon 6e | 0.2.1 candidate | [Knight sheet](plugins/pendragon-plugin/skills/knight-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
 
 Each skill links system overview, character creation, core rules, supported
 workflows, examples and authoritative sources. D&D includes 339 SRD spells and
