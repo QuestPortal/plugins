@@ -46,7 +46,7 @@ class BattlemapPackageTests(unittest.TestCase):
             marketplace = package.validate_marketplace(package.MARKETPLACE)
         self.assertEqual(report["version"], json.loads(self.files["plugin.json"])["version"])
         self.assertEqual(len(report["files"]), 8)
-        self.assertEqual(report["icon"]["width"], 512)
+        self.assertEqual(report["icon"]["width"], 100)
         self.assertEqual(marketplace["entry"]["source"]["path"], f"./plugins/{package.NAME}")
         self.assertEqual(report["schemas"]["plugin"]["sha256"], package.helpers.SCHEMA_HASHES["plugin"])
 

@@ -13,7 +13,7 @@ skill download or local server is unnecessary.
 
 | Setting        | Value                                                                |
 | -------------- | -------------------------------------------------------------------- |
-| Package        | `questportal-plugin` · `0.1.0`                                       |
+| Package        | `questportal-plugin` · `0.1.1`                                       |
 | MCP server key | `questportal`                                                        |
 | Endpoint       | `https://mcp.questportal.com/mcp`                                    |
 | Transport      | Streamable HTTP (`streamable-http` portable; `http` in Codex config) |

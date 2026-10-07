@@ -1,7 +1,7 @@
 # Attribution and source
 
-Published by Quest Portal. The icon is Quest Portal's existing 512 × 512 purple
-logomark, copied unchanged from the marketing site's `public/favicon.svg`.
+Published by Quest Portal. The gray Quest Portal logomark is exported from
+[Quest Portal’s plugin icon designs](https://www.figma.com/design/0BGxPK8blC94x5A8jz0Ozj/Plugins?node-id=20-44).
 
 The usage skill and six domain references derive from the canonical
 `skills/using-questportal-mcp/` directory at Quest Portal application revision

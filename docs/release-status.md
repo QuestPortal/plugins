@@ -1,6 +1,6 @@
 # Plugin release evidence
 
-Updated 2026-10-05. The earlier sheet release reconciled the original Call of
+Updated 2026-10-07. The earlier sheet release reconciled the original Call of
 Cthulhu, Pendragon and D&D identities with the existing Battlemap pilot. A separate
 `questportal-plugin` 0.1.0 package now adds the authenticated public MCP connection;
 see its [research and validation record](questportal-mcp-status.md). Marketplace
@@ -9,11 +9,31 @@ public-directory submission are separate states.
 
 | Package | Package version | Runtime and endpoint | Remaining acceptance |
 | --- | --- | --- | --- |
-| Quest Portal MCP | 0.1.0 | `https://mcp.questportal.com/mcp`; successful deployment recorded for `d640dd0` on 2026-10-05 | Package source prepared; authenticated OAuth/tool flows, native-host installation and public-directory submission unverified |
-| Call of Cthulhu | 0.4.3 | 0.4.3 verified live; `https://cthulhu.questportal.com/mcp` | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
-| Original Pendragon | 0.2.0 | 0.2.0 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
-| Original D&D | 0.2.0 | 0.2.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
-| Battlemap | 0.1.3 | Runtime 0.1.4 reported separately; `https://map.questportal.com/mcp`; unchanged owner-only pilot | Owner-only OAuth/linking, native UI/downloads, callback Events and physical mobile |
+| Quest Portal MCP | 0.1.1 | `https://mcp.questportal.com/mcp`; successful deployment recorded for `d640dd0` on 2026-10-05 | Package source prepared; authenticated OAuth/tool flows, native-host installation and public-directory submission unverified |
+| Call of Cthulhu | 0.4.4 | 0.4.3 verified live; `https://cthulhu.questportal.com/mcp` | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
+| Original Pendragon | 0.2.1 | 0.2.0 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
+| Original D&D | 0.2.1 | 0.2.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
+| Battlemap | 0.1.4 | Runtime 0.1.4 reported separately; `https://map.questportal.com/mcp`; unchanged owner-only pilot | Owner-only OAuth/linking, native UI/downloads, callback Events and physical mobile |
+
+## Plugin icon refresh — 2026-10-07
+
+All five packages use the new SVG exports from the
+[Plugins Figma file](https://www.figma.com/design/0BGxPK8blC94x5A8jz0Ozj/Plugins?node-id=0-1):
+Call of Cthulhu `19:41`, D&D `19:20`, Pendragon `20:2`, Quest Portal `20:44`,
+and Battlemap `21:171`. The exports retain their transparent 100 × 100 canvas
+and gray artwork. Both listing and composer references use the same asset.
+Portable/Codex manifests and the reviewed package inventory advance together.
+
+The 28 offline package regressions and nine retained static-handler tests pass,
+and the shared builder validates all five catalog packages and verifies archive
+contents against source. Each packaged SVG is byte-identical to its Figma export.
+A local desktop browser preview confirms all five at 100, 48 and 24 pixels.
+These checks target artwork integrity, manifest parity and complete archives;
+no credentials or production data are used, and no production state is changed.
+
+This is a package-only update. Marketplace synchronization, installed-host icon
+refresh and public-directory publication remain unverified. Runtime branding pins
+and deployments are unchanged; the runtime evidence below is historical.
 
 ## Coordinated parity release — 2026-10-05
 

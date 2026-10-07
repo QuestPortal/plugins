@@ -51,8 +51,9 @@ and their order. Keep both manifests’ identity, version and presentation in sy
 The MCP files use the same server key and URL; the portable transport spelling
 is `streamable-http`, while the compatibility file uses `http`.
 
-Package `0.2.0` is the coordinated parity candidate, requiring the matching
-runtime change before marketplace publication. It adds populated single/batch
+Package `0.2.1` refreshes the plugin icon and retains the coordinated `0.2.0`
+parity candidate's runtime requirements before marketplace publication. That
+runtime change adds populated single/batch
 creation and attached-snapshot revisions with replay/conflict handling. Nested
 objects merge; arrays replace with complete entries. Builds remain custom and
 are not automatically verified rules-legal. No deployment is included here.
@@ -76,8 +77,8 @@ see the repository’s `docs/release-status.md` for evidence and remaining gates
    public revision of this package’s icon.
 2. Review this directory’s manifests, skill, connection and assets together.
    Confirm that the hosted endpoint implements the advertised tools and that
-   both manifests still describe the actual behavior. This coordinated candidate is
-   `0.2.0`; advance both manifest versions together on future package releases.
+   both manifests still describe the actual behavior. The current package is
+   `0.2.1`; advance both manifest versions together on future package releases.
 3. Release the matching hosted runtime before making newly advertised behavior
    available in the marketplace. Publish package changes through the existing
    review process for `QuestPortal/plugins`. The catalog entry is
