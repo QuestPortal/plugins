@@ -30,6 +30,9 @@ NAME = "quest-portal-battlemap"
 ENDPOINT = "https://map.questportal.com/mcp"
 MARKETPLACE = SCRIPTS.parent / ".agents/plugins/marketplace.json"
 CLAUDE_MARKETPLACE = SCRIPTS.parent / ".claude-plugin/marketplace.json"
+CLAUDE_AUTHOR = {"name": "Quest Portal", "url": "https://www.questportal.com"}
+CLAUDE_HOMEPAGE = "https://map.questportal.com"
+CLAUDE_KEYWORDS = ["battlemap", "tabletop", "rpg", "encounter", "vtt", "mcp"]
 SKILLS = ("build-map", "onboarding", "run-encounter")
 FILES = (
     ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".mcp.json", "assets/icon.svg", "mcp.json",
@@ -64,8 +67,14 @@ def write_output(path, data, source):
     return helpers.write_output(path, data, source)
 
 
-def validate_marketplace(path, kind="codex"):
+def claude_entry(description):
+    """Complete reviewed Claude catalog entry; Claude shows these fields over the manifest."""
+    return {"name": NAME, "source": f"./plugins/{NAME}", "description": description, "author": CLAUDE_AUTHOR, "category": "entertainment", "homepage": CLAUDE_HOMEPAGE}
+
+
+def validate_marketplace(path, kind="codex", description=None):
     require(kind in ("codex", "claude"), "Unknown marketplace kind")
+    require((kind == "claude") == (description is not None), "Claude catalog validation requires the manifest description")
     require(not path.is_symlink() and path.is_file(), "Marketplace must be a regular local file")
     require(path.stat().st_size <= MAX_FILE_BYTES, "Marketplace exceeds size bound")
     catalog = decode_json(path.read_bytes())
@@ -77,8 +86,8 @@ def validate_marketplace(path, kind="codex"):
     matches = [entry for entry in entries if entry.get("name") == NAME]
     require(len(matches) == 1, "Marketplace must contain exactly one Battlemap entry")
     if kind == "claude":
-        require(isinstance(catalog.get("owner"), dict) and catalog["owner"].get("name") == "Quest Portal", "Claude marketplace owner changed")
-        require(matches[0].get("source") == f"./plugins/{NAME}", "Claude marketplace must bind the reviewed local Battlemap path")
+        require(catalog.get("owner") == CLAUDE_AUTHOR, "Claude marketplace owner changed")
+        require(matches[0] == claude_entry(description), "Claude marketplace entry, binding or presentation changed")
     else:
         require(matches == [{"name": NAME, "source": {"source": "local", "path": f"./plugins/{NAME}"}}], "Marketplace must contain exactly the reviewed local Battlemap entry")
     return {"name": catalog["name"], "kind": kind, "entry": matches[0], "sha256": sha256(path.read_bytes())}
@@ -161,7 +170,7 @@ def validate_files(files):
     }, "Portable and compatibility manifest identity/version/presentation differ")
     require(decode_json(files[".claude-plugin/plugin.json"]) == {
         "name": manifest["name"], "version": manifest["version"], "description": manifest["description"], "author": manifest["author"],
-        "homepage": "https://map.questportal.com", "keywords": ["battlemap", "tabletop", "rpg", "encounter", "vtt", "mcp"],
+        "homepage": CLAUDE_HOMEPAGE, "keywords": CLAUDE_KEYWORDS,
     }, "Portable and Claude manifest identity/version/presentation differ")
     require(mcp == {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
@@ -258,11 +267,10 @@ def main():
     parser.add_argument("--report", type=Path, help="JSON report outside source")
     args = parser.parse_args()
     marketplace = validate_marketplace(args.marketplace)
-    claude_marketplace = validate_marketplace(args.claude_marketplace, kind="claude")
     files = read_directory(args.source) if args.source.is_dir() else read_archive(args.source)
     report = validate_files(files)
     report["marketplace"] = marketplace
-    report["claudeMarketplace"] = claude_marketplace
+    report["claudeMarketplace"] = validate_marketplace(args.claude_marketplace, kind="claude", description=decode_json(files["plugin.json"])["description"])
     if args.command == "build":
         require(args.source.is_dir() and args.output, "Build requires a source directory and --output")
         archive = build_zip(files, args.layout)

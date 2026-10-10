@@ -44,7 +44,7 @@ class BattlemapPackageTests(unittest.TestCase):
         with patch("socket.socket", side_effect=AssertionError("Validation attempted networking")):
             report = package.validate_files(self.files)
             marketplace = package.validate_marketplace(package.MARKETPLACE)
-            claude_marketplace = package.validate_marketplace(package.CLAUDE_MARKETPLACE, kind="claude")
+            claude_marketplace = package.validate_marketplace(package.CLAUDE_MARKETPLACE, kind="claude", description=json.loads(self.files["plugin.json"])["description"])
         self.assertEqual(report["version"], json.loads(self.files["plugin.json"])["version"])
         self.assertEqual(len(report["files"]), 9)
         self.assertEqual(claude_marketplace["entry"]["source"], f"./plugins/{package.NAME}")
@@ -119,7 +119,11 @@ class BattlemapPackageTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 package.validate_marketplace(path)
         claude = json.loads(package.CLAUDE_MARKETPLACE.read_bytes())
-        for change in (lambda c: c["plugins"][0].update(source="../escape"), lambda c: c.update(owner={"name": "Someone else"})):
+        description = json.loads(self.files["plugin.json"])["description"]
+        for change in (lambda c: c["plugins"][0].update(source="../escape"), lambda c: c.update(owner={"name": "Someone else"}),
+                       lambda c: c["plugins"][0].update(description="Altered listing"), lambda c: c["plugins"][0].update(author={"name": "Quest Portal"}),
+                       lambda c: c["plugins"][0].update(category="productivity"), lambda c: c["plugins"][0].update(homepage="https://example.invalid"),
+                       lambda c: c["plugins"][0].update(version="9.9.9"), lambda c: c["plugins"][0].pop("homepage")):
             altered = copy.deepcopy(claude)
             altered["plugins"] = [next(item for item in altered["plugins"] if item["name"] == package.NAME)]
             change(altered)
@@ -127,12 +131,14 @@ class BattlemapPackageTests(unittest.TestCase):
             claude_path.parent.mkdir(exist_ok=True)
             claude_path.write_text(json.dumps(altered))
             with self.assertRaises(ValueError):
-                package.validate_marketplace(claude_path, kind="claude")
+                package.validate_marketplace(claude_path, kind="claude", description=description)
         with self.assertRaises(ValueError):
             package.validate_marketplace(package.CLAUDE_MARKETPLACE)
+        with self.assertRaises(ValueError):
+            package.validate_marketplace(package.CLAUDE_MARKETPLACE, kind="claude")
         copied = self.root / "renamed-claude-catalog.json"
         copied.write_bytes(package.CLAUDE_MARKETPLACE.read_bytes())
-        self.assertEqual(package.validate_marketplace(copied, kind="claude")["entry"]["source"], f"./plugins/{package.NAME}")
+        self.assertEqual(package.validate_marketplace(copied, kind="claude", description=description)["entry"], package.claude_entry(description))
         path.write_text('{"name":"questportal-plugins","name":"duplicate","plugins":[]}')
         with self.assertRaisesRegex(ValueError, "duplicate JSON"):
             package.validate_marketplace(path)
@@ -256,7 +262,9 @@ class BattlemapPackageTests(unittest.TestCase):
         self.assertEqual(report["claudeMarketplace"]["entry"]["source"], f"./plugins/{package.NAME}")
         self.assertEqual(package.read_archive(output), self.files)
         broken = self.root / "broken-claude.json"
-        broken.write_text('{"name":"questportal-plugins","owner":{"name":"Quest Portal"},"plugins":[]}')
+        altered = json.loads(package.CLAUDE_MARKETPLACE.read_bytes())
+        next(item for item in altered["plugins"] if item["name"] == package.NAME)["description"] = "Altered listing"
+        broken.write_text(json.dumps(altered))
         rejected = subprocess.run([sys.executable, str(Path(package.__file__)), "validate", str(self.source), "--claude-marketplace", str(broken)], capture_output=True, text=True)
         self.assertEqual(rejected.returncode, 1)
         missing = subprocess.run([sys.executable, str(Path(package.__file__)), "validate", str(self.source), "--claude-marketplace", str(self.root / "absent.json")], capture_output=True, text=True)
