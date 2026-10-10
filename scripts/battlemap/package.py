@@ -64,7 +64,8 @@ def write_output(path, data, source):
     return helpers.write_output(path, data, source)
 
 
-def validate_marketplace(path):
+def validate_marketplace(path, kind="codex"):
+    require(kind in ("codex", "claude"), "Unknown marketplace kind")
     require(not path.is_symlink() and path.is_file(), "Marketplace must be a regular local file")
     require(path.stat().st_size <= MAX_FILE_BYTES, "Marketplace exceeds size bound")
     catalog = decode_json(path.read_bytes())
@@ -75,12 +76,12 @@ def validate_marketplace(path):
     require(all(isinstance(name, str) for name in names) and len(names) == len(set(names)), "Marketplace plugin names must be unique strings")
     matches = [entry for entry in entries if entry.get("name") == NAME]
     require(len(matches) == 1, "Marketplace must contain exactly one Battlemap entry")
-    if path.parent.name == ".claude-plugin":
+    if kind == "claude":
         require(isinstance(catalog.get("owner"), dict) and catalog["owner"].get("name") == "Quest Portal", "Claude marketplace owner changed")
         require(matches[0].get("source") == f"./plugins/{NAME}", "Claude marketplace must bind the reviewed local Battlemap path")
     else:
         require(matches == [{"name": NAME, "source": {"source": "local", "path": f"./plugins/{NAME}"}}], "Marketplace must contain exactly the reviewed local Battlemap entry")
-    return {"name": catalog["name"], "entry": matches[0], "sha256": sha256(path.read_bytes())}
+    return {"name": catalog["name"], "kind": kind, "entry": matches[0], "sha256": sha256(path.read_bytes())}
 
 
 def validate_icon(data):
@@ -257,7 +258,7 @@ def main():
     parser.add_argument("--report", type=Path, help="JSON report outside source")
     args = parser.parse_args()
     marketplace = validate_marketplace(args.marketplace)
-    claude_marketplace = validate_marketplace(args.claude_marketplace)
+    claude_marketplace = validate_marketplace(args.claude_marketplace, kind="claude")
     files = read_directory(args.source) if args.source.is_dir() else read_archive(args.source)
     report = validate_files(files)
     report["marketplace"] = marketplace
