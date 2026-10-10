@@ -1,7 +1,7 @@
 # Quest Portal
 
-Connect ChatGPT or Codex to your Quest Portal account through the hosted public
-MCP server. Prepare campaigns, work with notes and character sheets, organize
+Connect ChatGPT, Codex or Claude to your Quest Portal account through the hosted
+public MCP server. Prepare campaigns, work with notes and character sheets, organize
 scenes and music, and read accessible session history and library sources.
 
 ## Connect
@@ -11,12 +11,22 @@ host's connection or authentication control to sign in to Quest Portal and
 approve the access you need. The plugin includes its usage skill; a separate
 skill download or local server is unnecessary.
 
+In Claude Code, run:
+
+```
+/plugin install questportal-plugin --marketplace QuestPortal/plugins
+```
+
+then authenticate with `/mcp` when prompted. In claude.ai or Claude Desktop, add
+`https://github.com/QuestPortal/plugins` as a marketplace under Customize >
+Plugins, install `questportal-plugin`, and complete the OAuth prompt.
+
 | Setting        | Value                                                                |
 | -------------- | -------------------------------------------------------------------- |
 | Package        | `questportal-plugin` · `0.1.1`                                       |
 | MCP server key | `questportal`                                                        |
 | Endpoint       | `https://mcp.questportal.com/mcp`                                    |
-| Transport      | Streamable HTTP (`streamable-http` portable; `http` in Codex config) |
+| Transport      | Streamable HTTP (`streamable-http` portable; `http` in Codex/Claude) |
 | Authentication | Browser OAuth through `https://auth.questportal.com`                 |
 | Usage skill    | [using-questportal-mcp](skills/using-questportal-mcp/SKILL.md)       |
 
@@ -60,8 +70,8 @@ available elsewhere in the Quest Portal app.
 ## Status and maintenance
 
 This is a source package for the Git-backed marketplace. Portable
-`plugin.json`/`mcp.json` and Codex `.codex-plugin/plugin.json`/`.mcp.json` are kept
-in sync. It supplies read/write tools and guidance, with no embedded sheet or
+`plugin.json`/`mcp.json`, Codex `.codex-plugin/plugin.json`/`.mcp.json` and the
+Claude `.claude-plugin/plugin.json` manifest are kept in sync. It supplies read/write tools and guidance, with no embedded sheet or
 Battlemap view.
 
 As researched on 2026-10-05, GitHub recorded successful production deployment of

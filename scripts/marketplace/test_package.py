@@ -18,6 +18,7 @@ class MarketplaceTests(unittest.TestCase):
         self.root = Path(self.tmp.name)
         shutil.copytree(package.ROOT / 'plugins', self.root / 'plugins')
         shutil.copytree(package.ROOT / '.agents', self.root / '.agents')
+        shutil.copytree(package.ROOT / '.claude-plugin', self.root / '.claude-plugin')
         self.policies = package.decode_json(package.POLICIES.read_bytes())
 
     def mutate_json(self, path, mutate):
@@ -46,6 +47,8 @@ class MarketplaceTests(unittest.TestCase):
             original = package.read_directory(self.root / 'plugins' / name, policy)
             changes = [
                 ('.codex-plugin/plugin.json', lambda m: m.update(version='99.0.0')),
+                ('.claude-plugin/plugin.json', lambda m: m.update(version='99.0.0')),
+                ('.claude-plugin/plugin.json', lambda m: m.update(mcpServers='./other.json')),
                 ('plugin.json', lambda m: m.update(name='alternate-plugin')),
                 ('plugin.json', lambda m: m.update(apps='./.app.json')),
                 ('plugin.json', lambda m: m['extensions']['com.openai']['interface'].update(defaultPrompt='changed')),
@@ -74,6 +77,19 @@ class MarketplaceTests(unittest.TestCase):
             self.mutate_json(path, mutate)
             with self.assertRaises(ValueError): package.validate_catalog(self.root)
             path.write_bytes(original)
+        claude = self.root / '.claude-plugin/marketplace.json'
+        original = claude.read_bytes()
+        for mutate in [lambda m: m['plugins'].append(m['plugins'][0]),
+                       lambda m: m['plugins'][0].update(source='../escape'),
+                       lambda m: m['plugins'][0].update(source={'source': 'github', 'repo': 'other/repo'}),
+                       lambda m: m['plugins'][0].update(description='changed'),
+                       lambda m: m['plugins'].reverse(),
+                       lambda m: m.update(owner={'name': 'Someone else'})]:
+            self.mutate_json(claude, mutate)
+            with self.assertRaises(ValueError): package.validate_catalog(self.root)
+            claude.write_bytes(original)
+        claude.unlink()
+        with self.assertRaises(ValueError): package.validate_catalog(self.root)
 
     def test_source_rejects_symlinks_untracked_files_and_empty_directories(self):
         source = self.root / 'plugins/dnd-plugin'

@@ -1,0 +1,17 @@
+{
+  "name": "pendragon-plugin",
+  "version": "0.2.1",
+  "description": "Create and revise populated guest Pendragon 6e knights, in batches up to 20, and roll opposed checks and damage.",
+  "author": {
+    "name": "Quest Portal"
+  },
+  "homepage": "https://pendragon.questportal.com",
+  "keywords": [
+    "pendragon",
+    "tabletop",
+    "rpg",
+    "character-sheet",
+    "dice",
+    "mcp"
+  ]
+}

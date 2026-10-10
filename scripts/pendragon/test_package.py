@@ -38,6 +38,7 @@ class PendragonPackageTests(unittest.TestCase):
         restored = package.read_archive(archive)
         self.assertEqual(restored, files)
         self.assertIn(".codex-plugin/plugin.json", restored)
+        self.assertIn(".claude-plugin/plugin.json", restored)
         self.assertIn(".mcp.json", restored)
 
     def test_rejects_manifest_version_drift_and_prompt_changes(self):
@@ -46,6 +47,12 @@ class PendragonPackageTests(unittest.TestCase):
         compatibility["version"] = "0.1.0"
         files[".codex-plugin/plugin.json"] = json.dumps(compatibility).encode()
         with self.assertRaisesRegex(ValueError, "manifest.*differ"):
+            package.validate_files(files)
+        files = package.read_directory(self.source)
+        claude = json.loads(files[".claude-plugin/plugin.json"])
+        claude["version"] = "0.1.0"
+        files[".claude-plugin/plugin.json"] = json.dumps(claude).encode()
+        with self.assertRaisesRegex(ValueError, "Claude manifest.*differ"):
             package.validate_files(files)
         files = package.read_directory(self.source)
         manifest = json.loads(files["plugin.json"])

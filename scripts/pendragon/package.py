@@ -23,6 +23,7 @@ DEFAULT_PROMPTS = [
     "Help me create a Pendragon 6th edition knight.",
 ]
 FILES = (
+    ".claude-plugin/plugin.json",
     ".codex-plugin/plugin.json",
     ".mcp.json",
     "NOTICE.md",
@@ -110,6 +111,12 @@ def validate_files(files):
         "description": manifest["description"], "author": manifest["author"],
         "skills": "./skills/", "interface": interface, "mcpServers": "./.mcp.json",
     }, "Portable and compatibility manifest identity/version/presentation differ")
+    require(decode_json(files[".claude-plugin/plugin.json"]) == {
+        "name": manifest["name"], "version": manifest["version"],
+        "description": manifest["description"], "author": manifest["author"],
+        "homepage": "https://pendragon.questportal.com",
+        "keywords": ["pendragon", "tabletop", "rpg", "character-sheet", "dice", "mcp"],
+    }, "Portable and Claude manifest identity/version/presentation differ")
     require(mcp["mcpServers"] == {"pendragon-sheets": {"type": "streamable-http", "url": ENDPOINT}}, "Portable MCP endpoint or transport changed")
     require(decode_json(files[".mcp.json"]) == {"mcpServers": {"pendragon-sheets": {"type": "http", "url": ENDPOINT}}}, "Compatibility MCP endpoint or transport differs")
 

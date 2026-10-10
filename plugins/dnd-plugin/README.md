@@ -11,6 +11,21 @@ The separately hosted application is configured at
 required. This package connects to that application; it does not contain or
 deploy the application runtime.
 
+## Install
+
+In ChatGPT, import the marketplace `https://github.com/QuestPortal/plugins` and
+install **Dungeons & Dragons**. In Claude Code, run:
+
+```
+/plugin install dnd-plugin --marketplace QuestPortal/plugins
+```
+
+In claude.ai or Claude Desktop, add `https://github.com/QuestPortal/plugins` as a
+marketplace under Customize > Plugins and install `dnd-plugin`. The package
+provides the portable `plugin.json`/`mcp.json`, the Codex `.codex-plugin/`
+overlay with `.mcp.json`, and the Claude `.claude-plugin/plugin.json` manifest;
+all three describe the same endpoint and skill.
+
 ## Included workflows
 
 - Open the guest sheet or prepare populated drafts individually or in batches of
@@ -44,10 +59,11 @@ not provide paid rulebooks. See [NOTICE.md](NOTICE.md) for attribution.
 | `assets/icon.svg`                 | Package-owned icon used by both manifests.                         |
 | `.codex-plugin/plugin.json`       | Compatibility manifest for clients using the Codex package layout. |
 | `.mcp.json`                       | Matching HTTP connection for the compatibility manifest.           |
+| `.claude-plugin/plugin.json`      | Claude Code manifest; Claude also reads `.mcp.json` and `skills/`. |
 | `NOTICE.md`                       | SRD attribution and third-party notices.                           |
 
 Preserve the package name, MCP server key `dnd-sheets`, existing starter prompts
-and their order. Keep both manifests’ identity, version and presentation in sync.
+and their order. Keep all three manifests’ identity, version and description in sync.
 The MCP files use the same server key and URL; the portable transport spelling
 is `streamable-http`, while the compatibility file uses `http`.
 
