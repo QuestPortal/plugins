@@ -29,9 +29,10 @@ fixed_schema = helpers.fixed_schema
 NAME = "quest-portal-battlemap"
 ENDPOINT = "https://map.questportal.com/mcp"
 MARKETPLACE = SCRIPTS.parent / ".agents/plugins/marketplace.json"
+CLAUDE_MARKETPLACE = SCRIPTS.parent / ".claude-plugin/marketplace.json"
 SKILLS = ("build-map", "onboarding", "run-encounter")
 FILES = (
-    ".codex-plugin/plugin.json", ".mcp.json", "assets/icon.svg", "mcp.json",
+    ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".mcp.json", "assets/icon.svg", "mcp.json",
     "plugin.json", *(f"skills/{name}/SKILL.md" for name in SKILLS),
 )
 DIRECTORIES = {str(parent) for name in FILES for parent in PurePosixPath(name).parents if str(parent) != "."}
@@ -73,7 +74,12 @@ def validate_marketplace(path):
     names = [entry.get("name") for entry in entries]
     require(all(isinstance(name, str) for name in names) and len(names) == len(set(names)), "Marketplace plugin names must be unique strings")
     matches = [entry for entry in entries if entry.get("name") == NAME]
-    require(matches == [{"name": NAME, "source": {"source": "local", "path": f"./plugins/{NAME}"}}], "Marketplace must contain exactly the reviewed local Battlemap entry")
+    require(len(matches) == 1, "Marketplace must contain exactly one Battlemap entry")
+    if path.parent.name == ".claude-plugin":
+        require(isinstance(catalog.get("owner"), dict) and catalog["owner"].get("name") == "Quest Portal", "Claude marketplace owner changed")
+        require(matches[0].get("source") == f"./plugins/{NAME}", "Claude marketplace must bind the reviewed local Battlemap path")
+    else:
+        require(matches == [{"name": NAME, "source": {"source": "local", "path": f"./plugins/{NAME}"}}], "Marketplace must contain exactly the reviewed local Battlemap entry")
     return {"name": catalog["name"], "entry": matches[0], "sha256": sha256(path.read_bytes())}
 
 
@@ -152,6 +158,10 @@ def validate_files(files):
         "skills": "./skills/", "extensions": {"com.openai": {"onboardingSkill": extension["onboardingSkill"]}},
         "interface": interface, "mcpServers": "./.mcp.json",
     }, "Portable and compatibility manifest identity/version/presentation differ")
+    require(decode_json(files[".claude-plugin/plugin.json"]) == {
+        "name": manifest["name"], "version": manifest["version"], "description": manifest["description"], "author": manifest["author"],
+        "homepage": "https://map.questportal.com", "keywords": ["battlemap", "tabletop", "rpg", "encounter", "vtt", "mcp"],
+    }, "Portable and Claude manifest identity/version/presentation differ")
     require(mcp == {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
         "mcpServers": {"battlemap": {"type": "streamable-http", "url": ENDPOINT}},

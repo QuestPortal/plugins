@@ -1,0 +1,19 @@
+{
+  "name": "dnd-plugin",
+  "version": "0.2.1",
+  "description": "Create and revise populated guest D&D 2024 characters, in batches up to 20, and roll checks and damage.",
+  "author": {
+    "name": "Quest Portal"
+  },
+  "homepage": "https://dnd.questportal.com",
+  "keywords": [
+    "dnd",
+    "dungeons-and-dragons",
+    "5e",
+    "tabletop",
+    "rpg",
+    "character-sheet",
+    "dice",
+    "mcp"
+  ]
+}

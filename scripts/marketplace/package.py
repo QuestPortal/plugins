@@ -109,6 +109,11 @@ def validate_files(name, files, policy):
     require(mcp == {'$schema': 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json', 'mcpServers': expected}, 'Portable endpoint, server identity or transport changed')
     expected[policy['server']]['type'] = 'http'
     require(decode_json(files['.mcp.json']) == {'mcpServers': expected}, 'Codex endpoint or transport changed')
+    # Claude Code reads .claude-plugin/plugin.json plus the root .mcp.json and skills/ directory.
+    claude = {k: manifest[k] for k in ('name', 'version', 'description', 'author')}
+    claude.update(homepage=policy['claude']['homepage'], keywords=policy['claude']['keywords'])
+    require(claude['homepage'].startswith('https://') and claude['keywords'] and all(re.fullmatch(r'[a-z0-9][a-z0-9-]*', k) for k in claude['keywords']), 'Invalid Claude homepage or keywords')
+    require(decode_json(files['.claude-plugin/plugin.json']) == claude, 'Portable/Claude manifest parity failed')
     for path in policy['files']:
         if not path.endswith('/SKILL.md'):
             continue
@@ -153,22 +158,35 @@ def validate_files(name, files, policy):
     return {'name': name, 'version': manifest['version'], 'endpoint': policy['endpoint'], 'status': 'valid', 'files': [{'path': p, 'sha256': helpers.sha256(files[p]), 'bytes': len(files[p])} for p in sorted(files)]}
 
 
-def validate_catalog(root):
-    path = root / '.agents/plugins/marketplace.json'
+def read_catalog(root, relative, policies):
+    path = root / relative
     require(not path.is_symlink() and path.is_file() and path.stat().st_size <= MAX_FILE, 'Invalid catalog file')
     catalog = decode_json(path.read_bytes())
-    policies = decode_json(POLICIES.read_bytes())
     require(catalog.get('name') == 'questportal-plugins', 'Catalog identity changed')
     entries = catalog.get('plugins')
     require(isinstance(entries, list) and all(isinstance(e, dict) for e in entries), 'Invalid catalog entries')
     require(len(entries) == len(policies) and {e.get('name') for e in entries} == set(policies), 'Missing, duplicate or unreviewed catalog identity')
+    return catalog, {e['name']: e for e in entries}
+
+
+def validate_catalog(root):
+    policies = decode_json(POLICIES.read_bytes())
+    # Codex/ChatGPT catalog and Claude Code catalog list the same local packages.
+    catalog, entries = read_catalog(root, '.agents/plugins/marketplace.json', policies)
+    claude_catalog, claude_entries = read_catalog(root, '.claude-plugin/marketplace.json', policies)
+    require(set(claude_catalog) == {'$schema', 'name', 'description', 'owner', 'plugins'}, 'Unexpected Claude catalog fields')
+    require(claude_catalog['$schema'] == 'https://anthropic.com/claude-code/marketplace.schema.json' and claude_catalog['description'].strip(), 'Claude catalog schema or description changed')
+    require(claude_catalog['owner'] == {'name': 'Quest Portal', 'url': 'https://www.questportal.com'}, 'Claude catalog owner changed')
+    require([e['name'] for e in catalog['plugins']] == [e['name'] for e in claude_catalog['plugins']], 'Catalog order differs')
     require(not (root / 'plugins').is_symlink(), 'Plugin directory may not be a symlink')
     reports = []
-    for entry in entries:
-        name = entry['name']
+    for name, entry in entries.items():
         require(entry == {'name': name, 'source': {'source': 'local', 'path': f'./plugins/{name}'}}, 'Catalog path, binding or audience changed')
         source = root / 'plugins' / name
-        reports.append(validate_files(name, read_directory(source, policies[name]), policies[name]))
+        files = read_directory(source, policies[name])
+        reports.append(validate_files(name, files, policies[name]))
+        manifest = decode_json(files['plugin.json'])
+        require(claude_entries[name] == {'name': name, 'source': f'./plugins/{name}', 'description': manifest['description'], 'author': manifest['author'], 'category': 'entertainment', 'homepage': policies[name]['claude']['homepage']}, 'Claude catalog entry, binding or audience changed')
     return reports
 
 

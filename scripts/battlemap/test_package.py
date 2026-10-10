@@ -44,8 +44,10 @@ class BattlemapPackageTests(unittest.TestCase):
         with patch("socket.socket", side_effect=AssertionError("Validation attempted networking")):
             report = package.validate_files(self.files)
             marketplace = package.validate_marketplace(package.MARKETPLACE)
+            claude_marketplace = package.validate_marketplace(package.CLAUDE_MARKETPLACE)
         self.assertEqual(report["version"], json.loads(self.files["plugin.json"])["version"])
-        self.assertEqual(len(report["files"]), 8)
+        self.assertEqual(len(report["files"]), 9)
+        self.assertEqual(claude_marketplace["entry"]["source"], f"./plugins/{package.NAME}")
         self.assertEqual(report["icon"]["width"], 100)
         self.assertEqual(marketplace["entry"]["source"]["path"], f"./plugins/{package.NAME}")
         self.assertEqual(report["schemas"]["plugin"]["sha256"], package.helpers.SCHEMA_HASHES["plugin"])
@@ -65,6 +67,7 @@ class BattlemapPackageTests(unittest.TestCase):
                 restored = package.read_archive(archive)
                 self.assertEqual(restored, self.files)
                 self.assertIn(".codex-plugin/plugin.json", restored)
+                self.assertIn(".claude-plugin/plugin.json", restored)
                 self.assertIn(".mcp.json", restored)
                 with zipfile.ZipFile(io.BytesIO(first)) as bundle:
                     names = bundle.namelist()
@@ -86,6 +89,7 @@ class BattlemapPackageTests(unittest.TestCase):
     def test_manifest_identity_prompt_version_and_endpoint_drift_are_rejected(self):
         cases = (
             (".codex-plugin/plugin.json", lambda value: value.update(version="0.0.0"), "manifest.*differ"),
+            (".claude-plugin/plugin.json", lambda value: value.update(version="0.0.0"), "Claude manifest.*differ"),
             ("plugin.json", lambda value: value["extensions"]["com.openai"]["interface"]["defaultPrompt"].reverse(), "Default prompts changed"),
             ("plugin.json", lambda value: value.update(name="another-plugin"), "Plugin identity changed"),
             ("mcp.json", lambda value: value["mcpServers"]["battlemap"].update(url="https://example.invalid/mcp"), "endpoint"),
@@ -114,6 +118,16 @@ class BattlemapPackageTests(unittest.TestCase):
             path.write_text(json.dumps(catalog))
             with self.assertRaises(ValueError):
                 package.validate_marketplace(path)
+        claude = json.loads(package.CLAUDE_MARKETPLACE.read_bytes())
+        for change in (lambda c: c["plugins"][0].update(source="../escape"), lambda c: c.update(owner={"name": "Someone else"})):
+            altered = copy.deepcopy(claude)
+            altered["plugins"] = [next(item for item in altered["plugins"] if item["name"] == package.NAME)]
+            change(altered)
+            claude_path = self.root / ".claude-plugin" / "marketplace.json"
+            claude_path.parent.mkdir(exist_ok=True)
+            claude_path.write_text(json.dumps(altered))
+            with self.assertRaises(ValueError):
+                package.validate_marketplace(claude_path)
         path.write_text('{"name":"questportal-plugins","name":"duplicate","plugins":[]}')
         with self.assertRaisesRegex(ValueError, "duplicate JSON"):
             package.validate_marketplace(path)

@@ -6,6 +6,17 @@
     },
     "server": "cthulhu-sheets",
     "endpoint": "https://cthulhu.questportal.com/mcp",
+    "claude": {
+      "homepage": "https://cthulhu.questportal.com/about",
+      "keywords": [
+        "call-of-cthulhu",
+        "tabletop",
+        "rpg",
+        "character-sheet",
+        "dice",
+        "mcp"
+      ]
+    },
     "extensionKeys": [
       "interface",
       "review"
@@ -40,6 +51,7 @@
       ]
     },
     "files": [
+      ".claude-plugin/plugin.json",
       ".codex-plugin/plugin.json",
       ".mcp.json",
       "NOTICE.md",
@@ -62,6 +74,19 @@
     },
     "server": "dnd-sheets",
     "endpoint": "https://dnd.questportal.com/mcp",
+    "claude": {
+      "homepage": "https://dnd.questportal.com",
+      "keywords": [
+        "dnd",
+        "dungeons-and-dragons",
+        "5e",
+        "tabletop",
+        "rpg",
+        "character-sheet",
+        "dice",
+        "mcp"
+      ]
+    },
     "extensionKeys": [
       "interface"
     ],
@@ -91,6 +116,7 @@
       ]
     },
     "files": [
+      ".claude-plugin/plugin.json",
       ".codex-plugin/plugin.json",
       ".mcp.json",
       "NOTICE.md",
@@ -114,6 +140,17 @@
     },
     "server": "pendragon-sheets",
     "endpoint": "https://pendragon.questportal.com/mcp",
+    "claude": {
+      "homepage": "https://pendragon.questportal.com",
+      "keywords": [
+        "pendragon",
+        "tabletop",
+        "rpg",
+        "character-sheet",
+        "dice",
+        "mcp"
+      ]
+    },
     "extensionKeys": [
       "interface"
     ],
@@ -143,6 +180,7 @@
       ]
     },
     "files": [
+      ".claude-plugin/plugin.json",
       ".codex-plugin/plugin.json",
       ".mcp.json",
       "NOTICE.md",
@@ -167,6 +205,17 @@
     },
     "server": "battlemap",
     "endpoint": "https://map.questportal.com/mcp",
+    "claude": {
+      "homepage": "https://map.questportal.com",
+      "keywords": [
+        "battlemap",
+        "tabletop",
+        "rpg",
+        "encounter",
+        "vtt",
+        "mcp"
+      ]
+    },
     "extensionKeys": [
       "onboardingSkill",
       "interface"
@@ -200,6 +249,7 @@
       ]
     },
     "files": [
+      ".claude-plugin/plugin.json",
       ".codex-plugin/plugin.json",
       ".mcp.json",
       "assets/icon.svg",
@@ -217,6 +267,17 @@
     },
     "server": "questportal",
     "endpoint": "https://mcp.questportal.com/mcp",
+    "claude": {
+      "homepage": "https://www.questportal.com",
+      "keywords": [
+        "quest-portal",
+        "tabletop",
+        "rpg",
+        "campaign",
+        "notes",
+        "mcp"
+      ]
+    },
     "extensionKeys": [
       "interface"
     ],
@@ -247,6 +308,7 @@
       ]
     },
     "files": [
+      ".claude-plugin/plugin.json",
       ".codex-plugin/plugin.json",
       ".mcp.json",
       "NOTICE.md",

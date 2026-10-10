@@ -1,0 +1,62 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "questportal-plugins",
+  "description": "Quest Portal plugins for tabletop roleplaying: the authenticated Quest Portal MCP connection, guest character sheets for Call of Cthulhu, Pendragon and D&D, and the Battlemap pilot.",
+  "owner": {
+    "name": "Quest Portal",
+    "url": "https://www.questportal.com"
+  },
+  "plugins": [
+    {
+      "name": "call-of-cthulhu-plugin",
+      "source": "./plugins/call-of-cthulhu-plugin",
+      "description": "Create and revise populated guest Call of Cthulhu 7e investigators, in batches up to 20, and roll dice with optional private sessions.",
+      "author": {
+        "name": "Quest Portal"
+      },
+      "category": "entertainment",
+      "homepage": "https://cthulhu.questportal.com/about"
+    },
+    {
+      "name": "pendragon-plugin",
+      "source": "./plugins/pendragon-plugin",
+      "description": "Create and revise populated guest Pendragon 6e knights, in batches up to 20, and roll opposed checks and damage.",
+      "author": {
+        "name": "Quest Portal"
+      },
+      "category": "entertainment",
+      "homepage": "https://pendragon.questportal.com"
+    },
+    {
+      "name": "quest-portal-battlemap",
+      "source": "./plugins/quest-portal-battlemap",
+      "description": "Create and run persistent tactical encounters with shared human and ChatGPT control, deterministic movement, fog, and bounded opponent turns.",
+      "author": {
+        "name": "Quest Portal",
+        "url": "https://www.questportal.com"
+      },
+      "category": "entertainment",
+      "homepage": "https://map.questportal.com"
+    },
+    {
+      "name": "dnd-plugin",
+      "source": "./plugins/dnd-plugin",
+      "description": "Create and revise populated guest D&D 2024 characters, in batches up to 20, and roll checks and damage.",
+      "author": {
+        "name": "Quest Portal"
+      },
+      "category": "entertainment",
+      "homepage": "https://dnd.questportal.com"
+    },
+    {
+      "name": "questportal-plugin",
+      "source": "./plugins/questportal-plugin",
+      "description": "Connect your Quest Portal account to manage campaigns, notes, characters, scenes and music, and read session history and accessible library sources.",
+      "author": {
+        "name": "Quest Portal"
+      },
+      "category": "entertainment",
+      "homepage": "https://www.questportal.com"
+    }
+  ]
+}

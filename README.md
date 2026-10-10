@@ -16,6 +16,33 @@ In Workspace settings > Plugins > Add > Import marketplace, enter:
 The catalog is at `.agents/plugins/marketplace.json`. Plugin packages are in
 `plugins/`, so importing does not require access to any private repository.
 
+## Install in Claude
+
+The same repository is a Claude Code plugin marketplace. Its catalog is at
+`.claude-plugin/marketplace.json`, and each package carries a
+`.claude-plugin/plugin.json` manifest beside the portable and Codex files. Claude
+reads the package's `.mcp.json` (`type: "http"`) and its `skills/` directory.
+
+In Claude Code, add the marketplace once, then install any package:
+
+```
+/plugin marketplace add QuestPortal/plugins
+/plugin install questportal-plugin@questportal-plugins
+```
+
+or install in one step with
+`/plugin install <name> --marketplace QuestPortal/plugins`. Package names are
+`questportal-plugin`, `call-of-cthulhu-plugin`, `pendragon-plugin`, `dnd-plugin`
+and `quest-portal-battlemap`. In claude.ai or Claude Desktop, add
+`https://github.com/QuestPortal/plugins` under Customize > Plugins > Add
+marketplace, then install from the list.
+
+Packages that require an account (Quest Portal, Battlemap) use the host's OAuth
+flow; in Claude Code run `/mcp` to authenticate. Guest sheets need no sign-in.
+Inline sheet rendering, roll cards and Events depend on MCP Apps support in the
+host; Claude Code and claude.ai acceptance of those flows is unverified. Run
+`claude plugin validate --strict .` to check the Claude manifests offline.
+
 ## Quest Portal MCP
 
 Connect your Quest Portal account through OAuth at
@@ -53,7 +80,7 @@ Refresh the marketplace and update the installed plugin to load the new instruct
 and tools. Existing dice and guest play sessions remain available. MCP Events,
 inline rendering, embedding and attachment depend on host support; endpoint deployment
 alone does not prove those flows. The package includes portable `plugin.json`/`mcp.json`
-and matching Codex compatibility files. The prior Site and its records are not migrated.
+and matching Codex and Claude compatibility files. The prior Site and its records are not migrated.
 
 Package 0.4.1 restores the existing listing/support/legal URLs and
 review cases from the separately prepared 0.3 submission without reverting the
@@ -126,8 +153,8 @@ shared with a conversation. Control grants and future-event subscriptions requir
 separate approval. Actual host OAuth linking, embedded downloads and live Events
 acceptance remain unverified; see [release evidence](docs/battlemap-release.md).
 
-The authoritative package is `plugins/quest-portal-battlemap/`, with portable and
-Codex manifests, the MCP connection, three skills and its icon. Validate it and
+The authoritative package is `plugins/quest-portal-battlemap/`, with portable,
+Codex and Claude manifests, the MCP connection, three skills and its icon. Validate it and
 build reproducible ZIPs using the [offline packaging tool](scripts/battlemap/README.md).
 The private application repository owns the runtime, Cloudflare configuration,
 storage and deployment. This catalog entry preserves the package name and does
