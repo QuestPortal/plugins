@@ -250,15 +250,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("validate", "build"))
     parser.add_argument("source", type=Path, help="Battlemap source directory or existing ZIP")
-    parser.add_argument("--marketplace", type=Path, default=MARKETPLACE, help="Local marketplace catalog (defaults to this repository)")
+    parser.add_argument("--marketplace", type=Path, default=MARKETPLACE, help="Local Codex marketplace catalog (defaults to this repository)")
+    parser.add_argument("--claude-marketplace", type=Path, default=CLAUDE_MARKETPLACE, help="Local Claude Code marketplace catalog (defaults to this repository)")
     parser.add_argument("--layout", choices=("wrapped", "portable"), default="wrapped", help="Build layout; wrapped matches Plugin Creator, portable has plugin.json at root")
     parser.add_argument("--output", type=Path, help="ZIP output outside source (build only)")
     parser.add_argument("--report", type=Path, help="JSON report outside source")
     args = parser.parse_args()
     marketplace = validate_marketplace(args.marketplace)
+    claude_marketplace = validate_marketplace(args.claude_marketplace)
     files = read_directory(args.source) if args.source.is_dir() else read_archive(args.source)
     report = validate_files(files)
     report["marketplace"] = marketplace
+    report["claudeMarketplace"] = claude_marketplace
     if args.command == "build":
         require(args.source.is_dir() and args.output, "Build requires a source directory and --output")
         archive = build_zip(files, args.layout)
