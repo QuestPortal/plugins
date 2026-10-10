@@ -26,10 +26,11 @@ hash are included in the report. Keep both script directories when copying the
 tool. No remote schemas are fetched.
 
 Every command validates the repository's `.agents/plugins/marketplace.json`
-entry against the exact package name and contained local path. `--marketplace`
-can point to another local catalog for an explicit release checkout. The tool
-then checks the official JSON schemas, exact eight-file inventory, portable and
-Codex metadata/endpoint parity, preserved default prompts, contained onboarding,
+and `.claude-plugin/marketplace.json` entries against the exact package name and
+contained local path. `--marketplace` and `--claude-marketplace` can point to
+other local catalogs for an explicit release checkout. The tool then checks the
+official JSON schemas, exact nine-file inventory, portable, Codex and Claude
+metadata/endpoint parity, preserved default prompts, contained onboarding,
 skill frontmatter, and static SVG artwork with contained fragment references.
 Unknown files/directories, symlinks, duplicate JSON keys, escaping archive paths,
 duplicate ZIP entries and excessive sizes are rejected. Known credential
