@@ -44,7 +44,7 @@ class BattlemapPackageTests(unittest.TestCase):
         with patch("socket.socket", side_effect=AssertionError("Validation attempted networking")):
             report = package.validate_files(self.files)
             marketplace = package.validate_marketplace(package.MARKETPLACE)
-            claude_marketplace = package.validate_marketplace(package.CLAUDE_MARKETPLACE)
+            claude_marketplace = package.validate_marketplace(package.CLAUDE_MARKETPLACE, kind="claude")
         self.assertEqual(report["version"], json.loads(self.files["plugin.json"])["version"])
         self.assertEqual(len(report["files"]), 9)
         self.assertEqual(claude_marketplace["entry"]["source"], f"./plugins/{package.NAME}")
@@ -127,7 +127,12 @@ class BattlemapPackageTests(unittest.TestCase):
             claude_path.parent.mkdir(exist_ok=True)
             claude_path.write_text(json.dumps(altered))
             with self.assertRaises(ValueError):
-                package.validate_marketplace(claude_path)
+                package.validate_marketplace(claude_path, kind="claude")
+        with self.assertRaises(ValueError):
+            package.validate_marketplace(package.CLAUDE_MARKETPLACE)
+        copied = self.root / "renamed-claude-catalog.json"
+        copied.write_bytes(package.CLAUDE_MARKETPLACE.read_bytes())
+        self.assertEqual(package.validate_marketplace(copied, kind="claude")["entry"]["source"], f"./plugins/{package.NAME}")
         path.write_text('{"name":"questportal-plugins","name":"duplicate","plugins":[]}')
         with self.assertRaisesRegex(ValueError, "duplicate JSON"):
             package.validate_marketplace(path)
