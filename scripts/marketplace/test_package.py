@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 import zipfile
+from unittest.mock import patch
 from pathlib import Path
 
 import package
@@ -17,6 +18,7 @@ class MarketplaceTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         shutil.copytree(package.ROOT / 'plugins', self.root / 'plugins')
+        shutil.copytree(package.ROOT / 'codex-plugins', self.root / 'codex-plugins')
         shutil.copytree(package.ROOT / '.agents', self.root / '.agents')
         shutil.copytree(package.ROOT / '.claude-plugin', self.root / '.claude-plugin')
         self.policies = package.decode_json(package.POLICIES.read_bytes())
@@ -30,6 +32,72 @@ class MarketplaceTests(unittest.TestCase):
         reports = package.validate_catalog(self.root)
         self.assertEqual({r['name'] for r in reports}, set(self.policies))
 
+    def test_codex_generation_is_exact_and_repeatable(self):
+        shutil.rmtree(self.root / 'codex-plugins')
+        package.generate_codex_bundles(self.root)
+        package.validate_catalog(self.root)
+        for name in package.CODEX_PACKAGES:
+            source = package.read_directory(self.root / 'plugins' / name, self.policies[name])
+            expected = package.codex_files(source)
+            self.assertFalse(package.PORTABLE_ONLY_FILES & expected.keys())
+            actual = package.read_directory(self.root / 'codex-plugins' / name, {'files': list(expected)})
+            self.assertEqual(actual, expected)
+        package.generate_codex_bundles(self.root)
+        package.validate_catalog(self.root)
+
+    def test_codex_rejects_portable_markers_and_unexpected_files(self):
+        for name in package.CODEX_PACKAGES:
+            for filename in ['plugin.json', 'mcp.json', '.claude-plugin/plugin.json', 'extra.md']:
+                with self.subTest(name=name, filename=filename):
+                    path = self.root / 'codex-plugins' / name / filename
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text('{}')
+                    with self.assertRaises(ValueError):
+                        package.validate_catalog(self.root)
+                    with self.assertRaises(ValueError):
+                        package.generate_codex_bundles(self.root)
+                    path.unlink()
+                    if filename.startswith('.claude-plugin/'):
+                        path.parent.rmdir()
+
+    def test_codex_rejects_stale_or_missing_copies_and_generator_repairs(self):
+        for name in package.CODEX_PACKAGES:
+            for filename in self.policies[name]['files']:
+                if filename in package.PORTABLE_ONLY_FILES:
+                    continue
+                path = self.root / 'codex-plugins' / name / filename
+                for change in ['stale', 'missing']:
+                    with self.subTest(name=name, filename=filename, change=change):
+                        if change == 'stale':
+                            path.write_bytes(path.read_bytes() + b'\nchanged')
+                        else:
+                            path.unlink()
+                        with self.assertRaises(ValueError):
+                            package.validate_catalog(self.root)
+                        package.generate_codex_bundles(self.root)
+                        package.validate_catalog(self.root)
+
+    def test_codex_generation_adds_new_reviewed_canonical_reference(self):
+        name = 'dnd-plugin'
+        reference = 'skills/character-sheet/references/new-guide.md'
+        (self.root / 'plugins' / name / reference).write_text('New reviewed guide.\n')
+        policies = json.loads(json.dumps(self.policies))
+        policies[name]['files'].append(reference)
+        with patch.object(package, 'policy_for', side_effect=policies.__getitem__):
+            package.generate_codex_bundles(self.root)
+        self.assertEqual(
+            (self.root / 'codex-plugins' / name / reference).read_bytes(),
+            (self.root / 'plugins' / name / reference).read_bytes(),
+        )
+
+    def test_codex_check_never_repairs_drift(self):
+        path = self.root / 'codex-plugins/dnd-plugin/assets/icon.svg'
+        path.write_bytes(path.read_bytes() + b'\nstale')
+        before = path.read_bytes()
+        result = subprocess.run([sys.executable, package.__file__, 'generate-codex', '--check', '--root', str(self.root)], capture_output=True)
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(path.read_bytes(), before)
+
     def test_all_archives_round_trip_deterministically(self):
         for name, policy in self.policies.items():
             with self.subTest(name=name):
@@ -41,6 +109,21 @@ class MarketplaceTests(unittest.TestCase):
                 restored = package.read_archive(path, name, policy)
                 self.assertEqual(restored, files)
                 package.validate_files(name, restored, policy)
+
+    def test_native_archive_builds_round_trip_and_preserve_portable_archives(self):
+        output = self.root / 'artifacts'
+        result = subprocess.run([sys.executable, package.__file__, 'build', '--root', str(self.root), '--output-dir', str(output)], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(len(list(output.glob('*.zip'))), len(self.policies) + len(package.CODEX_PACKAGES))
+        for name in package.CODEX_PACKAGES:
+            policy = self.policies[name]
+            source = package.read_directory(self.root / 'plugins' / name, policy)
+            expected = package.codex_files(source)
+            path = output / f"{name}-{policy['version']}-codex.zip"
+            self.assertEqual(path.read_bytes(), package.build_zip(name, expected))
+            self.assertEqual(package.read_archive(path, name, {'files': list(expected)}), expected)
+            portable = output / f"{name}-{policy['version']}.zip"
+            self.assertEqual(package.read_archive(portable, name, policy), source)
 
     def test_every_package_rejects_parity_endpoint_identity_and_missing_files(self):
         for name, policy in self.policies.items():

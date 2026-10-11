@@ -26,6 +26,8 @@ POLICIES = Path(__file__).with_name('packages.json')
 MAX_FILE = helpers.MAX_FILE_BYTES
 MAX_TOTAL = helpers.MAX_PACKAGE_BYTES
 SEMVER = helpers.helpers.SEMVER
+CODEX_PACKAGES = frozenset({'dnd-plugin', 'call-of-cthulhu-plugin'})
+PORTABLE_ONLY_FILES = frozenset({'plugin.json', 'mcp.json', '.claude-plugin/plugin.json'})
 
 
 def policy_for(name):
@@ -158,6 +160,35 @@ def validate_files(name, files, policy):
     return {'name': name, 'version': manifest['version'], 'endpoint': policy['endpoint'], 'status': 'valid', 'files': [{'path': p, 'sha256': helpers.sha256(files[p]), 'bytes': len(files[p])} for p in sorted(files)]}
 
 
+def codex_files(files):
+    """Native Codex packages must not contain the portable-format marker."""
+    return {path: data for path, data in files.items() if path not in PORTABLE_ONLY_FILES}
+
+
+def validate_codex_bundle(root, name, files):
+    expected = codex_files(files)
+    actual = read_directory(root / 'codex-plugins' / name, {'files': list(expected)})
+    require(actual == expected, f'Generated Codex bundle differs from canonical package: {name}')
+
+
+def generate_codex_bundles(root):
+    """Copy reviewed canonical files; reject unexpected files instead of deleting them."""
+    require(not (root / 'codex-plugins').is_symlink(), 'Codex directory may not be a symlink')
+    for name in sorted(CODEX_PACKAGES):
+        policy = policy_for(name)
+        files = read_directory(root / 'plugins' / name, policy)
+        validate_files(name, files, policy)
+        expected = codex_files(files)
+        destination = root / 'codex-plugins' / name
+        if destination.exists() or destination.is_symlink():
+            read_directory(destination, {'files': list(expected)})
+        for path, data in sorted(expected.items()):
+            target = destination / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+        validate_codex_bundle(root, name, files)
+
+
 def read_catalog(root, relative, policies):
     path = root / relative
     require(not path.is_symlink() and path.is_file() and path.stat().st_size <= MAX_FILE, 'Invalid catalog file')
@@ -171,7 +202,7 @@ def read_catalog(root, relative, policies):
 
 def validate_catalog(root):
     policies = decode_json(POLICIES.read_bytes())
-    # Codex/ChatGPT catalog and Claude Code catalog list the same local packages.
+    # Catalogs preserve identities while Codex uses native bundles for sheet plugins.
     catalog, entries = read_catalog(root, '.agents/plugins/marketplace.json', policies)
     claude_catalog, claude_entries = read_catalog(root, '.claude-plugin/marketplace.json', policies)
     require(set(claude_catalog) == {'$schema', 'name', 'description', 'owner', 'plugins'}, 'Unexpected Claude catalog fields')
@@ -179,12 +210,16 @@ def validate_catalog(root):
     require(claude_catalog['owner'] == {'name': 'Quest Portal', 'url': 'https://www.questportal.com'}, 'Claude catalog owner changed')
     require([e['name'] for e in catalog['plugins']] == [e['name'] for e in claude_catalog['plugins']], 'Catalog order differs')
     require(not (root / 'plugins').is_symlink(), 'Plugin directory may not be a symlink')
+    require(not (root / 'codex-plugins').is_symlink(), 'Codex directory may not be a symlink')
     reports = []
     for name, entry in entries.items():
-        require(entry == {'name': name, 'source': {'source': 'local', 'path': f'./plugins/{name}'}}, 'Catalog path, binding or audience changed')
+        directory = 'codex-plugins' if name in CODEX_PACKAGES else 'plugins'
+        require(entry == {'name': name, 'source': {'source': 'local', 'path': f'./{directory}/{name}'}}, 'Catalog path, binding or audience changed')
         source = root / 'plugins' / name
         files = read_directory(source, policies[name])
         reports.append(validate_files(name, files, policies[name]))
+        if name in CODEX_PACKAGES:
+            validate_codex_bundle(root, name, files)
         manifest = decode_json(files['plugin.json'])
         require(claude_entries[name] == {'name': name, 'source': f'./plugins/{name}', 'description': manifest['description'], 'author': manifest['author'], 'category': 'entertainment', 'homepage': policies[name]['claude']['homepage']}, 'Claude catalog entry, binding or audience changed')
     return reports
@@ -203,14 +238,20 @@ def build_zip(name, files):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['validate', 'build'])
+    parser.add_argument('command', choices=['validate', 'build', 'generate-codex'])
     parser.add_argument('--root', type=Path, default=ROOT)
     parser.add_argument('--output-dir', type=Path)
+    parser.add_argument('--check', action='store_true', help='Check generated Codex bundles without writing')
     args = parser.parse_args()
+    require(not args.check or args.command == 'generate-codex', '--check is only for generate-codex')
+    if args.command == 'generate-codex':
+        require(args.output_dir is None, '--output-dir is only for build')
+        if not args.check:
+            generate_codex_bundles(args.root)
     reports = validate_catalog(args.root)
     if args.command == 'build':
         require(args.output_dir is not None, 'Build requires --output-dir')
-        require(not args.output_dir.resolve().is_relative_to((args.root / 'plugins').resolve()), 'Write artifacts outside source packages')
+        require(all(not args.output_dir.resolve().is_relative_to((args.root / directory).resolve()) for directory in ('plugins', 'codex-plugins')), 'Write artifacts outside source packages')
         for report in reports:
             name = report['name']
             source = args.root / 'plugins' / name
@@ -223,6 +264,15 @@ def main():
             require(restored == files, 'Archive differs from source')
             validate_files(name, restored, policy)
             report['archive'] = {'path': str(path), 'sha256': helpers.sha256(data), 'bytes': len(data)}
+            if name in CODEX_PACKAGES:
+                native = codex_files(files)
+                native_data = build_zip(name, native)
+                native_path = args.output_dir / f"{name}-{report['version']}-codex.zip"
+                native_source = args.root / 'codex-plugins' / name
+                helpers.write_output(native_path, native_data, native_source)
+                restored_native = read_archive(native_path, name, {'files': list(native)})
+                require(restored_native == native, 'Native archive differs from canonical source')
+                report['codexArchive'] = {'path': str(native_path), 'sha256': helpers.sha256(native_data), 'bytes': len(native_data)}
     elif args.output_dir:
         raise ValueError('--output-dir is only for build')
     print(json.dumps({'packages': reports, 'boundaries': 'Offline only: endpoints are configuration checks, not live discovery. No native-host acceptance, deployment, Events delivery, legal attestation or directory approval is claimed.'}, indent=2))

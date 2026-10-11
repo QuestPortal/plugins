@@ -8,7 +8,7 @@
       "name": "call-of-cthulhu-plugin",
       "source": {
         "source": "local",
-        "path": "./plugins/call-of-cthulhu-plugin"
+        "path": "./codex-plugins/call-of-cthulhu-plugin"
       }
     },
     {
@@ -29,7 +29,7 @@
       "name": "dnd-plugin",
       "source": {
         "source": "local",
-        "path": "./plugins/dnd-plugin"
+        "path": "./codex-plugins/dnd-plugin"
       }
     },
     {

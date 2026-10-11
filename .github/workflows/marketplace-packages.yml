@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'plugins/**'
+      - 'codex-plugins/**'
       - 'scripts/**'
       - '.agents/plugins/marketplace.json'
       - '.claude-plugin/marketplace.json'
@@ -13,6 +14,7 @@ on:
     branches: [main]
     paths:
       - 'plugins/**'
+      - 'codex-plugins/**'
       - 'scripts/**'
       - '.agents/plugins/marketplace.json'
       - '.claude-plugin/marketplace.json'
@@ -44,5 +46,7 @@ jobs:
           python -m unittest discover -s scripts/pendragon -p 'test_*.py'
           python -m unittest discover -s scripts/battlemap -p 'test_*.py'
           node --test infrastructure/cthulhu-domain-verification/worker.test.mjs
+      - name: Verify generated Codex bundles match canonical packages
+        run: python scripts/marketplace/package.py generate-codex --check
       - name: Validate catalog and build verified deterministic archives
         run: python scripts/marketplace/package.py build --output-dir "$RUNNER_TEMP/packages"
