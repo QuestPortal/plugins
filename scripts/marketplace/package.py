@@ -186,7 +186,9 @@ def validate_catalog(root):
         files = read_directory(source, policies[name])
         reports.append(validate_files(name, files, policies[name]))
         manifest = decode_json(files['plugin.json'])
-        require(claude_entries[name] == {'name': name, 'source': f'./plugins/{name}', 'description': manifest['description'], 'author': manifest['author'], 'category': 'entertainment', 'homepage': policies[name]['claude']['homepage']}, 'Claude catalog entry, binding or audience changed')
+        display_name = policies[name]['claude']['displayName']
+        require(isinstance(display_name, str) and display_name.strip() == display_name and display_name, 'Invalid Claude display name')
+        require(claude_entries[name] == {'name': name, 'displayName': display_name, 'source': f'./plugins/{name}', 'description': manifest['description'], 'author': manifest['author'], 'category': 'entertainment', 'homepage': policies[name]['claude']['homepage']}, 'Claude catalog entry, binding or presentation changed')
     return reports
 
 

@@ -83,6 +83,8 @@ class MarketplaceTests(unittest.TestCase):
                        lambda m: m['plugins'][0].update(source='../escape'),
                        lambda m: m['plugins'][0].update(source={'source': 'github', 'repo': 'other/repo'}),
                        lambda m: m['plugins'][0].update(description='changed'),
+                       lambda m: m['plugins'][0].update(displayName='Changed listing'),
+                       lambda m: m['plugins'][0].pop('displayName'),
                        lambda m: m['plugins'].reverse(),
                        lambda m: m.update(owner={'name': 'Someone else'})]:
             self.mutate_json(claude, mutate)

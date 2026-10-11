@@ -32,6 +32,7 @@ MARKETPLACE = SCRIPTS.parent / ".agents/plugins/marketplace.json"
 CLAUDE_MARKETPLACE = SCRIPTS.parent / ".claude-plugin/marketplace.json"
 CLAUDE_AUTHOR = {"name": "Quest Portal", "url": "https://www.questportal.com"}
 CLAUDE_HOMEPAGE = "https://map.questportal.com"
+CLAUDE_DISPLAY_NAME = "Battlemap for Tabletop Roleplaying"
 CLAUDE_KEYWORDS = ["battlemap", "tabletop", "rpg", "encounter", "vtt", "mcp"]
 SKILLS = ("build-map", "onboarding", "run-encounter")
 FILES = (
@@ -69,7 +70,7 @@ def write_output(path, data, source):
 
 def claude_entry(description):
     """Complete reviewed Claude catalog entry; Claude shows these fields over the manifest."""
-    return {"name": NAME, "source": f"./plugins/{NAME}", "description": description, "author": CLAUDE_AUTHOR, "category": "entertainment", "homepage": CLAUDE_HOMEPAGE}
+    return {"name": NAME, "displayName": CLAUDE_DISPLAY_NAME, "source": f"./plugins/{NAME}", "description": description, "author": CLAUDE_AUTHOR, "category": "entertainment", "homepage": CLAUDE_HOMEPAGE}
 
 
 def validate_marketplace(path, kind="codex", description=None):
