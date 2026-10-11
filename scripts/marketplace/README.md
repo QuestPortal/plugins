@@ -9,6 +9,7 @@ Battlemap validation helpers. It does not download schemas or call endpoints.
 python3 -m venv /tmp/qp-package-venv
 /tmp/qp-package-venv/bin/pip install -r scripts/marketplace/requirements.txt
 /tmp/qp-package-venv/bin/python -m unittest discover -s scripts/marketplace -p 'test_*.py'
+/tmp/qp-package-venv/bin/python scripts/marketplace/package.py generate-codex --check
 /tmp/qp-package-venv/bin/python scripts/marketplace/package.py validate
 /tmp/qp-package-venv/bin/python scripts/marketplace/package.py build --output-dir /tmp/qp-packages
 ```
@@ -41,3 +42,32 @@ from the repository root; that tool is not part of the offline suite.
 
 `docs/release-status.md` records deployment and native-host gates. A successful
 archive build is not release approval or a claim that unrun host cases passed.
+
+## Native Codex sheet bundles
+
+`plugins/` remains canonical for portable archives and Claude. The Codex catalog
+selects `codex-plugins/dnd-plugin` and `codex-plugins/call-of-cthulhu-plugin`.
+These generated bundles contain exact copies of the native manifest, `.mcp.json`,
+skills, artwork, attribution and README where present. They omit the portable
+root `plugin.json` and `mcp.json` and the Claude manifest. The absence of the root
+portable manifest preserves native Codex package classification.
+
+After a canonical source change, run:
+
+```sh
+python scripts/marketplace/package.py generate-codex
+python scripts/marketplace/package.py generate-codex --check
+```
+
+Generation is deterministic, validates canonical packages before copying, and
+rejects unexpected destination files instead of deleting them. `--check`, normal
+validation and archive builds all reject missing, extra or stale generated files.
+CI checks committed bundles without regenerating them, so drift cannot pass by
+silently refreshing CI's checkout. Other packages and portable archive contents
+are unaffected by the native bundle selection.
+
+Builds also produce `dnd-plugin-<version>-codex.zip` and
+`call-of-cthulhu-plugin-<version>-codex.zip` for manual Codex/ChatGPT uploads.
+Use these native ZIPs for Codex/ChatGPT; the un-suffixed ZIPs retain the portable
+format for other hosts. Native ZIPs use the same deterministic archive layout and
+safe reader, and their restored bytes must equal the reviewed native subset.
