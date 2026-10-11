@@ -1,6 +1,6 @@
 {
   "name": "dnd-plugin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Create a Dungeons & Dragons character, roll for damage and attacks, and revise the sheet as you play.",
   "author": {
     "name": "Quest Portal"

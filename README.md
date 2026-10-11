@@ -13,8 +13,19 @@ In Workspace settings > Plugins > Add > Import marketplace, enter:
 - Path: leave empty
 - Branch, tag, or commit: `main` (or leave empty)
 
-The catalog is at `.agents/plugins/marketplace.json`. Plugin packages are in
-`plugins/`, so importing does not require access to any private repository.
+The catalog is at `.agents/plugins/marketplace.json`. It selects the generated
+native Codex bundles in `codex-plugins/` for D&D and Call of Cthulhu automatically.
+Those bundles use the [supported `.codex-plugin/plugin.json` layout](https://developers.openai.com/plugins/build/plugins)
+without a portable root manifest, so Codex loads them as native plugins. No local
+MCP configuration is needed. For manual Codex/ChatGPT uploads, use the
+`-codex.zip` artifacts from the [package builder](scripts/marketplace/README.md).
+Refresh the marketplace and update existing installs
+to D&D 0.2.2 and Call of Cthulhu 0.4.5.
+
+Canonical package sources and portable distribution archives remain in `plugins/`;
+the Claude catalog continues to select those sources. All packages are public,
+so importing does not require access to any private repository. This is a package
+release; the hosted MCP endpoints and runtimes are unchanged.
 
 ## Install in Claude
 
@@ -201,8 +212,8 @@ The package instructions now separate tabletop guidance from implemented tools:
 
 | System | Current package | Skill and linked references | Chat creation/edit boundary |
 | --- | --- | --- | --- |
-| D&D 2024 / SRD 5.2.1 | 0.2.1 candidate | [Character sheet](plugins/dnd-plugin/skills/character-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
-| Call of Cthulhu 7e | 0.4.4 candidate | [Investigator sheet](plugins/call-of-cthulhu-plugin/skills/investigator-sheet/SKILL.md) | Same capabilities through common names and retained investigator aliases |
+| D&D 2024 / SRD 5.2.1 | 0.2.2 | [Character sheet](plugins/dnd-plugin/skills/character-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
+| Call of Cthulhu 7e | 0.4.5 | [Investigator sheet](plugins/call-of-cthulhu-plugin/skills/investigator-sheet/SKILL.md) | Same capabilities through common names and retained investigator aliases |
 | Pendragon 6e | 0.2.1 candidate | [Knight sheet](plugins/pendragon-plugin/skills/knight-sheet/SKILL.md) | Populated single/batch creation (1–20), exact attached-sheet revisions |
 
 Each skill links system overview, character creation, core rules, supported
@@ -232,6 +243,10 @@ the authoritative source for the catalog, plugin manifest, skills, plugin icon,
 and MCP connection. Edit those files here. The private application
 repository owns the UI, backend, database, tests, and deployment, and consumes
 a pinned public icon during its builds.
+After editing D&D or Call of Cthulhu, run
+`python scripts/marketplace/package.py generate-codex` to refresh their native
+bundles. Do not edit generated files directly. CI checks exact file inventories
+and byte parity, including skills and artwork, before accepting changes.
 Marketplace sync reads updates from this repository's `main` branch.
 
 This catalog does not migrate an existing uploaded plugin or change workspace
