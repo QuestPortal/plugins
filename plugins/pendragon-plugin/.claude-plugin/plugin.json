@@ -1,7 +1,7 @@
 {
   "name": "pendragon-plugin",
   "version": "0.2.1",
-  "description": "Create a Pendragon 6e knight, roll opposed checks and damage and level up.",
+  "description": "Create a Pendragon 6e knight, roll opposed checks and damage, and revise the sheet between adventures.",
   "author": {
     "name": "Quest Portal"
   },

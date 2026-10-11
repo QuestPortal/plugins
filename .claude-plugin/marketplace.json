@@ -22,7 +22,7 @@
       "name": "pendragon-plugin",
       "displayName": "Pendragon Character Sheet",
       "source": "./plugins/pendragon-plugin",
-      "description": "Create a Pendragon 6e knight, roll opposed checks and damage and level up.",
+      "description": "Create a Pendragon 6e knight, roll opposed checks and damage, and revise the sheet between adventures.",
       "author": {
         "name": "Quest Portal"
       },
@@ -45,7 +45,7 @@
       "name": "dnd-plugin",
       "displayName": "D&D 5e Character Sheet",
       "source": "./plugins/dnd-plugin",
-      "description": "Create a Dungeons & Dragons character, roll for damage and attacks and level up.",
+      "description": "Create a Dungeons & Dragons character, roll for damage and attacks, and revise the sheet as you play.",
       "author": {
         "name": "Quest Portal"
       },
