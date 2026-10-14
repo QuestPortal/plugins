@@ -9,7 +9,7 @@ public-directory submission are separate states.
 
 | Package | Package version | Runtime and endpoint | Remaining acceptance |
 | --- | --- | --- | --- |
-| Quest Portal MCP | 0.1.1 | `https://mcp.questportal.com/mcp`; successful deployment recorded for `d640dd0` on 2026-10-05 | Package source prepared; authenticated OAuth/tool flows, native-host installation and public-directory submission unverified |
+| Quest Portal MCP | 0.1.2 | `https://mcp.questportal.com/mcp`; OAuth consent fix deployed as `b451e59` on 2026-10-14 | OAuth and a read-only tool call verified in the ChatGPT app's Codex on 2026-10-14; directory submission pending, see [submission record](questportal-directory-submission.md) |
 | Call of Cthulhu | 0.4.4 | 0.4.3 verified live; `https://cthulhu.questportal.com/mcp` | Installed-host review cases, including batch/revision/storage; directory review and attestations remain unrun |
 | Original Pendragon | 0.2.1 | 0.2.0 merged and verified live; `https://pendragon.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |
 | Original D&D | 0.2.1 | 0.2.0 merged and verified live; `https://dnd.questportal.com/mcp` | Installed-host rendering, Attach/storage, physical mobile, production Events |

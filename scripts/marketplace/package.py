@@ -75,6 +75,22 @@ def read_archive(path, name, policy):
     return files
 
 
+# Directory listings require all four public URLs and review cases.
+LISTING_URLS = {
+    'call-of-cthulhu-plugin': {
+        'websiteURL': 'https://cthulhu.questportal.com/about',
+        'supportURL': 'https://cthulhu.questportal.com/support',
+        'privacyPolicyURL': 'https://cthulhu.questportal.com/privacy',
+        'termsOfServiceURL': 'https://cthulhu.questportal.com/terms',
+    },
+    'questportal-plugin': {
+        'websiteURL': 'https://www.questportal.com',
+        'supportURL': 'https://www.questportal.com/support',
+        'privacyPolicyURL': 'https://www.questportal.com/privacy',
+        'termsOfServiceURL': 'https://www.questportal.com/terms',
+    },
+}
+
 def validate_files(name, files, policy):
     require(set(files) == set(policy['files']), 'Package inventory differs from reviewed file list')
     require(all(0 < len(v) <= MAX_FILE for v in files.values()) and sum(map(len, files.values())) <= MAX_TOTAL, 'Package exceeds size bound')
@@ -144,15 +160,17 @@ def validate_files(name, files, policy):
             if key in element.attrib:
                 require(element.attrib.pop(key) in ('evenodd', 'nonzero'), 'Invalid SVG fill rule')
     helpers.validate_icon(ElementTree.tostring(svg))
+    if name in LISTING_URLS:
+        for key, url in LISTING_URLS[name].items():
+            require(interface.get(key) == url, 'Listing URL missing or changed')
     if name == 'call-of-cthulhu-plugin':
-        for key, suffix in [('websiteURL','about'), ('supportURL','support'), ('privacyPolicyURL','privacy'), ('termsOfServiceURL','terms')]:
-            require(interface.get(key) == f'https://cthulhu.questportal.com/{suffix}', 'Cthulhu listing URL missing or changed')
+        require(extension['review'].get('demo_recording_url') == 'https://cthulhu.questportal.com/walkthrough.mp4', 'Cthulhu walkthrough missing')
+    if name in LISTING_URLS:
         review = extension['review']
-        require(set(review) == {'test_cases', 'commerce', 'commerce_description', 'demo_recording_url'}, 'Unexpected review metadata')
+        require(set(review) - {'demo_recording_url'} == {'test_cases', 'commerce', 'commerce_description'}, 'Unexpected review metadata')
         require(review['commerce'] is False and review['commerce_description'] == 'This plugin involves no payments or purchases.', 'Commerce metadata changed')
-        require(review.get('demo_recording_url') == 'https://cthulhu.questportal.com/walkthrough.mp4', 'Cthulhu walkthrough missing')
         cases = review.get('test_cases', {})
-        require(len(cases.get('positive', [])) >= 5 and len(cases.get('negative', [])) >= 3, 'Cthulhu review cases missing')
+        require(len(cases.get('positive', [])) >= 5 and len(cases.get('negative', [])) >= 3, 'Review cases missing')
         for case in cases['positive']:
             require(set(case) == {'description', 'prompt', 'tools_triggered', 'expected_behavior'} and all(isinstance(v,str) and v.strip() for v in case.values()), 'Invalid positive review case')
         for case in cases['negative']:

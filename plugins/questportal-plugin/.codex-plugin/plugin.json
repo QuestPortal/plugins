@@ -1,6 +1,6 @@
 {
   "name": "questportal-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Connect your Quest Portal account to manage campaigns, notes, characters, scenes and music, and read session history and accessible library sources.",
   "author": {
     "name": "Quest Portal"
@@ -12,7 +12,10 @@
     "longDescription": "Connect your Quest Portal account to work with campaigns, notes, characters, session history, library sources, scenes and music. Use supported tools to prepare games, update content and find answers with source links. Scheduling and note-content search depend on enabled features. Requires Quest Portal OAuth and eligible Pro access; permissions, campaign roles and feature gates still apply. This plugin connects to the hosted Quest Portal MCP service and includes its usage skill.",
     "developerName": "Quest Portal",
     "category": "Entertainment",
-    "capabilities": ["Read", "Write"],
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
     "logo": "./assets/icon.svg",
     "composerIcon": "./assets/icon.svg",
     "defaultPrompt": [
@@ -20,7 +23,10 @@
       "Summarize the latest session in my Quest Portal campaign with source links.",
       "Help me prepare an NPC and a session note for my Quest Portal campaign."
     ],
-    "websiteURL": "https://www.questportal.com"
+    "websiteURL": "https://www.questportal.com",
+    "supportURL": "https://www.questportal.com/support",
+    "privacyPolicyURL": "https://www.questportal.com/privacy",
+    "termsOfServiceURL": "https://www.questportal.com/terms"
   },
   "mcpServers": "./.mcp.json"
 }
