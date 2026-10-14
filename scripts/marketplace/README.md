@@ -37,7 +37,7 @@ from arbitrary downloaded packages to make failing validation pass. Versions are
 package versions; runtime versions can differ. Existing focused Pendragon and
 Battlemap tools remain supported. CI runs their tests alongside the shared suite.
 
-The Claude manifests can also be checked with `claude plugin validate --strict .`
+The Claude manifests can also be checked with `claude plugin validate .`
 from the repository root; that tool is not part of the offline suite.
 
 `docs/release-status.md` records deployment and native-host gates. A successful
