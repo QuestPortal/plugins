@@ -40,10 +40,10 @@
               "expected_behavior": "Lists the active campaigns on the reviewer account with each role (owner or player). Nothing is changed."
             },
             {
-              "description": "Summarize the most recent session of a campaign.",
-              "prompt": "Summarize the latest session in my Quest Portal campaign.",
-              "tools_triggered": "questportal_list_campaigns, questportal_list_sessions, questportal_get_session",
-              "expected_behavior": "Finds the campaign, reads its most recent session and returns its recap and metadata. Nothing is changed."
+              "description": "Show the campaign's scenes and the music on one scene.",
+              "prompt": "Show the scenes in my Quest Portal campaign and the music on the Dockside scene.",
+              "tools_triggered": "questportal_list_campaigns, questportal_get_scene_bar, questportal_get_scene_soundtrack",
+              "expected_behavior": "Lists the scenes on the campaign scene bar and the tracks on the Dockside scene. Nothing is changed."
             },
             {
               "description": "Read a character sheet from a campaign.",
