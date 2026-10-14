@@ -29,14 +29,14 @@ server's authentication configuration and can be paired with the plugin.
 | Tool titles and read-only/destructive hints | Present in source for every registered tool; the portals' tool scans confirm |
 | OAuth (DCR, PKCE S256, refresh) | Working end to end in Codex on 2026-10-14 |
 | Consent rate limiting | Fixed and deployed (`b451e59`, QuestPortal/questportal#10516) |
-| Character tools | Sheet reads fixed and verified live on 2026-10-14 (#10520 `d1bf354`, #10521 `782ec56`, live in `qp-mcp-public-00293-gut`). **Empty character creation still fails** for every non-staff account: the Universal template `y42e77vz3ahr` is a staff-owned draft that the MCP's template check rejects. Fix committed on `gummi/mcp-universal-template-access` (`12b56bb`), not yet merged. Stuck `reviewer-seed-char-brenna`/`-vell` requests and their half-created characters need cleanup (needs approval) |
+| Character tools | Fixed and live on 2026-10-14 (QuestPortal/questportal#10520, #10521, #10524; `qp-mcp-public-00297-jez`). Empty campaign characters and sheet reads verified as the reviewer |
 | MIT license | In the plugin folder and repository root |
 | README (40+ words) | 655 words |
 | Website, support, privacy and terms URLs | `www.questportal.com`, `/support`, `/privacy`, `/terms` return 200 |
 | ChatGPT review cases | 5 positive, 3 negative in `plugin.json` |
 | Public MCP documentation page | **Missing**: no page explains connecting an assistant |
 | Privacy policy coverage of agent access | **Unconfirmed**: the policy text does not visibly mention MCP or AI assistants |
-| Reviewer account | **Missing** |
+| Reviewer account | `review@questportal.com`, Pro through a 100%-off Stripe subscription. Campaign "The Sunken Vault" with characters, notes, and scenes with music. No recorded sessions or library sources |
 | OpenAI domain verification on `mcp.questportal.com` | **Missing**: needs the portal's challenge token |
 | Demo recording | **Missing** |
 | Release notes | **Missing**: entered at upload |
@@ -53,8 +53,9 @@ Both directories need a dedicated account, kept available for later reviews:
   rejects those).
 - Not anyone's personal account. Store the credentials in the shared vault.
 
-The ChatGPT review cases assume this data: they list campaigns, summarize the
-latest session, read a character sheet, create one note and answer a help question.
+The ChatGPT review cases use this data: they list campaigns, show scenes and
+scene music, read a character sheet, create one note and answer a help question.
+All 8 cases passed through Claude Code 2.1.295 as the reviewer on 2026-10-14.
 
 ## Claude connector listing
 
