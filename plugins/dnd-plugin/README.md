@@ -14,10 +14,11 @@ deploy the application runtime.
 ## Install
 
 In ChatGPT, import the marketplace `https://github.com/QuestPortal/plugins` and
-install **Dungeons & Dragons**. In Claude Code, run:
+install **Dungeons & Dragons**. In Claude Code, add the marketplace and install:
 
 ```
-/plugin install dnd-plugin --marketplace QuestPortal/plugins
+/plugin marketplace add https://github.com/QuestPortal/plugins
+/plugin install dnd-plugin@questportal-plugins
 ```
 
 In claude.ai or Claude Desktop, add `https://github.com/QuestPortal/plugins` as a

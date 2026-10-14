@@ -37,12 +37,13 @@ reads the package's `.mcp.json` (`type: "http"`) and its `skills/` directory.
 In Claude Code, add the marketplace once, then install any package:
 
 ```
-/plugin marketplace add QuestPortal/plugins
+/plugin marketplace add https://github.com/QuestPortal/plugins
 /plugin install questportal-plugin@questportal-plugins
 ```
 
-or install in one step with
-`/plugin install <name> --marketplace QuestPortal/plugins`. Package names are
+Use the full URL: on macOS the `QuestPortal/plugins` shorthand fails with
+"Failed to finalize marketplace cache", because its cache directory differs from
+the catalog name `questportal-plugins` only by letter case. Package names are
 `questportal-plugin`, `call-of-cthulhu-plugin`, `pendragon-plugin`, `dnd-plugin`
 and `quest-portal-battlemap`. In claude.ai or Claude Desktop, add
 `https://github.com/QuestPortal/plugins` under Customize > Plugins > Add
@@ -52,7 +53,7 @@ Packages that require an account (Quest Portal, Battlemap) use the host's OAuth
 flow; in Claude Code run `/mcp` to authenticate. Guest sheets need no sign-in.
 Inline sheet rendering, roll cards and Events depend on MCP Apps support in the
 host; Claude Code and claude.ai acceptance of those flows is unverified. Run
-`claude plugin validate --strict .` to check the Claude manifests offline.
+`claude plugin validate .` to check the Claude manifests offline.
 
 ## Quest Portal MCP
 

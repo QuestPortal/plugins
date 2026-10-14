@@ -14,7 +14,8 @@ skill download or local server is unnecessary.
 In Claude Code, run:
 
 ```
-/plugin install questportal-plugin --marketplace QuestPortal/plugins
+/plugin marketplace add https://github.com/QuestPortal/plugins
+/plugin install questportal-plugin@questportal-plugins
 ```
 
 then authenticate with `/mcp` when prompted. In claude.ai or Claude Desktop, add
