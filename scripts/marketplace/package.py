@@ -84,7 +84,7 @@ LISTING_URLS = {
         'termsOfServiceURL': 'https://cthulhu.questportal.com/terms',
     },
     'questportal-plugin': {
-        'websiteURL': 'https://www.questportal.com',
+        'websiteURL': 'https://www.questportal.com/mcp',
         'supportURL': 'https://www.questportal.com/support',
         'privacyPolicyURL': 'https://www.questportal.com/privacy',
         'termsOfServiceURL': 'https://www.questportal.com/terms',

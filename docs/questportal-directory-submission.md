@@ -32,10 +32,10 @@ server's authentication configuration and can be paired with the plugin.
 | Character tools | Fixed and live on 2026-10-14 (QuestPortal/questportal#10520, #10521, #10524; `qp-mcp-public-00297-jez`). Empty campaign characters and sheet reads verified as the reviewer |
 | MIT license | In the plugin folder and repository root |
 | README (40+ words) | 655 words |
-| Website, support, privacy and terms URLs | `www.questportal.com`, `/support`, `/privacy`, `/terms` return 200 |
+| Website, support, privacy and terms URLs | `www.questportal.com/mcp`, `/support`, `/privacy`, `/terms` return 200 |
 | ChatGPT review cases | 5 positive, 3 negative in `plugin.json` |
-| Public MCP documentation page | **Missing**: no page explains connecting an assistant |
-| Privacy policy coverage of agent access | **Unconfirmed**: the policy text does not visibly mention MCP or AI assistants |
+| Public MCP documentation page | Live at https://www.questportal.com/mcp (QuestPortal/questportal#10518); also the plugin's `websiteURL` |
+| Privacy policy coverage of agent access | Live: privacy policy and terms cover access through AI assistants (MCP) (QuestPortal/questportal#10517, #10526); operator revocation script (#10525) |
 | Reviewer account | `review@questportal.com`, Pro through a 100%-off Stripe subscription. Campaign "The Sunken Vault" with characters, notes, and scenes with music. No recorded sessions or library sources |
 | OpenAI domain verification on `mcp.questportal.com` | **Missing**: needs the portal's challenge token |
 | Demo recording | **Missing** |
@@ -64,7 +64,7 @@ All 8 cases passed through Claude Code 2.1.295 as the reviewer on 2026-10-14.
 | Server name (100) | Quest Portal |
 | One-liner (200) | Prepare and run your tabletop RPG campaigns in Quest Portal: campaigns, sessions, characters, notes, scenes and music. |
 | Categories | Entertainment; Productivity |
-| Documentation URL | **Needed** (public MCP page) |
+| Documentation URL | https://www.questportal.com/mcp |
 | Privacy policy URL | https://www.questportal.com/privacy |
 | Support contact | hi@questportal.com |
 | Icon | `plugins/questportal-plugin/assets/icon.svg` |
