@@ -225,6 +225,13 @@ class MarketplaceTests(unittest.TestCase):
             files=dict(original);manifest=json.loads(files['plugin.json']);mutation(manifest['extensions']['com.openai']);files['plugin.json']=json.dumps(manifest).encode()
             with self.assertRaises(ValueError):package.validate_files(name,files,policy)
 
+    def test_questportal_review_materials_required(self):
+        name='questportal-plugin';policy=self.policies[name]
+        original=package.read_directory(self.root/'plugins'/name,policy)
+        for mutation in [lambda e:e['review']['test_cases'].update(negative=[]),lambda e:e['review'].update(commerce=True),lambda e:e['interface'].pop('termsOfServiceURL')]:
+            files=dict(original);manifest=json.loads(files['plugin.json']);mutation(manifest['extensions']['com.openai']);files['plugin.json']=json.dumps(manifest).encode()
+            with self.assertRaises(ValueError):package.validate_files(name,files,policy)
+
     def test_secret_rejected_without_echo(self):
         marker='ghp_'+'syntheticNeverValid'*3
         skill=self.root/'plugins/dnd-plugin/skills/character-sheet/SKILL.md'

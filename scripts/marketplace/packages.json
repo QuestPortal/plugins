@@ -261,7 +261,7 @@
     ]
   },
   "questportal-plugin": {
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": {
       "name": "Quest Portal"
     },
@@ -279,7 +279,8 @@
       ]
     },
     "extensionKeys": [
-      "interface"
+      "interface",
+      "review"
     ],
     "interfaceKeys": [
       "displayName",
@@ -291,7 +292,10 @@
       "logo",
       "composerIcon",
       "defaultPrompt",
-      "websiteURL"
+      "websiteURL",
+      "supportURL",
+      "privacyPolicyURL",
+      "termsOfServiceURL"
     ],
     "identity": {
       "displayName": "Quest Portal",
@@ -311,6 +315,7 @@
       ".claude-plugin/plugin.json",
       ".codex-plugin/plugin.json",
       ".mcp.json",
+      "LICENSE",
       "NOTICE.md",
       "README.md",
       "assets/icon.svg",
