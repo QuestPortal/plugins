@@ -29,6 +29,7 @@ server's authentication configuration and can be paired with the plugin.
 | Tool titles and read-only/destructive hints | Present in source for every registered tool; the portals' tool scans confirm |
 | OAuth (DCR, PKCE S256, refresh) | Working end to end in Codex on 2026-10-14 |
 | Consent rate limiting | Fixed and deployed (`b451e59`, QuestPortal/questportal#10516) |
+| Character tools (campaign-empty create loops; sheet read fails on template characters) | **Fix in review**: QuestPortal/questportal#10520, not deployed. After deploy: clean up the stuck `reviewer-seed-char-brenna`/`-vell` requests (needs approval), reseed with new keys, and recheck sheet reads for Vell, Brenna and Ada |
 | MIT license | In the plugin folder and repository root |
 | README (40+ words) | 655 words |
 | Website, support, privacy and terms URLs | `www.questportal.com`, `/support`, `/privacy`, `/terms` return 200 |
