@@ -29,7 +29,7 @@ server's authentication configuration and can be paired with the plugin.
 | Tool titles and read-only/destructive hints | Present in source for every registered tool; the portals' tool scans confirm |
 | OAuth (DCR, PKCE S256, refresh) | Working end to end in Codex on 2026-10-14 |
 | Consent rate limiting | Fixed and deployed (`b451e59`, QuestPortal/questportal#10516) |
-| Character tools (campaign-empty create loops; sheet read fails on template characters) | **Merged**: QuestPortal/questportal#10520 (`d1bf354`) and the legacy widget contract fix #10521 (`782ec56`); deploy not verified. After deploy: clean up the stuck `reviewer-seed-char-brenna`/`-vell` requests (needs approval), reseed with new keys, and recheck sheet reads for Vell, Brenna and Ada |
+| Character tools | Sheet reads fixed and verified live on 2026-10-14 (#10520 `d1bf354`, #10521 `782ec56`, live in `qp-mcp-public-00293-gut`). **Empty character creation still fails** for every non-staff account: the Universal template `y42e77vz3ahr` is a staff-owned draft that the MCP's template check rejects. Fix committed on `gummi/mcp-universal-template-access` (`12b56bb`), not yet merged. Stuck `reviewer-seed-char-brenna`/`-vell` requests and their half-created characters need cleanup (needs approval) |
 | MIT license | In the plugin folder and repository root |
 | README (40+ words) | 655 words |
 | Website, support, privacy and terms URLs | `www.questportal.com`, `/support`, `/privacy`, `/terms` return 200 |
