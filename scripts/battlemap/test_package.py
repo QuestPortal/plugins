@@ -122,6 +122,7 @@ class BattlemapPackageTests(unittest.TestCase):
         description = json.loads(self.files["plugin.json"])["description"]
         for change in (lambda c: c["plugins"][0].update(source="../escape"), lambda c: c.update(owner={"name": "Someone else"}),
                        lambda c: c["plugins"][0].update(description="Altered listing"), lambda c: c["plugins"][0].update(author={"name": "Quest Portal"}),
+                       lambda c: c["plugins"][0].update(displayName="Altered name"), lambda c: c["plugins"][0].pop("displayName"),
                        lambda c: c["plugins"][0].update(category="productivity"), lambda c: c["plugins"][0].update(homepage="https://example.invalid"),
                        lambda c: c["plugins"][0].update(version="9.9.9"), lambda c: c["plugins"][0].pop("homepage")):
             altered = copy.deepcopy(claude)

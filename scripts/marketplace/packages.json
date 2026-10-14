@@ -7,6 +7,7 @@
     "server": "cthulhu-sheets",
     "endpoint": "https://cthulhu.questportal.com/mcp",
     "claude": {
+      "displayName": "Call of Cthulhu Character Sheet",
       "homepage": "https://cthulhu.questportal.com/about",
       "keywords": [
         "call-of-cthulhu",
@@ -75,6 +76,7 @@
     "server": "dnd-sheets",
     "endpoint": "https://dnd.questportal.com/mcp",
     "claude": {
+      "displayName": "D&D 5e Character Sheet",
       "homepage": "https://dnd.questportal.com",
       "keywords": [
         "dnd",
@@ -141,6 +143,7 @@
     "server": "pendragon-sheets",
     "endpoint": "https://pendragon.questportal.com/mcp",
     "claude": {
+      "displayName": "Pendragon Character Sheet",
       "homepage": "https://pendragon.questportal.com",
       "keywords": [
         "pendragon",
@@ -206,6 +209,7 @@
     "server": "battlemap",
     "endpoint": "https://map.questportal.com/mcp",
     "claude": {
+      "displayName": "Battlemap for Tabletop Roleplaying",
       "homepage": "https://map.questportal.com",
       "keywords": [
         "battlemap",
@@ -268,6 +272,7 @@
     "server": "questportal",
     "endpoint": "https://mcp.questportal.com/mcp",
     "claude": {
+      "displayName": "Quest Portal VTT",
       "homepage": "https://www.questportal.com",
       "keywords": [
         "quest-portal",

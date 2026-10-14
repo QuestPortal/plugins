@@ -1,7 +1,7 @@
 {
   "name": "dnd-plugin",
   "version": "0.2.2",
-  "description": "Create and revise populated guest D&D 2024 characters, in batches up to 20, and roll checks and damage.",
+  "description": "Create a Dungeons & Dragons character, roll for damage and attacks, and revise the sheet as you play.",
   "author": {
     "name": "Quest Portal"
   },
